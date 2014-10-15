@@ -1,0 +1,17 @@
+[
+{
+  "modid": "MineCharacter",
+  "name": "MineCharacter",
+  "description": "",
+  "version": "2.1.1",
+  "mcversion": "1.6.4",
+  "logoFile": "",
+  "url": "",
+  "updateUrl": "",
+  "authors": ["Jimmynator","hendyzone"],
+  "credits": "Canis Minor",
+  "parent": "",
+  "screenshots": [],
+  "dependencies": []
+}
+]
