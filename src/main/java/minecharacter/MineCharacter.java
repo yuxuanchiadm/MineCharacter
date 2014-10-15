@@ -32,7 +32,7 @@ import cpw.mods.fml.common.registry.TickRegistry;
 import cpw.mods.fml.relauncher.Side;
 
 @NetworkMod(serverSideRequired = false, clientSideRequired = true,packetHandler=PacketHandler.class,channels={"minecharacter"})
-@Mod(modid = "MineCharacter", name = "MineCharacter", version = "2.0.6")
+@Mod(modid = "MineCharacter", name = "MineCharacter", version = "@VERSION@")
 public class MineCharacter implements IFuelHandler {
 	
 	   //CreativeTabs 
