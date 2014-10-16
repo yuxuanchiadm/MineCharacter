@@ -45,34 +45,34 @@ public class CommonProxy implements IGuiHandler {
 
 	public boolean isEquid(EntityPlayer player, String string) {
 		if (string.equals("mage")) {
-			if ((player.inventory.armorInventory[3] != null && player.inventory.armorInventory[3].itemID == InitItem.mageHelmet.itemID)
-					&& (player.inventory.armorInventory[2] != null && player.inventory.armorInventory[2].itemID == InitItem.mageChest.itemID)
-					&& (player.inventory.armorInventory[1] != null && player.inventory.armorInventory[1].itemID == InitItem.mageLegs.itemID)
-					&& (player.inventory.armorInventory[0] != null && player.inventory.armorInventory[0].itemID == InitItem.mageBoots.itemID))
+			if ((player.inventory.armorInventory[3] != null && player.inventory.armorInventory[3].getItem().equals(InitItem.mageHelmet))
+					&& (player.inventory.armorInventory[2] != null && player.inventory.armorInventory[2].getItem().equals(InitItem.mageChest))
+					&& (player.inventory.armorInventory[1] != null && player.inventory.armorInventory[1].getItem().equals(InitItem.mageLegs))
+					&& (player.inventory.armorInventory[0] != null && player.inventory.armorInventory[0].getItem().equals(InitItem.mageBoots)))
 				return true;
 		} else if (string.equals("grim")) {
-			if ((player.inventory.armorInventory[3] != null && player.inventory.armorInventory[3].itemID == InitItem.grimHelmet.itemID)
-					&& (player.inventory.armorInventory[2] != null && player.inventory.armorInventory[2].itemID == InitItem.grimChest.itemID)
-					&& (player.inventory.armorInventory[1] != null && player.inventory.armorInventory[1].itemID == InitItem.grimLegs.itemID)
-					&& (player.inventory.armorInventory[0] != null && player.inventory.armorInventory[0].itemID == InitItem.grimBoots.itemID))
+			if ((player.inventory.armorInventory[3] != null && player.inventory.armorInventory[3].getItem().equals(InitItem.grimHelmet))
+					&& (player.inventory.armorInventory[2] != null && player.inventory.armorInventory[2].getItem().equals(InitItem.grimChest))
+					&& (player.inventory.armorInventory[1] != null && player.inventory.armorInventory[1].getItem().equals(InitItem.grimLegs))
+					&& (player.inventory.armorInventory[0] != null && player.inventory.armorInventory[0].getItem().equals(InitItem.grimBoots)))
 				return true;
 		} else if (string.equals("archer")) {
-			if ((player.inventory.armorInventory[3] != null && player.inventory.armorInventory[3].itemID == InitItem.archerHelmet.itemID)
-					&& (player.inventory.armorInventory[2] != null && player.inventory.armorInventory[2].itemID == InitItem.archerChest.itemID)
-					&& (player.inventory.armorInventory[1] != null && player.inventory.armorInventory[1].itemID == InitItem.archerLegs.itemID)
-					&& (player.inventory.armorInventory[0] != null && player.inventory.armorInventory[0].itemID == InitItem.archerBoots.itemID))
+			if ((player.inventory.armorInventory[3] != null && player.inventory.armorInventory[3].getItem().equals(InitItem.archerHelmet))
+					&& (player.inventory.armorInventory[2] != null && player.inventory.armorInventory[2].getItem().equals(InitItem.archerChest))
+					&& (player.inventory.armorInventory[1] != null && player.inventory.armorInventory[1].getItem().equals(InitItem.archerLegs))
+					&& (player.inventory.armorInventory[0] != null && player.inventory.armorInventory[0].getItem().equals(InitItem.archerBoots)))
 				return true;
 		} else if (string.equals("knight")) {
-			if ((player.inventory.armorInventory[3] != null && player.inventory.armorInventory[3].itemID == InitItem.knightHelmet.itemID)
-					&& (player.inventory.armorInventory[2] != null && player.inventory.armorInventory[2].itemID == InitItem.knightChest.itemID)
-					&& (player.inventory.armorInventory[1] != null && player.inventory.armorInventory[1].itemID == InitItem.knightLegs.itemID)
-					&& (player.inventory.armorInventory[0] != null && player.inventory.armorInventory[0].itemID == InitItem.knightBoots.itemID))
+			if ((player.inventory.armorInventory[3] != null && player.inventory.armorInventory[3].getItem().equals(InitItem.knightHelmet))
+					&& (player.inventory.armorInventory[2] != null && player.inventory.armorInventory[2].getItem().equals(InitItem.knightChest))
+					&& (player.inventory.armorInventory[1] != null && player.inventory.armorInventory[1].getItem().equals(InitItem.knightLegs))
+					&& (player.inventory.armorInventory[0] != null && player.inventory.armorInventory[0].getItem().equals(InitItem.knightBoots)))
 				return true;
 		} else if (string.equals("assassin")) {
-			if ((player.inventory.armorInventory[3] != null && player.inventory.armorInventory[3].itemID == InitItem.assassinHelmet.itemID)
-					&& (player.inventory.armorInventory[2] != null && player.inventory.armorInventory[2].itemID == InitItem.assassinChest.itemID)
-					&& (player.inventory.armorInventory[1] != null && player.inventory.armorInventory[1].itemID == InitItem.assassinLegs.itemID)
-					&& (player.inventory.armorInventory[0] != null && player.inventory.armorInventory[0].itemID == InitItem.assassinBoots.itemID))
+			if ((player.inventory.armorInventory[3] != null && player.inventory.armorInventory[3].getItem().equals(InitItem.assassinHelmet))
+					&& (player.inventory.armorInventory[2] != null && player.inventory.armorInventory[2].getItem().equals(InitItem.assassinChest))
+					&& (player.inventory.armorInventory[1] != null && player.inventory.armorInventory[1].getItem().equals(InitItem.assassinLegs))
+					&& (player.inventory.armorInventory[0] != null && player.inventory.armorInventory[0].getItem().equals(InitItem.assassinBoots)))
 				return true;
 		}
 		return false;
@@ -83,25 +83,6 @@ public class CommonProxy implements IGuiHandler {
 
 	}
 
-	//
-	// public void knockBack(Entity par1Entity, int par2, double par3, double
-	// par5)
-	// {
-	// this.isAirBorne = true;
-	// float f = MathHelper.sqrt_double(par3 * par3 + par5 * par5);
-	// float f1 = 0.4F;
-	// this.motionX /= 2.0D;
-	// this.motionY /= 2.0D;
-	// this.motionZ /= 2.0D;
-	// this.motionX -= par3 / (double)f * (double)f1;
-	// this.motionY += (double)f1;
-	// this.motionZ -= par5 / (double)f * (double)f1;
-	//
-	// if (this.motionY > 0.4000000059604645D)
-	// {
-	// this.motionY = 0.4000000059604645D;
-	// }
-	// }
 	@Override
 	public Object getServerGuiElement(int ID, EntityPlayer player, World world,
 			int x, int y, int z) {
