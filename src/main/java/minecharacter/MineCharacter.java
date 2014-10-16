@@ -17,6 +17,8 @@ import minecharacter.proxy.CommonProxy;
 import minecharacter.world.WorldGenerator;
 import net.minecraft.block.Block;
 import net.minecraft.creativetab.CreativeTabs;
+import net.minecraft.init.Blocks;
+import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.common.MinecraftForge;
@@ -60,16 +62,15 @@ public class MineCharacter implements IFuelHandler {
 	    channels = NetworkRegistry.INSTANCE.newChannel("minecharacter", new PacketHandler());
 	    
 		MinecraftForge.EVENT_BUS.register(new EventHandler());
+		MinecraftForge.EVENT_BUS.register(new TickHandler());
 
-		GameRegistry.registerWorldGenerator(new WorldGenerator());
-		NetworkRegistry.instance().registerGuiHandler(this, proxy);
+		GameRegistry.registerWorldGenerator(new WorldGenerator(), 0);
+		NetworkRegistry.INSTANCE.registerGuiHandler(this, proxy);
 		MinecraftForge.setToolClass(InitItem.mattock, "pickaxe", 4);
 		MinecraftForge.setToolClass(InitItem.tomahawk, "axe", 4);
 		MinecraftForge.setToolClass(InitItem.netherAxe, "axe", 4);
 		MinecraftForge.setToolClass(InitItem.netherPickaxe, "pickaxe", 4);
 
-		TickRegistry.registerTickHandler(new TickHandler(), Side.SERVER);
-		TickRegistry.registerTickHandler(new TickHandler(), Side.CLIENT);
 		loadRepice();
 		loadSmelt();
 		GameRegistry.registerFuelHandler(this);
@@ -78,108 +79,108 @@ public class MineCharacter implements IFuelHandler {
 	}
 
 	private void loadSmelt() {
-		GameRegistry.addSmelting(InitBlock.blockDemonite.blockID,
+		GameRegistry.addSmelting(InitBlock.blockDemonite,
 				new ItemStack(InitItem.demonite), 0.5F);
-		GameRegistry.addSmelting(InitBlock.blockLuciferite.blockID,
+		GameRegistry.addSmelting(InitBlock.blockLuciferite,
 				new ItemStack(InitItem.luciferite), 0.5F);
-		GameRegistry.addSmelting(Item.egg.itemID, new ItemStack(
+		GameRegistry.addSmelting(Items.egg, new ItemStack(
 				InitItem.friedEgg), 0.1F);
-		GameRegistry.addSmelting(Block.slowSand.blockID, new ItemStack(
+		GameRegistry.addSmelting(Blocks.soul_sand, new ItemStack(
 				InitItem.soul), 0.1F);
-		GameRegistry.addSmelting(InitItem.etherealPowder.itemID, new ItemStack(
+		GameRegistry.addSmelting(InitItem.etherealPowder, new ItemStack(
 				InitItem.etherealIngot), 0.1F);
 
 	}
 
 	private void loadRepice() {
-		GameRegistry.addShapedRecipe(new ItemStack(Block.ice), new Object[] {
-				"XXX", "XXX", "XXX", Character.valueOf('X'), Block.blockSnow });
+		GameRegistry.addShapedRecipe(new ItemStack(Blocks.ice), new Object[] {
+				"XXX", "XXX", "XXX", Character.valueOf('X'), Blocks.snow });
 
 		GameRegistry.addShapedRecipe(new ItemStack(InitItem.woodHammer, 1),
 				new Object[] { " XX", "//X", " XX", Character.valueOf('/'),
-						Item.stick, Character.valueOf('X'), Block.planks });
+						Items.stick, Character.valueOf('X'), Blocks.planks });
 
 		GameRegistry
 				.addShapedRecipe(
 						new ItemStack(InitItem.stoneHammer, 1),
 						new Object[] { " XX", "//X", " XX",
-								Character.valueOf('/'), Item.stick,
-								Character.valueOf('X'), Block.cobblestone });
+								Character.valueOf('/'), Items.stick,
+								Character.valueOf('X'), Blocks.cobblestone });
 
 		GameRegistry.addShapedRecipe(new ItemStack(InitItem.ironHammer, 1),
 				new Object[] { " XX", "//X", " XX", Character.valueOf('/'),
-						Item.stick, Character.valueOf('X'), Item.ingotIron });
+						Items.stick, Character.valueOf('X'), Items.iron_ingot });
 
 		GameRegistry.addShapedRecipe(new ItemStack(InitItem.diamondHammer, 1),
 				new Object[] { " XX", "//X", " XX", Character.valueOf('/'),
-						Item.stick, Character.valueOf('X'), Item.diamond });
+						Items.stick, Character.valueOf('X'), Items.diamond });
 
 		GameRegistry.addShapedRecipe(new ItemStack(InitItem.goldHammer, 1),
 				new Object[] { " XX", "//X", " XX", Character.valueOf('/'),
-						Item.stick, Character.valueOf('X'), Item.ingotGold });
+						Items.stick, Character.valueOf('X'), Items.gold_ingot });
 
 		GameRegistry.addShapedRecipe(new ItemStack(InitItem.fireStaff, 1),
 				new Object[] { " X ", " / ", " / ", Character.valueOf('/'),
-						Item.stick, Character.valueOf('X'), InitItem.fireOrb });
+						Items.stick, Character.valueOf('X'), InitItem.fireOrb });
 
 		GameRegistry.addShapedRecipe(new ItemStack(InitItem.iceStaff, 1),
 				new Object[] { " X ", " / ", " / ", Character.valueOf('/'),
-						Item.stick, Character.valueOf('X'), InitItem.iceOrb });
+						Items.stick, Character.valueOf('X'), InitItem.iceOrb });
 
 		GameRegistry.addShapedRecipe(new ItemStack(InitItem.lifeStaff, 1),
 				new Object[] { " X ", " / ", " / ", Character.valueOf('/'),
-						Item.stick, Character.valueOf('X'), InitItem.lifeOrb });
+						Items.stick, Character.valueOf('X'), InitItem.lifeOrb });
 
 		GameRegistry
 				.addShapedRecipe(
 						new ItemStack(InitItem.deathStaff, 1),
 						new Object[] { " X ", " / ", " / ",
-								Character.valueOf('/'), Item.stick,
+								Character.valueOf('/'), Items.stick,
 								Character.valueOf('X'), InitItem.deathOrb });
 
 		GameRegistry.addShapedRecipe(new ItemStack(InitItem.orb, 4),
 				new Object[] { " X ", "X X", " X ", Character.valueOf('X'),
-						Block.glass });
+						Blocks.glass });
 
 		GameRegistry.addShapedRecipe(new ItemStack(InitItem.bat, 1),
 				new Object[] { "  X", " X ", "/  ", Character.valueOf('/'),
-						Item.stick, Character.valueOf('X'), Block.planks });
+						Items.stick, Character.valueOf('X'), Blocks.planks });
 
 		GameRegistry.addShapedRecipe(new ItemStack(InitBlock.blockAnvil, 1),
 				new Object[] { "XXX", " X ", "XXX", Character.valueOf('X'),
-						Item.ingotIron });
+						Items.iron_ingot });
 
 		GameRegistry
 				.addShapedRecipe(new ItemStack(InitBlock.blockWheat, 1, 0),
 						new Object[] { "XX", "XX", Character.valueOf('X'),
-								Item.wheat });
+								Items.wheat });
 
 		GameRegistry.addShapedRecipe(new ItemStack(InitItem.omelette, 1),
 				new Object[] { "XXX", "XXX", "XXX", Character.valueOf('X'),
-						Item.egg });
+						Items.egg });
 
 		GameRegistry.addShapedRecipe(new ItemStack(InitBlock.pan, 1),
 				new Object[] { "  /", "XX ", "XX ", Character.valueOf('X'),
-						Item.ingotIron, Character.valueOf('/'), Item.stick });
+						Items.iron_ingot, Character.valueOf('/'), Items.stick });
 
 		GameRegistry.addShapedRecipe(new ItemStack(InitItem.beer, 1),
-				new Object[] { "X", "V", Character.valueOf('X'), Item.wheat,
+				new Object[] { "X", "V", Character.valueOf('X'), Items.wheat,
 						Character.valueOf('V'),
-						new ItemStack(Item.potion, 1, 0) });
+						new ItemStack(Items.potionitem, 1, 0) });
 
 		GameRegistry.addShapedRecipe(new ItemStack(InitItem.quiver, 1),
 				new Object[] { "//X", "/X ", "X  ", Character.valueOf('X'),
-						Item.arrow, Character.valueOf('/'), Item.silk });
+						Items.arrow, Character.valueOf('/'), Items.string });
 
 		GameRegistry.addShapedRecipe(new ItemStack(InitBlock.blockOrb, 1),
 				new Object[] { "X X", "XXX", Character.valueOf('X'),
-						Block.obsidian });
+						Blocks.obsidian });
 
 		GameRegistry.addShapelessRecipe(new ItemStack(InitItem.magicPowder, 1),
-				new Object[] { Item.redstone, Item.glowstone });
+				new Object[] { Items.redstone, Items.glowstone_dust });
 
 		GameRegistry.addShapelessRecipe(new ItemStack(InitItem.magicString, 1),
-				new Object[] { InitItem.magicPowder, Item.silk });
+				new Object[] { InitItem.magicPowder, Items.string });
 
 		GameRegistry.addShapelessRecipe(new ItemStack(InitItem.iceOrb, 1),
 				new Object[] { InitItem.icePowder, InitItem.orb });
@@ -194,28 +195,28 @@ public class MineCharacter implements IFuelHandler {
 				new Object[] { InitItem.deathPowder, InitItem.orb });
 
 		GameRegistry.addShapelessRecipe(new ItemStack(InitItem.icePowder, 4),
-				new Object[] { Block.ice, InitItem.magicPowder });
+				new Object[] { Blocks.ice, InitItem.magicPowder });
 
 		GameRegistry.addShapelessRecipe(new ItemStack(InitItem.firePowder, 4),
-				new Object[] { Item.blazePowder, InitItem.magicPowder });
+				new Object[] { Items.blaze_powder, InitItem.magicPowder });
 
 		GameRegistry.addShapelessRecipe(new ItemStack(InitItem.lifePowder, 4),
-				new Object[] { Item.emerald, InitItem.magicPowder });
+				new Object[] { Items.emerald, InitItem.magicPowder });
 
 		GameRegistry.addShapelessRecipe(new ItemStack(InitItem.deathPowder, 4),
-				new Object[] { Item.eyeOfEnder, InitItem.magicPowder });
+				new Object[] { Items.ender_eye, InitItem.magicPowder });
 
 		GameRegistry.addShapelessRecipe(new ItemStack(InitItem.rune, 1),
-				new Object[] { Block.stone, Block.cobblestone });
+				new Object[] { Blocks.stone, Blocks.cobblestone });
 
-		GameRegistry.addShapelessRecipe(new ItemStack(Item.wheat, 2),
+		GameRegistry.addShapelessRecipe(new ItemStack(Items.wheat, 2),
 				new Object[] { InitBlock.blockWheat });
 
 	}
 
 	@Override
 	public int getBurnTime(ItemStack fuel) {
-		if (fuel.itemID == InitItem.nethercoal.itemID)
+		if (fuel.getItem().equals(InitItem.nethercoal))
 			return 1000;
 		return 0;
 	}
