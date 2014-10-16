@@ -1,60 +1,49 @@
 package minecharacter.network;
 
+import io.netty.buffer.ByteBuf;
+
 import java.io.ByteArrayOutputStream;
 import java.io.DataOutputStream;
 
+import minecharacter.MineCharacter;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.network.packet.Packet250CustomPayload;
-
-
-import com.google.common.io.ByteArrayDataInput;
-
-import cpw.mods.fml.common.network.PacketDispatcher;
+import net.minecraft.entity.player.EntityPlayerMP;
 
 public class PacketSetPos extends PacketBase {
+	public double x;
+	public double y;
+	public double z;
 
-	public static PacketSetPos instance=new PacketSetPos();
-	@Override
-	void readClient(int id, ByteArrayDataInput data, Object[] extradata) {
-		
+	public PacketSetPos() {
+	}
 
+	public PacketSetPos(double x, double y, double z) {
+		this.x = x;
+		this.y = y;
+		this.z = z;
 	}
 
 	@Override
-	void readServer(int id, ByteArrayDataInput data, Object[] extradata) {
-		double posX=data.readDouble();
-		double posY=data.readDouble();
-		double posZ=data.readDouble();
-		EntityPlayer player=(EntityPlayer) extradata[0];
-		player.setPosition(posX, posY, posZ);
+	public void readData(ByteBuf data) {
+		x = data.readDouble();
+		y = data.readDouble();
+		z = data.readDouble();
+	}
 
+	@Override
+	public void writeData(ByteBuf data) {
+		data.writeDouble(x);
+		data.writeDouble(y);
+		data.writeDouble(z);
+	}
+
+	@Override
+	public void handleServer(EntityPlayerMP playerEntity) {
+		playerEntity.setPosition(x, y, z);
 
 	}
-	
 
-	public static void setPos(double x,double y,double z){
-
-		ByteArrayOutputStream bos = new ByteArrayOutputStream(110);
-		DataOutputStream dos = new DataOutputStream(bos);
-		try {
-			dos.writeInt(0);
-			dos.writeDouble(x);
-			dos.writeDouble(y);
-			dos.writeDouble(z);
-			
-			
-		} catch(Exception e) {
-			e.printStackTrace();
-		}
-		
-		Packet250CustomPayload pkt = new Packet250CustomPayload();
-		pkt.channel = "minecharacter";
-		pkt.data = bos.toByteArray();
-		pkt.length = bos.size();
-		pkt.isChunkDataPacket = false;
-		PacketDispatcher.sendPacketToServer(pkt);
-		
+	public static void setPos(double x, double y, double z) {
+		MineCharacter.proxy.sendToServer(new PacketSetPos(x, y, z));
 	}
-	
-
 }

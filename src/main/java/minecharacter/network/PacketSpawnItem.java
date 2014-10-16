@@ -1,69 +1,71 @@
 package minecharacter.network;
 
+import io.netty.buffer.ByteBuf;
+
 import java.io.ByteArrayOutputStream;
 import java.io.DataOutputStream;
 
+import minecharacter.MineCharacter;
+import net.minecraft.block.material.Material;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.player.EntityPlayerMP;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraft.network.packet.Packet250CustomPayload;
 import net.minecraft.world.World;
 
-import com.google.common.io.ByteArrayDataInput;
-
-import cpw.mods.fml.common.network.PacketDispatcher;
-
 public class PacketSpawnItem extends PacketBase {
-	public static PacketSpawnItem instance=new PacketSpawnItem();
-	@Override
-	void readClient(int id, ByteArrayDataInput data, Object[] extradata) {
-		
+	public int itemId;
+	public int meate;
+	public int count;
+	public double x;
+	public double y;
+	public double z;
 
+	public PacketSpawnItem() {
+	}
+
+	public PacketSpawnItem(int itemId, int meate, int count, double x,
+			double y, double z) {
+		this.itemId = itemId;
+		this.meate = meate;
+		this.count = count;
+		this.x = x;
+		this.y = y;
+		this.z = z;
 	}
 
 	@Override
-	void readServer(int id, ByteArrayDataInput data, Object[] extradata) {
-
-		int itemId=data.readInt();
-		int meate=data.readInt();
-		int count=data.readInt();
-		double x=data.readDouble();
-		double y=data.readDouble();
-		double z=data.readDouble();
-		EntityPlayer player=(EntityPlayer) extradata[0];
-		World world=player.worldObj;
-		world.spawnEntityInWorld(new EntityItem(world, x, y, z, new ItemStack(itemId,count,meate)));
-
-
-	}
-	
-
-	public static void spawnItem(int itemId,int meate,int count,double x,double y,double z){
-
-		ByteArrayOutputStream bos = new ByteArrayOutputStream(110);
-		DataOutputStream dos = new DataOutputStream(bos);
-		try {
-			dos.writeInt(1);
-			dos.writeInt(itemId);
-			dos.writeInt(meate);
-			dos.writeInt(count);
-			dos.writeDouble(x);
-			dos.writeDouble(y);
-			dos.writeDouble(z);
-			
-			
-		} catch(Exception e) {
-			e.printStackTrace();
-		}
-		
-		Packet250CustomPayload pkt = new Packet250CustomPayload();
-		pkt.channel = "minecharacter";
-		pkt.data = bos.toByteArray();
-		pkt.length = bos.size();
-		pkt.isChunkDataPacket = false;
-		
-		PacketDispatcher.sendPacketToServer(pkt);
-		
+	public void readData(ByteBuf data) {
+		itemId = data.readInt();
+		meate = data.readInt();
+		count = data.readInt();
+		x = data.readDouble();
+		y = data.readDouble();
+		z = data.readDouble();
 	}
 
+	@Override
+	public void writeData(ByteBuf data) {
+		data.writeInt(itemId);
+		data.writeInt(meate);
+		data.writeInt(count);
+		data.writeDouble(x);
+		data.writeDouble(y);
+		data.writeDouble(z);
+	}
+
+	@Override
+	public void handleServer(EntityPlayerMP playerEntity) {
+		World world = playerEntity.worldObj;
+		playerEntity.worldObj.spawnEntityInWorld(new EntityItem(world, x, y, z,
+				new ItemStack(Item.getItemById(itemId), count, meate)));
+
+	}
+
+	public static void spawnItem(int itemId, int meate, int count, double x,
+			double y, double z) {
+		MineCharacter.proxy.sendToServer(new PacketSpawnItem(itemId, meate,
+				count, x, y, z));
+	}
 }

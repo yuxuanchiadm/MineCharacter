@@ -1,64 +1,60 @@
 package minecharacter.network;
 
+import io.netty.buffer.ByteBuf;
+
 import java.io.ByteArrayOutputStream;
 import java.io.DataOutputStream;
 
+import minecharacter.MineCharacter;
 import minecharacter.block.tileentity.TileEntityOrb;
+import net.minecraft.client.multiplayer.WorldClient;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.network.packet.Packet250CustomPayload;
 import net.minecraft.tileentity.TileEntity;
 
-
-
-import com.google.common.io.ByteArrayDataInput;
-
-import cpw.mods.fml.common.network.PacketDispatcher;
+import cpw.mods.fml.client.FMLClientHandler;
 
 public class PacketOrbChange extends PacketBase {
-	public static PacketOrbChange instance=new PacketOrbChange();
-	@Override
-	void readClient(int id, ByteArrayDataInput data, Object[] extradata) {
-		
-		EntityPlayer player=(EntityPlayer) extradata[0];
-		int x=data.readInt();
-		int y=data.readInt();
-		int z=data.readInt();
-		int orb=data.readInt();
-		TileEntity tile=player.worldObj.getBlockTileEntity(x, y, z);
-		if(tile instanceof TileEntityOrb){
-		player.worldObj.setBlockMetadataWithNotify(x, y, z, orb, 2);
-		}
+	public int x;
+	public int y;
+	public int z;
+	public int orb;
+
+	public PacketOrbChange() {
+	}
+
+	public PacketOrbChange(int x, int y, int z, int orb) {
+		this.x = x;
+		this.y = y;
+		this.z = z;
+		this.orb = orb;
 	}
 
 	@Override
-	void readServer(int id, ByteArrayDataInput data, Object[] extradata) {
-
+	public void readData(ByteBuf data) {
+		x = data.readInt();
+		y = data.readInt();
+		z = data.readInt();
+		orb = data.readInt();
 	}
-	
 
-	public static void orbChange(int x,int y,int z,int orb){
+	@Override
+	public void writeData(ByteBuf data) {
+		data.writeInt(x);
+		data.writeInt(y);
+		data.writeInt(z);
+		data.writeInt(orb);
+	}
 
-		ByteArrayOutputStream bos = new ByteArrayOutputStream(110);
-		DataOutputStream dos = new DataOutputStream(bos);
-		try {
-			dos.writeInt(2);
-			dos.writeInt(x);
-			dos.writeInt(y);
-			dos.writeInt(z);
-			dos.writeInt(orb);
-			
-			
-		} catch(Exception e) {
-			e.printStackTrace();
+	@Override
+	public void handleClient() {
+		WorldClient worldClient = FMLClientHandler.instance().getClient().theWorld;
+		TileEntity tile = worldClient.getTileEntity(x, y, z);
+		if (tile instanceof TileEntityOrb) {
+			worldClient.setBlockMetadataWithNotify(x, y, z, orb, 2);
 		}
-		
-		Packet250CustomPayload pkt = new Packet250CustomPayload();
-		pkt.channel = "minecharacter";
-		pkt.data = bos.toByteArray();
-		pkt.length = bos.size();
-		pkt.isChunkDataPacket = false;
-		PacketDispatcher.sendPacketToAllPlayers(pkt);
-		
 	}
 
+	public static void orbChange(int x, int y, int z, int orb) {
+		MineCharacter.proxy.sendToAllPlayers(new PacketOrbChange(x, y, z, orb));
+	}
 }
