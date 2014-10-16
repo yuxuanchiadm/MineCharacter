@@ -3,19 +3,20 @@ package minecharacter.misc;
 import java.util.ArrayList;
 import java.util.Random;
 
+import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import minecharacter.MineCharacter;
 import net.minecraft.block.Block;
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.item.EntityXPOrb;
 import net.minecraft.entity.passive.EntityHorse;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.ItemTool;
 import net.minecraft.item.crafting.FurnaceRecipes;
 import net.minecraft.potion.Potion;
 import net.minecraft.util.DamageSource;
 import net.minecraft.world.World;
-import net.minecraftforge.event.ForgeSubscribe;
 import net.minecraftforge.event.entity.living.LivingSetAttackTargetEvent;
 import net.minecraftforge.event.entity.player.AttackEntityEvent;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent;
@@ -24,7 +25,7 @@ import net.minecraftforge.event.world.BlockEvent;
 public class EventHandler {
 	public static Random rand = new Random();
 
-	@ForgeSubscribe
+	@SubscribeEvent
 	public void setTorchOrHarestBlock(PlayerInteractEvent event) {
 		EntityPlayer player = event.entityPlayer;
 		PlayerInteractEvent.Action action = event.action;
@@ -38,7 +39,7 @@ public class EventHandler {
 				}
 			} else if (action == PlayerInteractEvent.Action.RIGHT_CLICK_BLOCK) {
 				if (player.inventory.getCurrentItem() != null
-						&& player.inventory.getCurrentItem().getItem().itemID == Block.torchWood.blockID
+						&& player.inventory.getCurrentItem().getItem().equals(Blocks.torch)
 						&& rand.nextInt(500) == 1)
 					player.worldObj.newExplosion(null, event.x, event.y,
 							event.z, 4.0F, true, true);
@@ -48,7 +49,7 @@ public class EventHandler {
 		}
 	}
 
-	@ForgeSubscribe
+	@SubscribeEvent
 	public void knightHit(AttackEntityEvent event) {
 		EntityPlayer player = event.entityPlayer;
 		if (MineCharacter.proxy.isEquid(player, "knight")) {
@@ -60,7 +61,7 @@ public class EventHandler {
 		}
 	}
 
-	@ForgeSubscribe
+	@SubscribeEvent
 	public void canntFouseonAssassin(LivingSetAttackTargetEvent event) {
 		if (event.target instanceof EntityPlayer) {
 			EntityPlayer player = (EntityPlayer) event.target;
@@ -73,13 +74,12 @@ public class EventHandler {
 
 	}
 
-	@ForgeSubscribe
+	@SubscribeEvent
 	public void harvestDrops(BlockEvent.HarvestDropsEvent event) {
 		if ((event.harvester != null)
 				&& (event.harvester.inventory.getCurrentItem() != null)
-				&& (event.harvester.inventory.getCurrentItem()
-						.canHarvestBlock(event.block))
-				&& (event.harvester.inventory.getCurrentItem().itemID == InitItem.netherPickaxe.itemID)) {
+				&& (event.harvester.inventory.getCurrentItem().getItem().canHarvestBlock(event.block, event.harvester.inventory.getCurrentItem()))
+				&& (event.harvester.inventory.getCurrentItem().equals(InitItem.netherPickaxe))) {
 			ArrayList removeThese = new ArrayList(1);
 			ArrayList addThese = new ArrayList(1);
 
@@ -104,7 +104,7 @@ public class EventHandler {
 
 	private void spawnSpeltXP(ItemStack smelted, World world, int x, int y,
 			int z) {
-		float floatXP = FurnaceRecipes.smelting().getExperience(smelted);
+		float floatXP = FurnaceRecipes.smelting().func_151398_b(smelted);
 		int smeltXP = (int) floatXP;
 
 		if ((floatXP > smeltXP) && (world.rand.nextFloat() < floatXP - smeltXP)) {

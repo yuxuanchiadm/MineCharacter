@@ -1,5 +1,6 @@
 package minecharacter.proxy;
 
+import minecharacter.MineCharacter;
 import minecharacter.block.tileentity.TileEntityOrb;
 import minecharacter.block.tileentity.TileEntityPan;
 import minecharacter.block.tileentity.render.RenderTileEntityOrb;
@@ -13,31 +14,57 @@ import minecharacter.entity.staff.EntityStaffFireball;
 import minecharacter.entity.staff.EntityStaffIceball;
 import minecharacter.entity.staff.EntityStaffLifeball;
 import minecharacter.misc.InitItem;
+import minecharacter.network.PacketBase;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.entity.RenderSnowball;
 import cpw.mods.fml.client.registry.ClientRegistry;
 import cpw.mods.fml.client.registry.RenderingRegistry;
+import cpw.mods.fml.common.network.FMLEmbeddedChannel;
+import cpw.mods.fml.common.network.FMLOutboundHandler;
+import cpw.mods.fml.common.network.FMLOutboundHandler.OutboundTarget;
+import cpw.mods.fml.relauncher.Side;
 
 public class ClientProxy extends CommonProxy {
 
 	@Override
 	public void registerRenderInformation() {
-		RenderingRegistry.registerEntityRenderingHandler(EntityTomahawk.class, new RenderTomahawk());
-		RenderingRegistry.registerEntityRenderingHandler(EntityStaffFireball.class, new RenderStaffBall());
-		RenderingRegistry.registerEntityRenderingHandler(EntityStaffIceball.class, new RenderStaffBall());
-		RenderingRegistry.registerEntityRenderingHandler(EntityStaffLifeball.class, new RenderStaffBall());
-		RenderingRegistry.registerEntityRenderingHandler(EntityStaffDeathball.class, new RenderStaffBall());
-		RenderingRegistry.registerEntityRenderingHandler(EntityShuriken.class, new RenderSnowball(InitItem.shuriken));
-		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityOrb.class, new RenderTileEntityOrb());
-		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityPan.class, new RenderTileEntityPan());
+		RenderingRegistry.registerEntityRenderingHandler(EntityTomahawk.class,
+				new RenderTomahawk());
+		RenderingRegistry.registerEntityRenderingHandler(
+				EntityStaffFireball.class, new RenderStaffBall());
+		RenderingRegistry.registerEntityRenderingHandler(
+				EntityStaffIceball.class, new RenderStaffBall());
+		RenderingRegistry.registerEntityRenderingHandler(
+				EntityStaffLifeball.class, new RenderStaffBall());
+		RenderingRegistry.registerEntityRenderingHandler(
+				EntityStaffDeathball.class, new RenderStaffBall());
+		RenderingRegistry.registerEntityRenderingHandler(EntityShuriken.class,
+				new RenderSnowball(InitItem.shuriken));
+		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityOrb.class,
+				new RenderTileEntityOrb());
+		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityPan.class,
+				new RenderTileEntityPan());
 	}
 
 	@Override
 	public int addArmor(String armor) {
 		return RenderingRegistry.addNewArmourRendererPrefix(armor);
 	}
+
 	@Override
 	public String getCurrentLanguage() {
-		return Minecraft.getMinecraft().getLanguageManager().getCurrentLanguage().getLanguageCode();
+		return Minecraft.getMinecraft().getLanguageManager()
+				.getCurrentLanguage().getLanguageCode();
+	}
+
+	@Override
+	public void sendToServer(PacketBase packet) {
+		FMLEmbeddedChannel channel = MineCharacter.instance.channels
+				.get(Side.CLIENT);
+		synchronized (channel) {
+			channel.attr(FMLOutboundHandler.FML_MESSAGETARGET).set(
+					OutboundTarget.TOSERVER);
+			channel.writeOutbound(packet);
+		}
 	}
 }

@@ -4,9 +4,15 @@ import java.util.Random;
 
 
 
+
+
+
 import minecharacter.misc.InitBlock;
+import net.minecraft.block.Block;
+import net.minecraft.init.Blocks;
 import net.minecraft.world.World;
 import net.minecraft.world.chunk.IChunkProvider;
+import net.minecraft.world.gen.feature.WorldGenMinable;
 import cpw.mods.fml.common.IWorldGenerator;
 
 public class WorldGenerator implements IWorldGenerator {
@@ -32,21 +38,21 @@ public class WorldGenerator implements IWorldGenerator {
 	      int Xcoord = i + random.nextInt(16);
 	      int Ycoord = random.nextInt(128);
 	      int Zcoord = j + random.nextInt(16);
-	      new WorldGenMinableNether(InitBlock.blockNethercoal.blockID, 0, 16).generate(world, random, Xcoord, Ycoord, Zcoord);
+	      new WorldGenMinable(InitBlock.blockNethercoal, 0, 16, Blocks.netherrack).generate(world, random, Xcoord, Ycoord, Zcoord);
 	    }
 	    for (int x = 0; x < 4; x++)
 	    {
 	      int Xcoord = i + random.nextInt(16);
 	      int Ycoord = random.nextInt(128);
 	      int Zcoord = j + random.nextInt(16);
-	      new WorldGenMinableNether(InitBlock.blockDemonite.blockID, 0, 8).generate(world, random, Xcoord, Ycoord, Zcoord);
+	      new WorldGenMinable(InitBlock.blockDemonite, 0, 8, Blocks.netherrack).generate(world, random, Xcoord, Ycoord, Zcoord);
 	    }
 	    for (int x = 0; x < 2; x++)
 	    {
 	      int Xcoord = i + random.nextInt(16);
 	      int Ycoord = random.nextInt(128);
 	      int Zcoord = j + random.nextInt(16);
-	      new WorldGenMinableNether(InitBlock.blockLuciferite.blockID, 0, 4).generate(world, random, Xcoord, Ycoord, Zcoord);
+	      new WorldGenMinable(InitBlock.blockLuciferite, 0, 4, Blocks.netherrack).generate(world, random, Xcoord, Ycoord, Zcoord);
 	    }
 	    
 		
