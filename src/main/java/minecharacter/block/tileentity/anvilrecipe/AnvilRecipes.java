@@ -1,5 +1,7 @@
 package minecharacter.block.tileentity.anvilrecipe;
 
+import com.sun.org.apache.bcel.internal.generic.NEW;
+
 import minecharacter.block.container.InventoryAnvil;
 import net.minecraft.item.ItemStack;
 
@@ -10,11 +12,11 @@ public class AnvilRecipes implements IAnvilRecipe {
 	 public ItemStack[] recipeItems;
 	 
 	  private ItemStack recipeOutput;
-	  public final int recipeOutputItemID;
+	  
 
 	  public AnvilRecipes(int i, int j, ItemStack[] aitemstack, ItemStack itemstack)
 	  {
-	    this.recipeOutputItemID = itemstack.itemID;
+	   
 	    this.recipeWidth = i;
 	    this.recipeHeight = j;
 	    this.recipeItems = aitemstack;
@@ -74,7 +76,7 @@ public class AnvilRecipes implements IAnvilRecipe {
 	          {
 	            return false;
 	          }
-	          if (itemstack!=null&&(itemstack.itemID != itemstack1.itemID||itemstack.getItemDamage() != 32767 && itemstack.getItemDamage() != itemstack1.getItemDamage()))
+	          if (itemstack!=null&&(itemstack.equals( itemstack1)||itemstack.getItemDamage() != 32767 && itemstack.getItemDamage() != itemstack1.getItemDamage()))
 	          {
 	            return false;
 	          }
@@ -87,7 +89,8 @@ public class AnvilRecipes implements IAnvilRecipe {
 	  @Override
 	  public ItemStack getCraftingResult(InventoryAnvil inventoryanvil)
 	  {
-	    return new ItemStack(this.recipeOutput.itemID, this.recipeOutput.stackSize, this.recipeOutput.getItemDamage());
+	    return new ItemStack(this.recipeOutput.getItem(), this.recipeOutput.stackSize, this.recipeOutput.getItemDamage());
+	    
 	  }
 	  @Override
 	  public int getRecipeSize()

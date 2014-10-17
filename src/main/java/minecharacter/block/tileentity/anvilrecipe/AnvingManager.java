@@ -3,9 +3,12 @@ package minecharacter.block.tileentity.anvilrecipe;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+
 import minecharacter.block.container.InventoryAnvil;
 import minecharacter.misc.InitItem;
 import net.minecraft.block.Block;
+import net.minecraft.init.Blocks;
+import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 public class AnvingManager {
@@ -21,9 +24,9 @@ public class AnvingManager {
 
 
 	  public AnvingManager(){
-		  addRecipe(new ItemStack(InitItem.excaliburBlade, 1), new Object[] { "     ", "DXDDD", "     ", Character.valueOf('X'), Item.diamond, Character.valueOf('D'), InitItem.etherealIngot });
+		  addRecipe(new ItemStack(InitItem.excaliburBlade, 1), new Object[] { "     ", "DXDDD", "     ", Character.valueOf('X'), Items.diamond, Character.valueOf('D'), InitItem.etherealIngot });
 
-		    addRecipe(new ItemStack(InitItem.excaliburHandle, 1), new Object[] { "DDXDD", "  D  ", "  X  ", Character.valueOf('X'), Item.diamond, Character.valueOf('D'), InitItem.etherealIngot });
+		    addRecipe(new ItemStack(InitItem.excaliburHandle, 1), new Object[] { "DDXDD", "  D  ", "  X  ", Character.valueOf('X'), Items.diamond, Character.valueOf('D'), InitItem.etherealIngot });
 
 		    addRecipe(new ItemStack(InitItem.excalibur, 1), new Object[] { " X", "D ", Character.valueOf('X'), InitItem.excaliburBlade, Character.valueOf('D'), InitItem.excaliburHandle });
 
@@ -39,17 +42,17 @@ public class AnvingManager {
 
 		    addRecipe(new ItemStack(InitItem.reaper, 1), new Object[] { " X", "D ", Character.valueOf('X'), InitItem.reaperBlade, Character.valueOf('D'), InitItem.netherHandle });
 
-		    addRecipe(new ItemStack(InitItem.mattockBlade, 1), new Object[] { "XDDDD", "  DDD", "    D", Character.valueOf('D'), InitItem.etherealIngot, Character.valueOf('X'), Item.diamond });
+		    addRecipe(new ItemStack(InitItem.mattockBlade, 1), new Object[] { "XDDDD", "  DDD", "    D", Character.valueOf('D'), InitItem.etherealIngot, Character.valueOf('X'), Items.diamond });
 
-		    addRecipe(new ItemStack(InitItem.mattock, 1), new Object[] { " D", "X ", Character.valueOf('X'), Item.diamond, Character.valueOf('D'), InitItem.mattockBlade });
+		    addRecipe(new ItemStack(InitItem.mattock, 1), new Object[] { " D", "X ", Character.valueOf('X'), Items.diamond, Character.valueOf('D'), InitItem.mattockBlade });
 
-		    addRecipe(new ItemStack(InitItem.tomahawkBlade, 1), new Object[] { "XDDDD", "XD   ", "X    ", Character.valueOf('D'), InitItem.etherealIngot, Character.valueOf('X'),Item.diamond });
+		    addRecipe(new ItemStack(InitItem.tomahawkBlade, 1), new Object[] { "XDDDD", "XD   ", "X    ", Character.valueOf('D'), InitItem.etherealIngot, Character.valueOf('X'),Items.diamond });
 
-		    addRecipe(new ItemStack(InitItem.tomahawk, 1), new Object[] { " D", "X ", Character.valueOf('X'), Item.diamond, Character.valueOf('D'), InitItem.tomahawkBlade });
+		    addRecipe(new ItemStack(InitItem.tomahawk, 1), new Object[] { " D", "X ", Character.valueOf('X'), Items.diamond, Character.valueOf('D'), InitItem.tomahawkBlade });
 
-		    addRecipe(new ItemStack(InitItem.mjolnirBlade, 1), new Object[] { "XDDDX", "DDDDD", "XDDDX", Character.valueOf('D'), InitItem.etherealIngot, Character.valueOf('X'),Item.diamond });
+		    addRecipe(new ItemStack(InitItem.mjolnirBlade, 1), new Object[] { "XDDDX", "DDDDD", "XDDDX", Character.valueOf('D'), InitItem.etherealIngot, Character.valueOf('X'),Items.diamond });
 
-		    addRecipe(new ItemStack(InitItem.mjolnirHandle, 1), new Object[] { "VVVVV", "XDDDD", "VVVVV", Character.valueOf('D'), InitItem.etherealIngot, Character.valueOf('X'),Item.diamond, Character.valueOf('V'), Item.diamond });
+		    addRecipe(new ItemStack(InitItem.mjolnirHandle, 1), new Object[] { "VVVVV", "XDDDD", "VVVVV", Character.valueOf('D'), InitItem.etherealIngot, Character.valueOf('X'),Items.diamond, Character.valueOf('V'), Items.diamond });
 
 		    addRecipe(new ItemStack(InitItem.mjolnir, 1), new Object[] { " D", "X ", Character.valueOf('X'), InitItem.mjolnirHandle, Character.valueOf('D'), InitItem.mjolnirBlade });
 
@@ -61,35 +64,35 @@ public class AnvingManager {
 
 		    addRecipe(new ItemStack(InitItem.netherPickaxe, 1), new Object[] { " D", "X ", Character.valueOf('X'), InitItem.netherHandle, Character.valueOf('D'), InitItem.netherPickaxeBlade });
 
-		    addRecipe(new ItemStack(InitItem.lanceBlade, 1), new Object[] { "     ", "XDXDX", "     ", Character.valueOf('D'), InitItem.etherealIngot, Character.valueOf('X'),Item.diamond });
+		    addRecipe(new ItemStack(InitItem.lanceBlade, 1), new Object[] { "     ", "XDXDX", "     ", Character.valueOf('D'), InitItem.etherealIngot, Character.valueOf('X'),Items.diamond });
 
-		    addRecipe(new ItemStack(InitItem.lanceHandle, 1), new Object[] { "   D ", "XDXDX", "   D ", Character.valueOf('D'), InitItem.etherealIngot, Character.valueOf('X'),Item.diamond });
+		    addRecipe(new ItemStack(InitItem.lanceHandle, 1), new Object[] { "   D ", "XDXDX", "   D ", Character.valueOf('D'), InitItem.etherealIngot, Character.valueOf('X'),Items.diamond });
 
 		    addRecipe(new ItemStack(InitItem.lance, 1), new Object[] { "D ", " X", Character.valueOf('X'), InitItem.lanceHandle, Character.valueOf('D'), InitItem.lanceBlade });
 
-		    addRecipe(new ItemStack(InitItem.mechanicBow, 1), new Object[] { " DDD ", "D   D", "VVVVV", Character.valueOf('D'), Item.ingotIron, Character.valueOf('V'),Item.silk });
+		    addRecipe(new ItemStack(InitItem.mechanicBow, 1), new Object[] { " DDD ", "D   D", "VVVVV", Character.valueOf('D'), Items.iron_ingot, Character.valueOf('V'),Items.string });
 
-		    addRecipe(new ItemStack(InitItem.etherBow, 1), new Object[] { " DXD ", "D   D", "VVVVV", Character.valueOf('D'), InitItem.etherealIngot, Character.valueOf('X'),Item.diamond, Character.valueOf('V'),Item.silk });
+		    addRecipe(new ItemStack(InitItem.etherBow, 1), new Object[] { " DXD ", "D   D", "VVVVV", Character.valueOf('D'), InitItem.etherealIngot, Character.valueOf('X'),Items.diamond, Character.valueOf('V'),Items.string });
 
-		    addRecipe(new ItemStack(InitItem.netherBow, 1), new Object[] { " DXD ", "D   D", "VVVVV", Character.valueOf('D'), InitItem.demonite, Character.valueOf('X'), InitItem.luciferite, Character.valueOf('V'),Item.silk });
+		    addRecipe(new ItemStack(InitItem.netherBow, 1), new Object[] { " DXD ", "D   D", "VVVVV", Character.valueOf('D'), InitItem.demonite, Character.valueOf('X'), InitItem.luciferite, Character.valueOf('V'),Items.string });
 
 		    addRecipe(new ItemStack(InitItem.shuriken, 4), new Object[] { " X ", "XXX", " X ", Character.valueOf('X'), InitItem.assassinSteel });
 
 		    addRecipe(new ItemStack(InitItem.draggerBlade, 1), new Object[] { "     ", "XXXXX", "     ", Character.valueOf('X'), InitItem.assassinSteel });
 
-		    addRecipe(new ItemStack(InitItem.draggerHandle, 1), new Object[] { "XXXX", " XX ", " XX ", Character.valueOf('X'), Item.diamond });
+		    addRecipe(new ItemStack(InitItem.draggerHandle, 1), new Object[] { "XXXX", " XX ", " XX ", Character.valueOf('X'), Items.diamond });
 
 		    addRecipe(new ItemStack(InitItem.dragger, 1), new Object[] { " D", "X ", Character.valueOf('D'), InitItem.draggerBlade, Character.valueOf('X'), InitItem.draggerHandle });
 
-		    addRecipe(new ItemStack(InitItem.smokeGrenade, 4), new Object[] { " DDD ", "DXVXD", " DDD ", Character.valueOf('X'), Item.coal, Character.valueOf('V'), Item.ingotIron, Character.valueOf('D'), InitItem.assassinSteel });
+		    addRecipe(new ItemStack(InitItem.smokeGrenade, 4), new Object[] { " DDD ", "DXVXD", " DDD ", Character.valueOf('X'), Items.coal, Character.valueOf('V'), Items.iron_ingot, Character.valueOf('D'), InitItem.assassinSteel });
 
-		    addRecipe(new ItemStack(InitItem.knightChest, 1), new Object[] { "DXDXD", " DXD ", " DDD ", Character.valueOf('D'), InitItem.etherealIngot, Character.valueOf('X'),Item.diamond });
+		    addRecipe(new ItemStack(InitItem.knightChest, 1), new Object[] { "DXDXD", " DXD ", " DDD ", Character.valueOf('D'), InitItem.etherealIngot, Character.valueOf('X'),Items.diamond });
 
-		    addRecipe(new ItemStack(InitItem.knightHelmet, 1), new Object[] { " DXD ", "DXDXD", "D   D", Character.valueOf('D'), InitItem.etherealIngot, Character.valueOf('X'),Item.diamond });
+		    addRecipe(new ItemStack(InitItem.knightHelmet, 1), new Object[] { " DXD ", "DXDXD", "D   D", Character.valueOf('D'), InitItem.etherealIngot, Character.valueOf('X'),Items.diamond });
 
-		    addRecipe(new ItemStack(InitItem.knightLegs, 1), new Object[] { "DXDDX", "   DD", "DXDDX", Character.valueOf('D'), InitItem.etherealIngot, Character.valueOf('X'),Item.diamond });
+		    addRecipe(new ItemStack(InitItem.knightLegs, 1), new Object[] { "DXDDX", "   DD", "DXDDX", Character.valueOf('D'), InitItem.etherealIngot, Character.valueOf('X'),Items.diamond });
 
-		    addRecipe(new ItemStack(InitItem.knightBoots, 1), new Object[] { " D D ", " X X ", "DD DD", Character.valueOf('D'), InitItem.etherealIngot, Character.valueOf('X'),Item.diamond });
+		    addRecipe(new ItemStack(InitItem.knightBoots, 1), new Object[] { " D D ", " X X ", "DD DD", Character.valueOf('D'), InitItem.etherealIngot, Character.valueOf('X'),Items.diamond });
 
 		    addRecipe(new ItemStack(InitItem.grimChest, 1), new Object[] { "DDDDD", " DDD ", " DDD ", Character.valueOf('D'), InitItem.soul });
 
@@ -107,21 +110,21 @@ public class AnvingManager {
 
 		    addRecipe(new ItemStack(InitItem.mageBoots, 1), new Object[] { " D D ", " D D ", "DD DD", Character.valueOf('D'), InitItem.magicString });
 
-		    addRecipe(new ItemStack(InitItem.archerChest, 1), new Object[] { "DDDDD", " DXD ", " DDD ", Character.valueOf('D'),Item.silk, Character.valueOf('X'), InitItem.quiver });
+		    addRecipe(new ItemStack(InitItem.archerChest, 1), new Object[] { "DDDDD", " DXD ", " DDD ", Character.valueOf('D'),Items.string, Character.valueOf('X'), InitItem.quiver });
 
-		    addRecipe(new ItemStack(InitItem.archerHelmet, 1), new Object[] { " DDD ", "DDDDD", "D   D", Character.valueOf('D'),Item.silk });
+		    addRecipe(new ItemStack(InitItem.archerHelmet, 1), new Object[] { " DDD ", "DDDDD", "D   D", Character.valueOf('D'),Items.string });
 
-		    addRecipe(new ItemStack(InitItem.archerLegs, 1), new Object[] { "DDDDD", "   DD", "DDDDD", Character.valueOf('D'),Item.silk });
+		    addRecipe(new ItemStack(InitItem.archerLegs, 1), new Object[] { "DDDDD", "   DD", "DDDDD", Character.valueOf('D'),Items.string });
 
-		    addRecipe(new ItemStack(InitItem.archerBoots, 1), new Object[] { " D D ", " D D ", "DD DD", Character.valueOf('D'),Item.silk });
+		    addRecipe(new ItemStack(InitItem.archerBoots, 1), new Object[] { " D D ", " D D ", "DD DD", Character.valueOf('D'),Items.string });
 
-		    addRecipe(new ItemStack(InitItem.assassinChest, 1), new Object[] { "DDDDD", " DDD ", " DDD ", Character.valueOf('D'), new ItemStack(Block.cloth, 1, 15) });
+		    addRecipe(new ItemStack(InitItem.assassinChest, 1), new Object[] { "DDDDD", " DDD ", " DDD ", Character.valueOf('D'), new ItemStack(Blocks.wool, 1, 15) });
 
-		    addRecipe(new ItemStack(InitItem.assassinHelmet, 1), new Object[] { " DDD ", "DDDDD", "D   D", Character.valueOf('D'), new ItemStack(Block.cloth, 1, 15) });
+		    addRecipe(new ItemStack(InitItem.assassinHelmet, 1), new Object[] { " DDD ", "DDDDD", "D   D", Character.valueOf('D'), new ItemStack(Blocks.wool, 1, 15) });
 
-		    addRecipe(new ItemStack(InitItem.assassinLegs, 1), new Object[] { "DDDDD", "   DD", "DDDDD", Character.valueOf('D'), new ItemStack(Block.cloth, 1, 15) });
+		    addRecipe(new ItemStack(InitItem.assassinLegs, 1), new Object[] { "DDDDD", "   DD", "DDDDD", Character.valueOf('D'), new ItemStack(Blocks.wool, 1, 15) });
 
-		    addRecipe(new ItemStack(InitItem.assassinBoots, 1), new Object[] { " D D ", " D D ", "DD DD", Character.valueOf('D'), new ItemStack(Block.cloth, 1, 15) });
+		    addRecipe(new ItemStack(InitItem.assassinBoots, 1), new Object[] { " D D ", " D D ", "DD DD", Character.valueOf('D'), new ItemStack(Blocks.wool, 1, 15) });
 		    
 	  }
 	
@@ -150,7 +153,7 @@ public class AnvingManager {
 	      {
 	        itemstack1 = new ItemStack((Item)par2ArrayOfObj[(i + 1)]);
 	      }
-	      else if ((par2ArrayOfObj[(i + 1)] instanceof Block))
+ else if ((par2ArrayOfObj[(i + 1)] instanceof Block))
 	      {
 	        itemstack1 = new ItemStack((Block)par2ArrayOfObj[(i + 1)], 1, -1);
 	      }
