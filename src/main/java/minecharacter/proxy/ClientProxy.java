@@ -17,6 +17,7 @@ import minecharacter.misc.InitItem;
 import minecharacter.network.PacketBase;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.entity.RenderSnowball;
+import net.minecraft.client.resources.Language;
 import cpw.mods.fml.client.registry.ClientRegistry;
 import cpw.mods.fml.client.registry.RenderingRegistry;
 import cpw.mods.fml.common.network.FMLEmbeddedChannel;
@@ -53,8 +54,13 @@ public class ClientProxy extends CommonProxy {
 
 	@Override
 	public String getCurrentLanguage() {
-		return Minecraft.getMinecraft().getLanguageManager()
-				.getCurrentLanguage().getLanguageCode();
+		Language language = Minecraft.getMinecraft().getLanguageManager()
+				.getCurrentLanguage();
+		if (language != null) {
+			return language.getLanguageCode();
+		} else {
+			return "en_US";
+		}
 	}
 
 	@Override
