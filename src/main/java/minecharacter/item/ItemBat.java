@@ -2,11 +2,9 @@ package minecharacter.item;
 
 import java.util.List;
 
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
 import minecharacter.MineCharacter;
 import minecharacter.misc.Localization;
-import net.minecraft.client.renderer.texture.IconRegister;
+import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.EntityLivingBase;
@@ -17,18 +15,20 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.util.DamageSource;
 import net.minecraft.world.World;
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 
 public class ItemBat extends Item {
 private int weaponDamage;
-	public ItemBat(int par1) {
-		super(par1);
+	public ItemBat() {
+		super();
 		this.weaponDamage=1;
 		this.setCreativeTab(MineCharacter.tabMineCharacter);
 		this.setMaxStackSize(1);
 	}
 	@Override
-	public String getItemDisplayName(ItemStack itemstack) {
-		return Localization.localize(getUnlocalizedName(itemstack));
+	public String getItemStackDisplayName(ItemStack itemStack) {
+		return Localization.localize(getUnlocalizedName(itemStack));
 	}
 	
 	
@@ -43,7 +43,7 @@ private int weaponDamage;
 
 	@Override
 	@SideOnly(Side.CLIENT)
-	public void registerIcons(IconRegister par1IconRegister) {
+	public void registerIcons(IIconRegister par1IconRegister) {
 		this.itemIcon=par1IconRegister.registerIcon("minecharacter:"+this.getUnlocalizedName().replace("item.", ""));
 	}
 

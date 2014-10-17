@@ -1,26 +1,29 @@
 package minecharacter.item;
 
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
 import minecharacter.MineCharacter;
 import minecharacter.misc.Localization;
-import net.minecraft.client.renderer.texture.IconRegister;
+import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 
 public class ItemMineCharacter extends Item {
 
-	public ItemMineCharacter(int par1) {
-		super(par1);
+	public ItemMineCharacter() {
+		super();
 		this.setCreativeTab(MineCharacter.tabMineCharacter);
 	}
+
 	@Override
 	@SideOnly(Side.CLIENT)
-	public void registerIcons(IconRegister par1IconRegister) {
-		this.itemIcon=par1IconRegister.registerIcon("minecharacter:"+this.getUnlocalizedName().replace("item.", ""));
+	public void registerIcons(IIconRegister par1IconRegister) {
+		this.itemIcon = par1IconRegister.registerIcon("minecharacter:"
+				+ this.getUnlocalizedName().replace("item.", ""));
 	}
+
 	@Override
-	public String getItemDisplayName(ItemStack itemstack) {
-		return Localization.localize(getUnlocalizedName(itemstack));
+	public String getItemStackDisplayName(ItemStack itemStack) {
+		return Localization.localize(getUnlocalizedName(itemStack));
 	}
 }

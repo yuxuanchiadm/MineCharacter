@@ -1,26 +1,25 @@
 package minecharacter.item.knight;
 
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
 import minecharacter.MineCharacter;
 import minecharacter.misc.Localization;
-import net.minecraft.client.renderer.texture.IconRegister;
+import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.entity.EntityLivingBase;
-import net.minecraft.item.EnumToolMaterial;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.ItemSword;
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 
 public class ItemLance extends ItemSword {
 	private int demage;
-	public ItemLance(int par1, EnumToolMaterial par2EnumToolMaterial) {
-		super(par1, par2EnumToolMaterial);
+	public ItemLance(ToolMaterial par2EnumToolMaterial) {
+		super(par2EnumToolMaterial);
 		this.setMaxDamage(3122);
 		this.setCreativeTab(MineCharacter.tabMineCharacter);
 		this.demage=(int) par2EnumToolMaterial.getDamageVsEntity();
 	}
 	@Override
 	@SideOnly(Side.CLIENT)
-	public void registerIcons(IconRegister par1IconRegister) {
+	public void registerIcons(IIconRegister par1IconRegister) {
 		this.itemIcon=par1IconRegister.registerIcon("minecharacter:"+this.getUnlocalizedName().replace("item.", ""));
 	}
 
@@ -42,7 +41,7 @@ public class ItemLance extends ItemSword {
 		    return true;
 	}
 	@Override
-	public String getItemDisplayName(ItemStack itemstack) {
-		return Localization.localize(getUnlocalizedName(itemstack));
+	public String getItemStackDisplayName(ItemStack itemStack) {
+		return Localization.localize(getUnlocalizedName(itemStack));
 	}
 }

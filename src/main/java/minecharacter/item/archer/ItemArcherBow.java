@@ -1,34 +1,36 @@
 package minecharacter.item.archer;
 
-import cpw.mods.fml.common.FMLCommonHandler;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
+import javax.swing.Icon;
+
 import minecharacter.MineCharacter;
 import minecharacter.misc.Localization;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemBow;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.Icon;
+import net.minecraft.util.IIcon;
+import cpw.mods.fml.common.FMLCommonHandler;
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 
 public class ItemArcherBow extends ItemBow {
-	protected Icon[] iconArray;
+	protected IIcon[] iconArray;
 	protected int[] iconTime=new int[3];
 	protected double damage; 
-	public ItemArcherBow(int par1) {
-		super(par1);
+	public ItemArcherBow() {
+		super();
 		this.setCreativeTab(MineCharacter.tabMineCharacter);
 	}
 
 	@Override
 	@SideOnly(Side.CLIENT)
-	public Icon getItemIconForUseDuration(int par1) {
+	public IIcon getItemIconForUseDuration(int par1) {
 
 		return this.iconArray[par1];
 	}
 
 	@Override
-	public String getItemDisplayName(ItemStack itemstack) {
-		return Localization.localize(getUnlocalizedName(itemstack));
+	public String getItemStackDisplayName(ItemStack itemStack) {
+		return Localization.localize(getUnlocalizedName(itemStack));
 	}
 
 	@Override
@@ -38,13 +40,13 @@ public class ItemArcherBow extends ItemBow {
 	}
 
 	@Override
-	public void onUsingItemTick(ItemStack stack, EntityPlayer player, int count) {
+	public void onUsingTick(ItemStack stack, EntityPlayer player, int count) {
 		if (FMLCommonHandler.instance().getEffectiveSide() == Side.CLIENT) {
 			int j = this.getMaxItemUseDuration(stack) - count;
 			this.iconchange(j);
 		}
 
-		super.onUsingItemTick(stack, player, count);
+		super.onUsingTick(stack, player, count);
 	}
 
 	@SideOnly(Side.CLIENT)

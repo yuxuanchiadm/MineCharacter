@@ -1,42 +1,82 @@
 package minecharacter.item.knight;
 
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
+import java.util.Set;
+
 import minecharacter.MineCharacter;
 import minecharacter.misc.Localization;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
-import net.minecraft.client.renderer.texture.IconRegister;
-import net.minecraft.item.EnumToolMaterial;
+import net.minecraft.client.renderer.texture.IIconRegister;
+import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.ItemTool;
 
+import com.google.common.collect.Sets;
+
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
+
 public class ItemMattock extends ItemTool {
-	public static final Block[] blocksEffectiveAgainst = new Block[] {Block.grass, Block.dirt, Block.sand, Block.gravel, Block.snow, Block.blockSnow, Block.blockClay, Block.tilledField, Block.slowSand, Block.mycelium,Block.cobblestone, Block.stoneDoubleSlab, Block.stoneSingleSlab, Block.stone, Block.sandStone, Block.cobblestoneMossy, Block.oreIron, Block.blockIron, Block.oreCoal, Block.blockGold, Block.oreGold, Block.oreDiamond, Block.blockDiamond, Block.ice, Block.netherrack, Block.oreLapis, Block.blockLapis, Block.oreRedstone, Block.oreRedstoneGlowing, Block.rail, Block.railDetector, Block.railPowered, Block.railActivator};
-	public ItemMattock(int par1,EnumToolMaterial par3EnumToolMaterial) {
-		super(par1, 4, par3EnumToolMaterial, blocksEffectiveAgainst);
+	private static final Set blocksEffectiveAgainst = Sets
+			.newHashSet(new Block[] { Blocks.cobblestone,
+					Blocks.double_stone_slab, Blocks.stone_slab, Blocks.stone,
+					Blocks.sandstone, Blocks.mossy_cobblestone,
+					Blocks.iron_ore, Blocks.iron_block, Blocks.coal_ore,
+					Blocks.gold_block, Blocks.gold_ore, Blocks.diamond_ore,
+					Blocks.diamond_block, Blocks.ice, Blocks.netherrack,
+					Blocks.lapis_ore, Blocks.lapis_block, Blocks.redstone_ore,
+					Blocks.lit_redstone_ore, Blocks.rail, Blocks.detector_rail,
+					Blocks.golden_rail, Blocks.activator_rail });
+
+	public ItemMattock(ToolMaterial par3EnumToolMaterial) {
+		super(4, par3EnumToolMaterial, blocksEffectiveAgainst);
 		this.setMaxDamage(3122);
 		this.setCreativeTab(MineCharacter.tabMineCharacter);
-	
+
 	}
 
-	  public float getStrVsBlock(ItemStack par1ItemStack, Block par2Block)
-	    {
-	        return par2Block != null && (par2Block.blockMaterial == Material.iron || par2Block.blockMaterial == Material.anvil || par2Block.blockMaterial == Material.rock) ? this.efficiencyOnProperMaterial : super.getStrVsBlock(par1ItemStack, par2Block);
-	    }
+	@Override
+	public float func_150893_a(ItemStack par1ItemStack, Block par2Block) {
+		return par2Block != null
+				&& (par2Block.getMaterial() == Material.iron
+						|| par2Block.getMaterial() == Material.anvil || par2Block.getMaterial() == Material.rock) ? this.efficiencyOnProperMaterial
+				: super.func_150893_a(par1ItemStack, par2Block);
+	}
 
-    public boolean canHarvestBlock(Block par1Block)
-    {
-        return par1Block == Block.obsidian ? this.toolMaterial.getHarvestLevel() == 3 : (par1Block != Block.blockDiamond && par1Block != Block.oreDiamond ? (par1Block != Block.oreEmerald && par1Block != Block.blockEmerald ? (par1Block != Block.blockGold && par1Block != Block.oreGold ? (par1Block != Block.blockIron && par1Block != Block.oreIron ? (par1Block != Block.blockLapis && par1Block != Block.oreLapis ? (par1Block != Block.oreRedstone && par1Block != Block.oreRedstoneGlowing ? (par1Block.blockMaterial == Material.rock ? true : (par1Block.blockMaterial == Material.iron ? true : par1Block.blockMaterial == Material.anvil)) : this.toolMaterial.getHarvestLevel() >= 2) : this.toolMaterial.getHarvestLevel() >= 1) : this.toolMaterial.getHarvestLevel() >= 1) : this.toolMaterial.getHarvestLevel() >= 2) : this.toolMaterial.getHarvestLevel() >= 2) : this.toolMaterial.getHarvestLevel() >= 2);
-    }
-    @Override
+	@Override
+	public boolean canHarvestBlock(Block par1Block, ItemStack itemStack) {
+		return par1Block == Blocks.obsidian ? this.toolMaterial
+				.getHarvestLevel() == 3
+				: (par1Block != Blocks.diamond_block
+						&& par1Block != Blocks.diamond_ore ? (par1Block != Blocks.emerald_ore
+						&& par1Block != Blocks.emerald_block ? (par1Block != Blocks.gold_block
+						&& par1Block != Blocks.gold_ore ? (par1Block != Blocks.iron_block
+						&& par1Block != Blocks.iron_ore ? (par1Block != Blocks.lapis_block
+						&& par1Block != Blocks.lapis_ore ? (par1Block != Blocks.redstone_ore
+						&& par1Block != Blocks.redstone_lamp ? (par1Block
+						.getMaterial().equals(Material.rock) ? true
+						: (par1Block.getMaterial().equals(Material.iron) ? true
+								: par1Block.getMaterial()
+										.equals(Material.anvil)))
+						: this.toolMaterial.getHarvestLevel() >= 2)
+						: this.toolMaterial.getHarvestLevel() >= 1)
+						: this.toolMaterial.getHarvestLevel() >= 1)
+						: this.toolMaterial.getHarvestLevel() >= 2)
+						: this.toolMaterial.getHarvestLevel() >= 2)
+						: this.toolMaterial.getHarvestLevel() >= 2);
+	}
+
+
+	@Override
 	@SideOnly(Side.CLIENT)
-	public void registerIcons(IconRegister par1IconRegister) {
-		this.itemIcon=par1IconRegister.registerIcon("minecharacter:"+this.getUnlocalizedName().replace("item.", ""));
+	public void registerIcons(IIconRegister par1IconRegister) {
+		this.itemIcon = par1IconRegister.registerIcon("minecharacter:"
+				+ this.getUnlocalizedName().replace("item.", ""));
 	}
-    @Override
-	public String getItemDisplayName(ItemStack itemstack) {
-		return Localization.localize(getUnlocalizedName(itemstack));
+
+	@Override
+	public String getItemStackDisplayName(ItemStack itemStack) {
+		return Localization.localize(getUnlocalizedName(itemStack));
 	}
 
 }

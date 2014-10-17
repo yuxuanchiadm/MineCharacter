@@ -1,26 +1,26 @@
 package minecharacter.item.archer;
 
-import cpw.mods.fml.common.FMLCommonHandler;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
 import minecharacter.MineCharacter;
-import net.minecraft.client.renderer.texture.IconRegister;
+import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.projectile.EntityArrow;
-import net.minecraft.item.Item;
+import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.Icon;
+import net.minecraft.util.IIcon;
 import net.minecraft.world.World;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.entity.player.ArrowLooseEvent;
+import cpw.mods.fml.common.FMLCommonHandler;
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 
 public class ItemMechanicBow extends ItemArcherBow {
 	public static final String[] mechanicBowPullIconNameArray = new String[] {
 			"mechanicBow_pull_0", "mechanicBow_pull_1", "mechanicBow_pull_2",
 			"mechanicBow_pull_3" };
 
-	public ItemMechanicBow(int par1) {
-		super(par1);
+	public ItemMechanicBow() {
+		super();
 		this.setMaxDamage(251);
 		damage = 3;
 		this.iconTime[0] = 0;
@@ -47,7 +47,7 @@ public class ItemMechanicBow extends ItemArcherBow {
 
 		if (flag
 				|| (MineCharacter.proxy.isEquid(par3EntityPlayer, "archer") && par3EntityPlayer.inventory
-						.hasItem(Item.arrow.itemID))) {
+						.hasItem(Items.arrow))) {
 			float f = (float) j / 6.0F;
 			f = (f * f + f * 2.0F) / 3.0F;
 
@@ -74,7 +74,7 @@ public class ItemMechanicBow extends ItemArcherBow {
 
 			entityarrow.canBePickedUp = 2;
 
-			par3EntityPlayer.inventory.consumeInventoryItem(Item.arrow.itemID);
+			par3EntityPlayer.inventory.consumeInventoryItem(Items.arrow);
 
 			if (!par2World.isRemote) {
 				par2World.spawnEntityInWorld(entityarrow);
@@ -84,10 +84,10 @@ public class ItemMechanicBow extends ItemArcherBow {
 
 	@Override
 	@SideOnly(Side.CLIENT)
-	public void registerIcons(IconRegister par1IconRegister) {
+	public void registerIcons(IIconRegister par1IconRegister) {
 		this.itemIcon = par1IconRegister.registerIcon("minecharacter:"
 				+ mechanicBowPullIconNameArray[0]);
-		this.iconArray = new Icon[mechanicBowPullIconNameArray.length];
+		this.iconArray = new IIcon[mechanicBowPullIconNameArray.length];
 
 		for (int i = 0; i < this.iconArray.length; ++i) {
 			this.iconArray[i] = par1IconRegister.registerIcon("minecharacter:"
