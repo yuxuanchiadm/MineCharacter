@@ -1,8 +1,13 @@
 package minecharacter.block;
 
+import java.util.Random;
+
+import minecharacter.misc.InitBlock;
 import minecharacter.misc.InitItem;
 import net.minecraft.block.BlockCake;
 import net.minecraft.client.renderer.texture.IIconRegister;
+import net.minecraft.init.Items;
+import net.minecraft.item.Item;
 import net.minecraft.util.IIcon;
 import net.minecraft.world.World;
 import cpw.mods.fml.relauncher.Side;
@@ -40,7 +45,9 @@ public class BlockOmelette extends BlockCake {
 	}
 
 	@Override
-	public int idPicked(World par1World, int par2, int par3, int par4) {
-		return InitItem.omelette.itemID;
+	public Item getItemDropped(int par1, Random par2Random, int par3) {
+
+		return InitItem.omelette;
 	}
+
 }

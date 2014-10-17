@@ -5,19 +5,21 @@ import net.minecraft.block.Block;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
 
-public class ItemBlockMineCharacter extends ItemBlock{
+public class ItemBlockMineCharacter extends ItemBlock {
 
-	public ItemBlockMineCharacter(int par1, Block par2Block) {
-		super(par1);
-		
+	public ItemBlockMineCharacter(Block par2Block) {
+		super(par2Block);
+
 	}
+
 	@Override
 	public int getMetadata(int i) {
 		return i;
 	}
 
 	@Override
-	public String getItemDisplayName(ItemStack itemstack) {
-		return Localization.localize(getUnlocalizedName(itemstack));
+	public String getItemStackDisplayName(ItemStack arg0) {
+		return Localization.localize(getUnlocalizedName(arg0));
 	}
+
 }

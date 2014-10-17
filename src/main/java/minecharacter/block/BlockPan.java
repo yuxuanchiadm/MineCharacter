@@ -6,6 +6,7 @@ import minecharacter.misc.InitItem;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockContainer;
 import net.minecraft.block.material.Material;
+import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
@@ -42,9 +43,9 @@ public class BlockPan extends BlockContainer {
 		TileEntity tile = par1World.getTileEntity(par2, par3, par4);
 		if (tile != null && tile instanceof TileEntityPan) {
 			TileEntityPan pan = (TileEntityPan) tile;
-			if (pan.inPan != -1)
+			if (pan.inPan != null)
 				par1World.spawnEntityInWorld(new EntityItem(par1World, par2,
-						par3, par4, new ItemStack(pan.inPan, 1, 0)));
+						par3, par4, pan.inPan));
 
 		}
 
@@ -66,11 +67,11 @@ public class BlockPan extends BlockContainer {
 		TileEntity tile = par1World.getTileEntity(par2, par3, par4);
 		if (tile != null && tile instanceof TileEntityPan) {
 			TileEntityPan pan = (TileEntityPan) tile;
-			if (pan.inPan == -1) {
+			if (pan.inPan == null) {
 				if (par5EntityPlayer.inventory.getCurrentItem() != null) {
 					if (canCook(par5EntityPlayer.inventory.getCurrentItem())) {
 						pan.inPan = par5EntityPlayer.inventory.getCurrentItem()
-								.splitStack(1).itemID;
+								.splitStack(1);
 						par1World.markBlockForUpdate(par2, par3, par4);
 					}
 				} else {
@@ -79,9 +80,9 @@ public class BlockPan extends BlockContainer {
 			} else {
 				if (!par1World.isRemote)
 					par1World.spawnEntityInWorld(new EntityItem(par1World,
-							par2, par3, par4, new ItemStack(pan.inPan, 1, 0)));
+							par2, par3, par4, pan.inPan));
 
-				pan.inPan = -1;
+				pan.inPan = null;
 				par1World.markBlockForUpdate(par2, par3, par4);
 
 			}
@@ -116,38 +117,32 @@ public class BlockPan extends BlockContainer {
 
 	@Override
 	@SideOnly(Side.CLIENT)
-	public void registerIcons(IconRegister par1IconRegister) {
+	public void registerBlockIcons(IIconRegister par1IconRegister) {
 		this.blockIcon = par1IconRegister.registerIcon("minecharacter:"
 				+ this.getUnlocalizedName().replace("tile.", ""));
 	}
 
-	private void setDefaultDirection(World par1World, int par2, int par3,
-			int par4) {
-		if (!par1World.isRemote) {
-			int l = par1World.getBlockId(par2, par3, par4 - 1);
-			int i1 = par1World.getBlockId(par2, par3, par4 + 1);
-			int j1 = par1World.getBlockId(par2 - 1, par3, par4);
-			int k1 = par1World.getBlockId(par2 + 1, par3, par4);
-			byte b0 = 0;
-
-			if (Block.opaqueCubeLookup[l] && !Block.opaqueCubeLookup[i1]) {
-				b0 = 1;
-			}
-
-			if (Block.opaqueCubeLookup[i1] && !Block.opaqueCubeLookup[l]) {
-				b0 = 0;
-			}
-
-			if (Block.opaqueCubeLookup[j1] && !Block.opaqueCubeLookup[k1]) {
-				b0 = 3;
-			}
-
-			if (Block.opaqueCubeLookup[k1] && !Block.opaqueCubeLookup[j1]) {
-				b0 = 2;
-			}
-
-			par1World.setBlockMetadataWithNotify(par2, par3, par4, b0, 2);
+	// XXX 具体效果等待运行游戏查看
+	private void func_149930_e(World world, int posX, int poxY, int posZ) {
+		if (world.isRemote) {
+			return;
 		}
+
+		Block localBlock1 = world.getBlock(posX, poxY, posZ - 1);
+		Block localBlock2 = world.getBlock(posX, poxY, posZ + 1);
+		Block localBlock3 = world.getBlock(posX - 1, poxY, posZ);
+		Block localBlock4 = world.getBlock(posX + 1, poxY, posZ);
+
+		int i = 0;
+		if ((localBlock1.func_149730_j()) && (!localBlock2.func_149730_j()))
+			i = 1;
+		if ((localBlock2.func_149730_j()) && (!localBlock1.func_149730_j()))
+			i = 0;
+		if ((localBlock3.func_149730_j()) && (!localBlock4.func_149730_j()))
+			i = 3;
+		if ((localBlock4.func_149730_j()) && (!localBlock3.func_149730_j()))
+			i = 2;
+		world.setBlockMetadataWithNotify(posX, poxY, posZ, i, 2);
 	}
 
 	@Override
@@ -179,7 +174,7 @@ public class BlockPan extends BlockContainer {
 	@Override
 	public void onBlockAdded(World par1World, int par2, int par3, int par4) {
 		super.onBlockAdded(par1World, par2, par3, par4);
-		this.setDefaultDirection(par1World, par2, par3, par4);
+		this.func_149930_e(par1World, par2, par3, par4);
 	}
 
 	@Override
