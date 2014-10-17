@@ -9,13 +9,17 @@ import net.minecraft.enchantment.EnchantmentThorns;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.entity.EntityTracker;
 import net.minecraft.entity.IProjectile;
+import net.minecraft.entity.effect.EntityLightningBolt;
 import net.minecraft.entity.item.EntityItem;
+import net.minecraft.entity.item.EntityXPOrb;
 import net.minecraft.entity.monster.EntityEnderman;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.network.play.server.S0DPacketCollectItem;
 import net.minecraft.network.play.server.S2BPacketChangeGameState;
 import net.minecraft.network.play.server.S40PacketDisconnect;
 import net.minecraft.util.AxisAlignedBB;
@@ -24,6 +28,7 @@ import net.minecraft.util.MathHelper;
 import net.minecraft.util.MovingObjectPosition;
 import net.minecraft.util.Vec3;
 import net.minecraft.world.World;
+import net.minecraft.world.WorldServer;
 import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.common.registry.IThrowableEntity;
 import cpw.mods.fml.relauncher.Side;
@@ -42,6 +47,12 @@ public class EntityTomahawk extends Entity implements IThrowableEntity,
 	private double damage = 2.0D;
 	private EntityPlayer thrower;
 	private int itemDamage;
+	
+	public EntityTomahawk(World par1World) {
+		super(par1World);
+		this.renderDistanceWeight = 10.0D;
+		this.setSize(0.5F, 0.5F);
+	}
 
 	public EntityTomahawk(World par1World, ItemStack itemstack,
 			EntityLivingBase par2EntityLiving, float par3) {
@@ -223,11 +234,6 @@ public class EntityTomahawk extends Entity implements IThrowableEntity,
 					int i1 = MathHelper.ceiling_double_int((double) f2
 							* this.damage);
 
-					// if (this.getIsCritical())
-					// {
-					// i1 += this.rand.nextInt(i1 / 2 + 2);
-					// }
-
 					DamageSource damagesource = null;
 
 					if (this.thrower == null) {
@@ -248,17 +254,6 @@ public class EntityTomahawk extends Entity implements IThrowableEntity,
 						if (movingobjectposition.entityHit instanceof EntityLiving) {
 							EntityLiving entityliving = (EntityLiving) movingobjectposition.entityHit;
 
-							if (!this.worldObj.isRemote) {
-								entityliving.setArrowCountInEntity(entityliving
-										.getArrowCountInEntity() + 1);
-							}
-
-							if (this.thrower != null) {
-//								EnchantmentThorns.func_151367_b(entityliving,
-//										this.thrower, 1);
-								//TODO ´ò¸öÀ×
-							}
-
 							if (this.thrower != null
 									&& movingobjectposition.entityHit != this.thrower
 									&& movingobjectposition.entityHit instanceof EntityPlayer
@@ -273,10 +268,6 @@ public class EntityTomahawk extends Entity implements IThrowableEntity,
 
 						this.playSound("random.bowhit", 1.0F,
 								1.2F / (this.rand.nextFloat() * 0.2F + 0.9F));
-
-						if (!(movingobjectposition.entityHit instanceof EntityEnderman)) {
-							this.setDead();
-						}
 					} else {
 						this.motionX *= -0.10000000149011612D;
 						this.motionY *= -0.10000000149011612D;
@@ -308,7 +299,6 @@ public class EntityTomahawk extends Entity implements IThrowableEntity,
 					this.playSound("random.bowhit", 1.0F,
 							1.2F / (this.rand.nextFloat() * 0.2F + 0.9F));
 					this.inGround = true;
-					// this.setIsCritical(false);
 
 					if (this.inTile != null) {
 						this.inTile.onEntityCollidedWithBlock(this.worldObj,
@@ -373,17 +363,20 @@ public class EntityTomahawk extends Entity implements IThrowableEntity,
 
 	@Override
 	public void onCollideWithPlayer(EntityPlayer par1EntityPlayer) {
-		if (FMLCommonHandler.instance().getEffectiveSide() == Side.CLIENT) {
-
-			if (this.ticksInAir > 0 && this.inGround) {
-				this.worldObj.spawnEntityInWorld(new EntityItem(worldObj,
-						xTile, yTile, zTile, new ItemStack(InitItem.tomahawk,
-								this.itemDamage, 1)));
-
-				this.setDead();
-			}
+		if ((this.worldObj.isRemote) || (!this.inGround)) {
+			return;
 		}
-
+		int i = par1EntityPlayer.capabilities.isCreativeMode ? 1 : 0;
+		if ((!par1EntityPlayer.inventory.addItemStackToInventory(new ItemStack(
+				InitItem.tomahawk, 1, this.itemDamage)))) {
+			i = 0;
+		}
+		if (i != 0) {
+			playSound("random.pop", 0.2F, ((this.rand.nextFloat() - this.rand.nextFloat()) * 0.7F + 1.0F) * 2.0F);
+			EntityTracker entitytracker = ((WorldServer)par1EntityPlayer.worldObj).getEntityTracker();
+			entitytracker.func_151247_a(this, new S0DPacketCollectItem(this.getEntityId(), par1EntityPlayer.getEntityId()));
+			setDead();
+		}
 	}
 
 	@Override

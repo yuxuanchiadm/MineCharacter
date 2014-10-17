@@ -5,6 +5,7 @@ import java.util.Random;
 
 import minecharacter.block.tileentity.TileEntityOrb;
 import minecharacter.block.tileentity.TileEntityPan;
+import minecharacter.entity.EntityTomahawk;
 import minecharacter.misc.CreativeTabMineCharacter;
 import minecharacter.misc.EventHandler;
 import minecharacter.misc.InitBlock;
@@ -28,6 +29,7 @@ import cpw.mods.fml.common.event.FMLInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import cpw.mods.fml.common.network.FMLEmbeddedChannel;
 import cpw.mods.fml.common.network.NetworkRegistry;
+import cpw.mods.fml.common.registry.EntityRegistry;
 import cpw.mods.fml.common.registry.GameRegistry;
 import cpw.mods.fml.relauncher.Side;
 
@@ -75,7 +77,8 @@ public class MineCharacter implements IFuelHandler {
 		loadSmelt();
 		GameRegistry.registerFuelHandler(this);
 		proxy.registerRenderInformation();
-
+		
+		EntityRegistry.registerModEntity(EntityTomahawk.class, "mc_tomahawk", 590, this, 32, 3, true);
 	}
 
 	private void loadSmelt() {
