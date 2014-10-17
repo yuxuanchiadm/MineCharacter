@@ -64,10 +64,12 @@ public class MineCharacter implements IFuelHandler {
 
 		GameRegistry.registerWorldGenerator(new WorldGenerator(), 0);
 		NetworkRegistry.INSTANCE.registerGuiHandler(this, proxy);
-		MinecraftForge.setToolClass(InitItem.mattock, "pickaxe", 4);
-		MinecraftForge.setToolClass(InitItem.tomahawk, "axe", 4);
-		MinecraftForge.setToolClass(InitItem.netherAxe, "axe", 4);
-		MinecraftForge.setToolClass(InitItem.netherPickaxe, "pickaxe", 4);
+		/*
+		 * MinecraftForge.setToolClass(InitItem.mattock, "pickaxe", 4);
+		 * MinecraftForge.setToolClass(InitItem.tomahawk, "axe", 4);
+		 * MinecraftForge.setToolClass(InitItem.netherAxe, "axe", 4);
+		 * MinecraftForge.setToolClass(InitItem.netherPickaxe, "pickaxe", 4);
+		 */
 
 		loadRepice();
 		loadSmelt();
