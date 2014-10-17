@@ -45,7 +45,8 @@ public class TileEntityPan extends TileEntity {
 
 		super.writeToNBT(par1nbtTagCompound);
 		par1nbtTagCompound.setShort("cooked", (short) this.cooked);
-		this.inPan.writeToNBT(par1nbtTagCompound);
+		if (inPan != null)
+			this.inPan.writeToNBT(par1nbtTagCompound);
 
 	}
 
