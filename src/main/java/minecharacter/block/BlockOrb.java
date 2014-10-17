@@ -97,40 +97,46 @@ public class BlockOrb extends BlockContainer {
 
 			} else {
 				if (tileorb.getBlockMetadata() == 1) {
+					if (FMLCommonHandler.instance().getEffectiveSide() == Side.SERVER) {
 					par1World
 							.spawnEntityInWorld(new EntityItem(par1World, par2,
 									par3, par4, new ItemStack(InitItem.orb, 1,
 											0)));
+					}
 					par1World
 							.setBlockMetadataWithNotify(par2, par3, par4, 0, 2);
 
 				}
 				if (tileorb.getBlockMetadata() == 2) {
-
+					if (FMLCommonHandler.instance().getEffectiveSide() == Side.SERVER) {
 					par1World.spawnEntityInWorld(new EntityItem(par1World,
 							par2, par3, par4, new ItemStack(InitItem.fireOrb,
 									1, 0)));
-
+					}
 					par1World
 							.setBlockMetadataWithNotify(par2, par3, par4, 0, 2);
 				} else if (tileorb.getBlockMetadata() == 3) {
-
+					if (FMLCommonHandler.instance().getEffectiveSide() == Side.SERVER) {
 					par1World.spawnEntityInWorld(new EntityItem(par1World,
 							par2, par3, par4, new ItemStack(InitItem.iceOrb, 1,
 									0)));
+					}
 					par1World
 							.setBlockMetadataWithNotify(par2, par3, par4, 0, 2);
 				} else if (tileorb.getBlockMetadata() == 4) {
+					if (FMLCommonHandler.instance().getEffectiveSide() == Side.SERVER) {
 					par1World.spawnEntityInWorld(new EntityItem(par1World,
 							par2, par3, par4, new ItemStack(InitItem.lifeOrb,
 									1, 0)));
+					}
 					par1World
 							.setBlockMetadataWithNotify(par2, par3, par4, 0, 2);
 				} else if (tileorb.getBlockMetadata() == 5) {
-					if (FMLCommonHandler.instance().getEffectiveSide() == Side.CLIENT)
+					if (FMLCommonHandler.instance().getEffectiveSide() == Side.SERVER) {
 						par1World.spawnEntityInWorld(new EntityItem(par1World,
 								par2, par3, par4, new ItemStack(
 										InitItem.deathOrb, 1, 0)));
+					}
 					par1World
 							.setBlockMetadataWithNotify(par2, par3, par4, 0, 2);
 				}
