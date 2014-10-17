@@ -4,6 +4,7 @@ import java.util.List;
 
 import net.minecraft.block.Block;
 import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.init.Blocks;
 import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.MathHelper;
@@ -60,15 +61,15 @@ public class EntityStaffLifeball extends EntityStaffBall {
 		for(int i=x-3;i<=x+3;i++)
 			for(int j=y-3;j<=y+3;j++)
 				for(int k=z-3;k<=z+3;k++){
-					if((this.worldObj.getBlockId(i, j, k)==0)&&this.worldObj.getBlockId(i, j-1, k)!=0){
-						if(this.worldObj.getBlockId(i, j-1, k) == Block.waterStill.blockID&&this.worldObj.getBlockMetadata(i, j-1, k)==0){
-							this.worldObj.setBlock(i, j, k,Block.waterlily.blockID,0,2);
+					if((this.worldObj.getBlock(i, j, k).equals(Blocks.air))&&!this.worldObj.getBlock(i, j-1, k).equals(Blocks.air)){
+						if(this.worldObj.getBlock(i, j-1, k) == Blocks.water&&this.worldObj.getBlockMetadata(i, j-1, k)==0){
+							this.worldObj.setBlock(i, j, k,Blocks.waterlily,0,2);
 						}
-						if(this.worldObj.getBlockId(i, j-1, k) == Block.grass.blockID )
-						this.worldObj.setBlock(i, j, k, Block.tallGrass.blockID, 1, 2);
-						else if(this.worldObj.getBlockId(i, j-1, k) == Block.dirt.blockID || this.worldObj.getBlockId(i, j-1, k) == Block.tilledField.blockID){
-							this.worldObj.setBlock(i, j, k, Block.tallGrass.blockID, 1, 2);
-							this.worldObj.setBlock(i, j-1, k, Block.grass.blockID, 0, 2);
+						if(this.worldObj.getBlock(i, j-1, k) == Blocks.grass )
+						this.worldObj.setBlock(i, j, k, Blocks.tallgrass, 1, 2);
+						else if(this.worldObj.getBlock(i, j-1, k) == Blocks.dirt || this.worldObj.getBlock(i, j-1, k) == Blocks.farmland){
+							this.worldObj.setBlock(i, j, k, Blocks.tallgrass, 1, 2);
+							this.worldObj.setBlock(i, j-1, k, Blocks.grass, 0, 2);
 						}
 					}
 				}

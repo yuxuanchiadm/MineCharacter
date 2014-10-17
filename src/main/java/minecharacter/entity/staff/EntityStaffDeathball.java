@@ -5,6 +5,7 @@ import java.util.List;
 import net.minecraft.block.Block;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.init.Blocks;
 import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.MathHelper;
@@ -40,22 +41,22 @@ private void toBlock(int x, int y, int z) {
 		for(int i=x-1;i<=x+1;i++)
 			for(int j=y-1;j<=y+1;j++)
 				for(int k=z-1;k<=z+1;k++){
-					if((this.worldObj.getBlockId(i, j, k)==Block.grass.blockID)){
-						this.worldObj.setBlock(i, j, k,Block.dirt.blockID);
+					if((this.worldObj.getBlock(i, j, k).equals(Blocks.grass))){
+						this.worldObj.setBlock(i, j, k, Blocks.dirt);
 						
 						}
-					if((this.worldObj.getBlockId(i, j, k)==Block.sapling.blockID)){
-						this.worldObj.setBlock(i, j, k,Block.deadBush.blockID);
+					if((this.worldObj.getBlock(i, j, k).equals(Blocks.sapling))){
+						this.worldObj.setBlock(i, j, k,Blocks.deadbush);
 						
 						}
-					if((this.worldObj.getBlockId(i, j, k)==Block.tallGrass.blockID)){
+					if((this.worldObj.getBlock(i, j, k).equals(Blocks.tallgrass))){
 						this.worldObj.setBlockToAir(i, j, k);
 						
 						}
-					if((this.worldObj.getBlockId(i, j, k)==Block.waterlily.blockID)){
+					if((this.worldObj.getBlock(i, j, k).equals(Blocks.waterlily))){
 						this.worldObj.setBlockToAir(i, j, k);	
 						}
-					if((this.worldObj.getBlockId(i, j, k)==Block.leaves.blockID||this.worldObj.getBlockId(i, j, k)==Block.wood.blockID)){
+					if((this.worldObj.getBlock(i, j, k).equals(Blocks.leaves)||this.worldObj.getBlock(i, j, k).equals(Blocks.log))){
 						this.worldObj.setBlockToAir(i, j, k);	
 						}
 					}

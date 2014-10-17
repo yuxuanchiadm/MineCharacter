@@ -7,6 +7,7 @@ import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.IProjectile;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.init.Blocks;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.util.MathHelper;
@@ -82,12 +83,12 @@ public abstract class EntityStaffBall extends Entity implements IProjectile{
 	            this.prevRotationPitch = this.rotationPitch = (float)(Math.atan2(this.motionY, (double)f) * 180.0D / Math.PI);
 	        }
 
-	        int i = this.worldObj.getBlockId(this.xTile, this.yTile, this.zTile);
+	        Block block = this.worldObj.getBlock(this.xTile, this.yTile, this.zTile);
 
-	        if (i > 0)
+	        if (!block.equals(Blocks.air))
 	        {
-	            Block.blocksList[i].setBlockBoundsBasedOnState(this.worldObj, this.xTile, this.yTile, this.zTile);
-	            AxisAlignedBB axisalignedbb = Block.blocksList[i].getCollisionBoundingBoxFromPool(this.worldObj, this.xTile, this.yTile, this.zTile);
+	            block.setBlockBoundsBasedOnState(this.worldObj, this.xTile, this.yTile, this.zTile);
+	            AxisAlignedBB axisalignedbb = block.getCollisionBoundingBoxFromPool(this.worldObj, this.xTile, this.yTile, this.zTile);
 
 	            if (axisalignedbb != null && axisalignedbb.isVecInside(this.worldObj.getWorldVec3Pool().getVecFromPool(this.posX, this.posY, this.posZ)))
 	            {
@@ -99,7 +100,7 @@ public abstract class EntityStaffBall extends Entity implements IProjectile{
 
 	        if (this.inGround)
 	        {
-	            this.worldObj.getBlockId(this.xTile, this.yTile, this.zTile);
+	            this.worldObj.getBlock(this.xTile, this.yTile, this.zTile);
 	            this.worldObj.getBlockMetadata(this.xTile, this.yTile, this.zTile);
 
 	           this.withBlock(worldObj, xTile, yTile, zTile);
@@ -109,7 +110,7 @@ public abstract class EntityStaffBall extends Entity implements IProjectile{
 	            ++this.ticksInAir;
 	            Vec3 vec3 = this.worldObj.getWorldVec3Pool().getVecFromPool(this.posX, this.posY, this.posZ);
 	            Vec3 vec31 = this.worldObj.getWorldVec3Pool().getVecFromPool(this.posX + this.motionX, this.posY + this.motionY, this.posZ + this.motionZ);
-	            MovingObjectPosition movingobjectposition = this.worldObj.rayTraceBlocks_do_do(vec3, vec31, false, true);
+	            MovingObjectPosition movingobjectposition = this.worldObj.func_147447_a(vec3, vec31, false, true, false);
 	            vec3 = this.worldObj.getWorldVec3Pool().getVecFromPool(this.posX, this.posY, this.posZ);
 	            vec31 = this.worldObj.getWorldVec3Pool().getVecFromPool(this.posX + this.motionX, this.posY + this.motionY, this.posZ + this.motionZ);
 

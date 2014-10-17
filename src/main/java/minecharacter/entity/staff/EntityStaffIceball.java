@@ -6,6 +6,7 @@ import net.minecraft.block.Block;
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.init.Blocks;
 import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.MathHelper;
@@ -38,14 +39,14 @@ public class EntityStaffIceball extends EntityStaffBall {
 		for(int i=x-2;i<=x+2;i++)
 			for(int j=y-2;j<=y+2;j++)
 				for(int k=z-2;k<=z+2;k++){
-					if(this.worldObj.getBlockId(i, j, k)==Block.fire.blockID){
+					if(this.worldObj.getBlock(i, j, k)==Blocks.fire){
 						this.worldObj.setBlockToAir(i, j, k);
 					}
-					if(this.worldObj.getBlockId(i, j, k)==Block.waterStill.blockID&&this.worldObj.getBlockMetadata(i, j, k)==0){
-						this.worldObj.setBlock(i, j, k, Block.ice.blockID, 0, 2);
+					if(this.worldObj.getBlock(i, j, k)==Blocks.water && this.worldObj.getBlockMetadata(i, j, k)==0){
+						this.worldObj.setBlock(i, j, k, Blocks.ice, 0, 2);
 					}
-					else if(this.worldObj.getBlockId(i, j-1, k)!=0&&this.worldObj.getBlockId(i, j, k)==0&&Block.isNormalCube(this.worldObj.getBlockId(i, j-1, k))){
-						this.worldObj.setBlock(i, j, k, Block.snow.blockID, 0, 2);
+					else if(!this.worldObj.getBlock(i, j-1, k).equals(Blocks.air) && this.worldObj.getBlock(i, j, k).equals(Blocks.air)&&this.worldObj.getBlock(i, j-1, k).isNormalCube()){
+						this.worldObj.setBlock(i, j, k, Blocks.snow, 0, 2);
 					
 					
 					}

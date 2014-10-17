@@ -2,6 +2,7 @@ package minecharacter.entity.staff;
 
 import net.minecraft.block.Block;
 import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.init.Blocks;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.MathHelper;
 import net.minecraft.util.MovingObjectPosition;
@@ -24,10 +25,10 @@ public class EntityStaffFireball extends EntityStaffBall {
 	for(int i=x-1;i<=x+1;i++)
 		for(int j=y-1;j<=y+1;j++)
 			for(int k=z-1;k<=z+1;k++){
-				if(this.worldObj.getBlockId(i, j, k)==0&&this.worldObj.getBlockId(i, j-1, k)!=0){
-					this.worldObj.setBlock(i, j, k, Block.fire.blockID, 0, 2);
-					if(this.worldObj.getBlockId(i, j, k)==Block.ice.blockID){
-						this.worldObj.setBlock(i,j ,k, Block.waterStill.blockID,0,2);
+				if(this.worldObj.getBlock(i, j, k).equals(Blocks.air) && !this.worldObj.getBlock(i, j-1, k).equals(Blocks.air)){
+					this.worldObj.setBlock(i, j, k, Blocks.fire, 0, 2);
+					if(this.worldObj.getBlock(i, j, k)==Blocks.ice){
+						this.worldObj.setBlock(i,j ,k, Blocks.water, 0, 2);
 					}
 				}
 				
@@ -45,10 +46,10 @@ public class EntityStaffFireball extends EntityStaffBall {
 		for(int i=x-1;i<=x+1;i++)
 			for(int j=y-1;j<=y+1;j++)
 				for(int k=z-1;k<=z+1;k++){
-					if(this.worldObj.getBlockId(i, j, k)==0&&this.worldObj.getBlockId(i, j-1, k)!=0){
-						this.worldObj.setBlock(i, j, k, Block.fire.blockID, 0, 2);
-						if(this.worldObj.getBlockId(i, j, k)==Block.ice.blockID){
-							this.worldObj.setBlock(i,j ,k, Block.waterStill.blockID,0,2);
+					if(this.worldObj.getBlock(i, j, k).equals(Blocks.air) && !this.worldObj.getBlock(i, j-1, k).equals(Blocks.air)){
+						this.worldObj.setBlock(i, j, k, Blocks.fire, 0, 2);
+						if(this.worldObj.getBlock(i, j, k)==Blocks.ice){
+							this.worldObj.setBlock(i,j ,k, Blocks.water,0,2);
 						}
 					}
 				}
