@@ -4,8 +4,10 @@ import minecharacter.block.container.slot.SlotAnvil;
 import minecharacter.block.container.slot.SlotAnvilHammer;
 import minecharacter.block.tileentity.anvilrecipe.AnvingManager;
 import minecharacter.misc.InitBlock;
+import net.minecraft.block.Block;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
+import net.minecraft.init.Blocks;
 import net.minecraft.inventory.Container;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.inventory.Slot;
@@ -34,7 +36,8 @@ public class ContainerAnvil extends Container {
 		this.posZ = k;
 		this.hammer = new SlotAnvilHammer(this.anvilHammer, 0, 143, 17);
 		this.addSlotToContainer(this.hammer);
-		this.addSlotToContainer(new SlotAnvil(inventoryplayer.player,this.anvilMatrix, this.anvResult, this.hammer, 0, 143, 49));
+		this.addSlotToContainer(new SlotAnvil(inventoryplayer.player,
+				this.anvilMatrix, this.anvResult, this.hammer, 0, 143, 49));
 		for (int l = 0; l < 3; l++) {
 			for (int k1 = 0; k1 < 5; k1++) {
 				this.addSlotToContainer(new Slot(this.anvilMatrix, k1 + l * 5,
@@ -60,7 +63,9 @@ public class ContainerAnvil extends Container {
 
 	@Override
 	public void onCraftMatrixChanged(IInventory iinventory) {
-		if ((this.hammer.getHasStack())&& (this.hammer.getStack().getItemDamage() + 50 <= this.hammer.getStack().getMaxDamage())) {
+		if ((this.hammer.getHasStack())
+				&& (this.hammer.getStack().getItemDamage() + 50 <= this.hammer
+						.getStack().getMaxDamage())) {
 			int number = 0;
 			int slot = 0;
 			for (int i = 0; i < this.anvilMatrix.getSizeInventory(); i++) {
@@ -72,7 +77,8 @@ public class ContainerAnvil extends Container {
 			}
 
 			if (number == 1) {
-				ItemStack newitem = ItemStack.copyItemStack(this.anvilMatrix.getStackInSlot(slot));
+				ItemStack newitem = ItemStack.copyItemStack(this.anvilMatrix
+						.getStackInSlot(slot));
 				if (newitem.getItem().isDamageable()) {
 					if (newitem.getItemDamage() - 24 > 0) {
 						newitem.setItemDamage(newitem.getItemDamage() - 24);
@@ -83,7 +89,8 @@ public class ContainerAnvil extends Container {
 					this.anvResult.setInventorySlotContents(0, newitem);
 				}
 			} else {
-				this.anvResult.setInventorySlotContents(0, AnvingManager.getInstance().findMatchingRecipe(this.anvilMatrix));
+				this.anvResult.setInventorySlotContents(0, AnvingManager
+						.getInstance().findMatchingRecipe(this.anvilMatrix));
 
 			}
 
@@ -92,7 +99,6 @@ public class ContainerAnvil extends Container {
 		}
 
 	}
-
 
 	@Override
 	public void onContainerClosed(EntityPlayer entityplayer) {
@@ -103,19 +109,21 @@ public class ContainerAnvil extends Container {
 		for (int i = 0; i < 15; i++) {
 			ItemStack itemstack = this.anvilMatrix.getStackInSlotOnClosing(i);
 			if (itemstack != null) {
-				entityplayer.dropPlayerItem(itemstack);
+				entityplayer.entityDropItem(itemstack, 0F);
 			}
 		}
 		ItemStack itemstack = this.hammer.getStack();
 		if (itemstack != null) {
-			entityplayer.dropPlayerItem(itemstack);
+			entityplayer.entityDropItem(itemstack, 0F);
 		}
 
 	}
 
 	@Override
 	public boolean canInteractWith(EntityPlayer entityplayer) {
-		if (this.worldObj.getBlockId(this.posX, this.posY, this.posZ) != InitBlock.blockAnvil.blockID) {
+		if (Block.isEqualTo(
+				this.worldObj.getBlock(this.posX, this.posY, this.posZ),
+				InitBlock.blockAnvil)) {
 			return false;
 		}
 		return entityplayer.getDistanceSq(this.posX + 0.5D, this.posY + 0.5D,

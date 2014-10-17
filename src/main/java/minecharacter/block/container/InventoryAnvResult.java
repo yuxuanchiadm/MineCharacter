@@ -19,16 +19,6 @@ public class InventoryAnvResult implements IInventory {
 	}
 
 	@Override
-	public String getInvName() {
-		return "Result";
-	}
-
-	@Override
-	public boolean isInvNameLocalized() {
-		return false;
-	}
-
-	@Override
 	public ItemStack decrStackSize(int par1, int par2) {
 		if (this.stackResult[0] != null) {
 			ItemStack itemstack = this.stackResult[0];
@@ -61,25 +51,38 @@ public class InventoryAnvResult implements IInventory {
 	}
 
 	@Override
-	public void onInventoryChanged() {
-	}
-
-	@Override
 	public boolean isUseableByPlayer(EntityPlayer par1EntityPlayer) {
 		return true;
-	}
-
-	@Override
-	public void openChest() {
-	}
-
-	@Override
-	public void closeChest() {
 	}
 
 	@Override
 	public boolean isItemValidForSlot(int i, ItemStack itemstack) {
 
 		return true;
+	}
+
+	@Override
+	public String getInventoryName() {
+		return "Result";
+	}
+
+	@Override
+	public boolean hasCustomInventoryName() {
+		return false;
+	}
+
+	@Override
+	public void markDirty() {
+
+	}
+
+	@Override
+	public void closeInventory() {
+
+	}
+
+	@Override
+	public void openInventory() {
+
 	}
 }

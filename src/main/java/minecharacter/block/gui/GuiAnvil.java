@@ -19,8 +19,8 @@ public class GuiAnvil extends GuiContainer {
 
 	  protected void drawGuiContainerForegroundLayer()
 	  {
-	    this.fontRenderer.drawString("Anvil", 12, 6, 4210752);
-	    this.fontRenderer.drawString("Hammer", 134, 6, 4210752);
+	    this.fontRendererObj.drawString("Anvil", 12, 6, 4210752);
+	    this.fontRendererObj.drawString("Hammer", 134, 6, 4210752);
 	  }
 
 
