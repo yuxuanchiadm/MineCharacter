@@ -6,6 +6,7 @@ import net.minecraft.block.Block;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.effect.EntityLightningBolt;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.init.Blocks;
 import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
@@ -55,9 +56,9 @@ private int boltLivingTime;
                     int j = MathHelper.floor_double(this.posY);
                     int k = MathHelper.floor_double(this.posZ);
 
-                    if (this.worldObj.getBlockId(i, j, k) == 0 && Block.fire.canPlaceBlockAt(this.worldObj, i, j, k))
+                    if (this.worldObj.getBlock(i, j, k) == Blocks.air && Blocks.fire.canPlaceBlockAt(this.worldObj, i, j, k))
                     {
-                        this.worldObj.setBlock(i, j, k, Block.fire.blockID);
+                        this.worldObj.setBlock(i, j, k, Blocks.fire);
                     }
                 }
             }
