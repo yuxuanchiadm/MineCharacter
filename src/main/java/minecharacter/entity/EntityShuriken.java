@@ -11,22 +11,28 @@ import net.minecraft.world.World;
 
 public class EntityShuriken extends EntityThrowable {
 
+	public EntityShuriken(World par1World) {
+		super(par1World);
+		this.ignoreFrustumCheck = true;
+	}
+
 	public EntityShuriken(World par1World, EntityLivingBase par2EntityLiving) {
 		super(par1World, par2EntityLiving);
-	this.ignoreFrustumCheck = true;
+		this.ignoreFrustumCheck = true;
 	}
 
 	@Override
 	protected void onImpact(MovingObjectPosition movingobjectposition) {
-		if(movingobjectposition.entityHit!=null){
-		movingobjectposition.entityHit.attackEntityFrom(DamageSource.causeThrownDamage(this, this),4);	
+		if (movingobjectposition.entityHit != null) {
+			movingobjectposition.entityHit.attackEntityFrom(
+					DamageSource.causeThrownDamage(this, this), 4);
 
-		this.setDead();
-		}
-		else{
-			if(!worldObj.isRemote)
-				worldObj.spawnEntityInWorld(new EntityItem(worldObj, movingobjectposition.blockX, movingobjectposition.blockY, movingobjectposition.blockZ, new ItemStack(InitItem.shuriken)));
-				this.setDead();
+			this.setDead();
+		} else {
+			if (!worldObj.isRemote)
+				worldObj.spawnEntityInWorld(new EntityItem(worldObj, posX,
+						posY, posZ, new ItemStack(InitItem.shuriken)));
+			this.setDead();
 		}
 	}
 

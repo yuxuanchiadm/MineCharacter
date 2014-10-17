@@ -5,6 +5,7 @@ import java.util.Random;
 
 import minecharacter.block.tileentity.TileEntityOrb;
 import minecharacter.block.tileentity.TileEntityPan;
+import minecharacter.entity.EntityShuriken;
 import minecharacter.entity.EntityTomahawk;
 import minecharacter.misc.CreativeTabMineCharacter;
 import minecharacter.misc.EventHandler;
@@ -66,19 +67,14 @@ public class MineCharacter implements IFuelHandler {
 
 		GameRegistry.registerWorldGenerator(new WorldGenerator(), 0);
 		NetworkRegistry.INSTANCE.registerGuiHandler(this, proxy);
-		/*
-		 * MinecraftForge.setToolClass(InitItem.mattock, "pickaxe", 4);
-		 * MinecraftForge.setToolClass(InitItem.tomahawk, "axe", 4);
-		 * MinecraftForge.setToolClass(InitItem.netherAxe, "axe", 4);
-		 * MinecraftForge.setToolClass(InitItem.netherPickaxe, "pickaxe", 4);
-		 */
 
 		loadRepice();
 		loadSmelt();
 		GameRegistry.registerFuelHandler(this);
 		proxy.registerRenderInformation();
 		
-		EntityRegistry.registerModEntity(EntityTomahawk.class, "mc_tomahawk", 590, this, 32, 3, true);
+		EntityRegistry.registerModEntity(EntityTomahawk.class, "Tomahawk", 590, this, 64, 20, false);
+		EntityRegistry.registerModEntity(EntityShuriken.class, "Shuriken", 591, this, 64, 10, true);
 	}
 
 	private void loadSmelt() {
