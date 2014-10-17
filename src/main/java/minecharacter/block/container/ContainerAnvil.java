@@ -121,9 +121,7 @@ public class ContainerAnvil extends Container {
 
 	@Override
 	public boolean canInteractWith(EntityPlayer entityplayer) {
-		if (Block.isEqualTo(
-				this.worldObj.getBlock(this.posX, this.posY, this.posZ),
-				InitBlock.blockAnvil)) {
+		if (!this.worldObj.getBlock(this.posX, this.posY, this.posZ).equals(InitBlock.blockAnvil)) {
 			return false;
 		}
 		return entityplayer.getDistanceSq(this.posX + 0.5D, this.posY + 0.5D,
