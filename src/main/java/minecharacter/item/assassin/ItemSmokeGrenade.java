@@ -12,7 +12,7 @@ import net.minecraft.world.World;
 
 public class ItemSmokeGrenade extends ItemMineCharacter {
 
-	public ItemSmokeGrenade(int par1) {
+	public ItemSmokeGrenade() {
 		super();
 		this.setMaxStackSize(1);
 	}

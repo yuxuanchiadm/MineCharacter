@@ -25,12 +25,12 @@ import minecharacter.item.knight.ItemMattock;
 import minecharacter.item.knight.ItemMjolnir;
 import minecharacter.item.knight.ItemTomahawk;
 import minecharacter.item.mage.ItemStaff;
-import net.minecraft.item.EnumArmorMaterial;
-import net.minecraft.item.EnumToolMaterial;
 import net.minecraft.item.Item;
+import net.minecraft.item.Item.ToolMaterial;
+import net.minecraft.item.ItemArmor.ArmorMaterial;
 import net.minecraft.item.ItemArmor;
 import net.minecraft.item.ItemFood;
-import net.minecraftforge.common.EnumHelper;
+import net.minecraftforge.common.util.EnumHelper;
 
 public class InitItem {
 
@@ -123,117 +123,117 @@ public class InitItem {
 	public static Item quiver;
 	public static Item netherAxe;
 	public static Item netherPickaxe;
-	public static final EnumArmorMaterial KNIGHT = EnumHelper.addArmorMaterial("KNIGHT", 33, new int[] { 5, 15, 10, 5 }, 30);
-	public static final EnumArmorMaterial GRIM = EnumHelper.addArmorMaterial("GRIM", -1, new int[] { 0, 0, 0, 0 }, 30);
-	public static final EnumToolMaterial ETHER = EnumHelper.addToolMaterial("ETHER", 3, 3122, 15.0F, 6, 30);
-	public static final EnumToolMaterial NETHER = EnumHelper.addToolMaterial("NETHER", 3, 2341, 15.0F, 10, 5);
-	public static final EnumToolMaterial ASSASSIN = EnumHelper.addToolMaterial("ASSASSIN", 3, 635, 15.0F, 5, 15);
-	public static final EnumToolMaterial NORTH = EnumHelper.addToolMaterial("NORTH", 3, 635, 15.0F,5, 15);
+	public static final ArmorMaterial KNIGHT = EnumHelper.addArmorMaterial("KNIGHT", 33, new int[] { 5, 15, 10, 5 }, 30);
+	public static final ArmorMaterial GRIM = EnumHelper.addArmorMaterial("GRIM", -1, new int[] { 0, 0, 0, 0 }, 30);
+	public static final ToolMaterial ETHER = EnumHelper.addToolMaterial("ETHER", 3, 3122, 15.0F, 6, 30);
+	public static final ToolMaterial NETHER = EnumHelper.addToolMaterial("NETHER", 3, 2341, 15.0F, 10, 5);
+	public static final ToolMaterial ASSASSIN = EnumHelper.addToolMaterial("ASSASSIN", 3, 635, 15.0F, 5, 15);
+	public static final ToolMaterial NORTH = EnumHelper.addToolMaterial("NORTH", 3, 635, 15.0F,5, 15);
 	public void initItem() {
-		  omelette=new ItemOmelette(ModIdConfig.omeletteId, InitBlock.blockOmelette).setUnlocalizedName("omelette");
-			woodHammer=new ItemHammer(ModIdConfig.woodHammerId,EnumToolMaterial.WOOD).setUnlocalizedName("woodhammer");
-			stoneHammer=new ItemHammer(ModIdConfig.stoneHammerId,EnumToolMaterial.STONE).setUnlocalizedName("stonehammer");
-			ironHammer=new ItemHammer(ModIdConfig.ironHammerId,EnumToolMaterial.IRON).setUnlocalizedName("ironhammer");
-			goldHammer=new ItemHammer(ModIdConfig.goldHammerId,EnumToolMaterial.GOLD).setUnlocalizedName("goldhammer");
-			diamondHammer=new ItemHammer(ModIdConfig.diamondHammerId, EnumToolMaterial.EMERALD).setUnlocalizedName("diamondhammer");
+		  omelette=new ItemOmelette(InitBlock.blockOmelette).setUnlocalizedName("omelette");
+			woodHammer=new ItemHammer(ToolMaterial.WOOD).setUnlocalizedName("woodhammer");
+			stoneHammer=new ItemHammer(ToolMaterial.STONE).setUnlocalizedName("stonehammer");
+			ironHammer=new ItemHammer(ToolMaterial.IRON).setUnlocalizedName("ironhammer");
+			goldHammer=new ItemHammer(ToolMaterial.GOLD).setUnlocalizedName("goldhammer");
+			diamondHammer=new ItemHammer( ToolMaterial.EMERALD).setUnlocalizedName("diamondhammer");
 			
-			orb=new ItemMineCharacter(ModIdConfig.orbId).setUnlocalizedName("orb");
-			fireOrb=new ItemMineCharacter(ModIdConfig.fireOrbId).setUnlocalizedName("fireOrb").setContainerItem(orb);
-			iceOrb=new ItemMineCharacter(ModIdConfig.iceOrbId).setUnlocalizedName("iceOrb").setContainerItem(orb);
-			lifeOrb=new ItemMineCharacter(ModIdConfig.lifeOrbId).setUnlocalizedName("lifeOrb").setContainerItem(orb);
-			deathOrb=new ItemMineCharacter(ModIdConfig.deathOrbId).setUnlocalizedName("deathOrb").setContainerItem(orb);
+			orb=new ItemMineCharacter().setUnlocalizedName("orb");
+			fireOrb=new ItemMineCharacter().setUnlocalizedName("fireOrb").setContainerItem(orb);
+			iceOrb=new ItemMineCharacter().setUnlocalizedName("iceOrb").setContainerItem(orb);
+			lifeOrb=new ItemMineCharacter().setUnlocalizedName("lifeOrb").setContainerItem(orb);
+			deathOrb=new ItemMineCharacter().setUnlocalizedName("deathOrb").setContainerItem(orb);
 
-			fireStaff=new ItemStaff(ModIdConfig.fireStaffId,1).setUnlocalizedName("fireStaff");
-			iceStaff=new ItemStaff(ModIdConfig.iceStaffId,2).setUnlocalizedName("iceStaff");
-			lifeStaff=new ItemStaff(ModIdConfig.lifeStaffId,3).setUnlocalizedName("lifeStaff");
-			deathStaff=new ItemStaff(ModIdConfig.deathStaffId,4).setUnlocalizedName("deathStaff");
+			fireStaff=new ItemStaff(1).setUnlocalizedName("fireStaff");
+			iceStaff=new ItemStaff(2).setUnlocalizedName("iceStaff");
+			lifeStaff=new ItemStaff(3).setUnlocalizedName("lifeStaff");
+			deathStaff=new ItemStaff(4).setUnlocalizedName("deathStaff");
 			
-			knightHelmet=(ItemArmor) new CharItemArmor(ModIdConfig.knightHelmetId, KNIGHT,  MineCharacter.proxy.addArmor("knight"), 0).setUnlocalizedName("knightHelmet");
-			knightChest=(ItemArmor) new CharItemArmor(ModIdConfig.knightChestId, KNIGHT, MineCharacter.proxy.addArmor("knight"), 1).setUnlocalizedName("knightChest");
-			knightLegs=(ItemArmor) new CharItemArmor(ModIdConfig.knightLegsId, KNIGHT, MineCharacter.proxy.addArmor("knight"), 2).setUnlocalizedName("knightLegs");
-			knightBoots=(ItemArmor) new CharItemArmor(ModIdConfig.knightBootsId, KNIGHT, MineCharacter.proxy.addArmor("knight"), 3).setUnlocalizedName("knightBoots");
+			knightHelmet=(ItemArmor) new CharItemArmor(KNIGHT,  MineCharacter.proxy.addArmor("knight"), 0).setUnlocalizedName("knightHelmet");
+			knightChest=(ItemArmor) new CharItemArmor(KNIGHT, MineCharacter.proxy.addArmor("knight"), 1).setUnlocalizedName("knightChest");
+			knightLegs=(ItemArmor) new CharItemArmor(KNIGHT, MineCharacter.proxy.addArmor("knight"), 2).setUnlocalizedName("knightLegs");
+			knightBoots=(ItemArmor) new CharItemArmor(KNIGHT, MineCharacter.proxy.addArmor("knight"), 3).setUnlocalizedName("knightBoots");
 
-			grimHelmet=(ItemArmor) new CharItemArmor(ModIdConfig.grimHelmetId, GRIM, MineCharacter.proxy.addArmor("grim"), 0).setUnlocalizedName("grimHelmet");
-			grimChest=(ItemArmor) new CharItemArmor(ModIdConfig.grimChestId, GRIM, MineCharacter.proxy.addArmor("grim"), 1).setUnlocalizedName("grimChest");
-			grimLegs=(ItemArmor) new CharItemArmor(ModIdConfig.grimLegsId, GRIM, MineCharacter.proxy.addArmor("grim"), 2).setUnlocalizedName("grimLegs");
-			grimBoots=(ItemArmor) new CharItemArmor(ModIdConfig.grimBootsId, GRIM, MineCharacter.proxy.addArmor("grim"), 3).setUnlocalizedName("grimBoots");
+			grimHelmet=(ItemArmor) new CharItemArmor(GRIM, MineCharacter.proxy.addArmor("grim"), 0).setUnlocalizedName("grimHelmet");
+			grimChest=(ItemArmor) new CharItemArmor(GRIM, MineCharacter.proxy.addArmor("grim"), 1).setUnlocalizedName("grimChest");
+			grimLegs=(ItemArmor) new CharItemArmor(GRIM, MineCharacter.proxy.addArmor("grim"), 2).setUnlocalizedName("grimLegs");
+			grimBoots=(ItemArmor) new CharItemArmor(GRIM, MineCharacter.proxy.addArmor("grim"), 3).setUnlocalizedName("grimBoots");
 		
-			mageHelmet=(ItemArmor) new CharItemArmor(ModIdConfig.mageHelmetId, GRIM, MineCharacter.proxy.addArmor("mage"), 0).setUnlocalizedName("mageHelmet");
-			mageChest=(ItemArmor) new CharItemArmor(ModIdConfig.mageChestId, GRIM, MineCharacter.proxy.addArmor("mage"), 1).setUnlocalizedName("mageChest");
-			mageLegs=(ItemArmor) new CharItemArmor(ModIdConfig.mageLegsId, GRIM, MineCharacter.proxy.addArmor("mage"), 2).setUnlocalizedName("mageLegs");
-			mageBoots=(ItemArmor) new CharItemArmor(ModIdConfig.mageBootsId, GRIM, MineCharacter.proxy.addArmor("mage"), 3).setUnlocalizedName("mageBoots");
+			mageHelmet=(ItemArmor) new CharItemArmor(GRIM, MineCharacter.proxy.addArmor("mage"), 0).setUnlocalizedName("mageHelmet");
+			mageChest=(ItemArmor) new CharItemArmor(GRIM, MineCharacter.proxy.addArmor("mage"), 1).setUnlocalizedName("mageChest");
+			mageLegs=(ItemArmor) new CharItemArmor(GRIM, MineCharacter.proxy.addArmor("mage"), 2).setUnlocalizedName("mageLegs");
+			mageBoots=(ItemArmor) new CharItemArmor(GRIM, MineCharacter.proxy.addArmor("mage"), 3).setUnlocalizedName("mageBoots");
 			
-			archerHelmet=(ItemArmor) new CharItemArmor(ModIdConfig.archerHelmetId, GRIM, MineCharacter.proxy.addArmor("archer"), 0).setUnlocalizedName("archerHelmet");
-			archerChest=(ItemArmor) new CharItemArmor(ModIdConfig.archerChestId, GRIM, MineCharacter.proxy.addArmor("archer"), 1).setUnlocalizedName("archerChest");
-			archerLegs=(ItemArmor) new CharItemArmor(ModIdConfig.archerLegsId, GRIM, MineCharacter.proxy.addArmor("archer"), 2).setUnlocalizedName("archerLegs");
-			archerBoots=(ItemArmor) new CharItemArmor(ModIdConfig.archerBootsId, GRIM, MineCharacter.proxy.addArmor("archer"), 3).setUnlocalizedName("archerBoots");
+			archerHelmet=(ItemArmor) new CharItemArmor(GRIM, MineCharacter.proxy.addArmor("archer"), 0).setUnlocalizedName("archerHelmet");
+			archerChest=(ItemArmor) new CharItemArmor(GRIM, MineCharacter.proxy.addArmor("archer"), 1).setUnlocalizedName("archerChest");
+			archerLegs=(ItemArmor) new CharItemArmor(GRIM, MineCharacter.proxy.addArmor("archer"), 2).setUnlocalizedName("archerLegs");
+			archerBoots=(ItemArmor) new CharItemArmor(GRIM, MineCharacter.proxy.addArmor("archer"), 3).setUnlocalizedName("archerBoots");
 			
-			assassinHelmet=(ItemArmor) new CharItemArmor(ModIdConfig.ninjaHelmetId, GRIM, MineCharacter.proxy.addArmor("assassin"), 0).setUnlocalizedName("assassinHelmet");
-			assassinChest=(ItemArmor) new CharItemArmor(ModIdConfig.ninjaChestId, GRIM, MineCharacter.proxy.addArmor("assassin"), 1).setUnlocalizedName("assassinChest");
-			assassinLegs=(ItemArmor) new CharItemArmor(ModIdConfig.ninjaLegsId, GRIM, MineCharacter.proxy.addArmor("assassin"), 2).setUnlocalizedName("assassinLegs");
-			assassinBoots=(ItemArmor) new CharItemArmor(ModIdConfig.ninjaBootsId, GRIM, MineCharacter.proxy.addArmor("assassin"), 3).setUnlocalizedName("assassinBoots");
+			assassinHelmet=(ItemArmor) new CharItemArmor(GRIM, MineCharacter.proxy.addArmor("assassin"), 0).setUnlocalizedName("assassinHelmet");
+			assassinChest=(ItemArmor) new CharItemArmor(GRIM, MineCharacter.proxy.addArmor("assassin"), 1).setUnlocalizedName("assassinChest");
+			assassinLegs=(ItemArmor) new CharItemArmor(GRIM, MineCharacter.proxy.addArmor("assassin"), 2).setUnlocalizedName("assassinLegs");
+			assassinBoots=(ItemArmor) new CharItemArmor(GRIM, MineCharacter.proxy.addArmor("assassin"), 3).setUnlocalizedName("assassinBoots");
 		
-			rune=new ItemMineCharacter(ModIdConfig.runeId).setUnlocalizedName("rune");
-			fireRune=new ItemMineCharacter(ModIdConfig.fireRuneId).setUnlocalizedName("fireRune");
-			iceRune=new ItemMineCharacter(ModIdConfig.iceRuneId).setUnlocalizedName("iceRune");
-			lifeRune=new ItemMineCharacter(ModIdConfig.lifeRuneId).setUnlocalizedName("lifeRune");
-			deathRune=new ItemMineCharacter(ModIdConfig.deathRuneId).setUnlocalizedName("deathRune");
+			rune=new ItemMineCharacter().setUnlocalizedName("rune");
+			fireRune=new ItemMineCharacter().setUnlocalizedName("fireRune");
+			iceRune=new ItemMineCharacter().setUnlocalizedName("iceRune");
+			lifeRune=new ItemMineCharacter().setUnlocalizedName("lifeRune");
+			deathRune=new ItemMineCharacter().setUnlocalizedName("deathRune");
 			
-			soul=new ItemMineCharacter(ModIdConfig.soulId).setUnlocalizedName("soul");
-			lucifer=new ItemLucifer(ModIdConfig.luciferId, NETHER).setUnlocalizedName("lucifer");
-			reaper=new ItemReaper(ModIdConfig.reaperId,NETHER).setUnlocalizedName("reaper");
-			mechanicBow=new ItemMechanicBow(ModIdConfig.mechanicBowId).setUnlocalizedName("mechanicBow");
-			etherBow=new ItemEtherBow(ModIdConfig.etherBowId).setUnlocalizedName("etherBow");
-			netherBow=new ItemNetherBow(ModIdConfig.netherBowId).setUnlocalizedName("netherBow");
+			soul=new ItemMineCharacter().setUnlocalizedName("soul");
+			lucifer=new ItemLucifer(NETHER).setUnlocalizedName("lucifer");
+			reaper=new ItemReaper(NETHER).setUnlocalizedName("reaper");
+			mechanicBow=new ItemMechanicBow().setUnlocalizedName("mechanicBow");
+			etherBow=new ItemEtherBow().setUnlocalizedName("etherBow");
+			netherBow=new ItemNetherBow().setUnlocalizedName("netherBow");
 			
-			excalibur=new ItemExcalibur(ModIdConfig.excaliburId, ETHER).setUnlocalizedName("excalibur");
-			lance=new ItemLance(ModIdConfig.lanceId,ETHER).setUnlocalizedName("lance");
-			mjolnir=new ItemMjolnir(ModIdConfig.mjolnirId, ETHER).setUnlocalizedName("mjolnir");
-			mattock=new ItemMattock(ModIdConfig.mattockId, ETHER).setUnlocalizedName("mattock");
-			tomahawk=new ItemTomahawk(ModIdConfig.tomahawkId,ETHER).setUnlocalizedName("tomahawk");
+			excalibur=new ItemExcalibur(ETHER).setUnlocalizedName("excalibur");
+			lance=new ItemLance(ETHER).setUnlocalizedName("lance");
+			mjolnir=new ItemMjolnir(ETHER).setUnlocalizedName("mjolnir");
+			mattock=new ItemMattock(ETHER).setUnlocalizedName("mattock");
+			tomahawk=new ItemTomahawk(ETHER).setUnlocalizedName("tomahawk");
 			
-			beer=(ItemFood) new ItemBeer(ModIdConfig.beerId,4, 1.0F, false).setAlwaysEdible().setPotionEffect(9, 20*10, 0, 0.33F).setUnlocalizedName("beer");
+			beer=(ItemFood) new ItemBeer(4, 1.0F, false).setAlwaysEdible().setPotionEffect(9, 20*10, 0, 0.33F).setUnlocalizedName("beer");
 			
-			excaliburHandle=new ItemMineCharacter(ModIdConfig.excaliburHandleId).setUnlocalizedName("excaliburHandle");
-			excaliburBlade=new ItemMineCharacter(ModIdConfig.excaliburBladeId).setUnlocalizedName("excaliburBlade");
-			luciferHandle=new ItemMineCharacter(ModIdConfig.luciferHandleId).setUnlocalizedName("luciferHandle");
-			luciferBlade=new ItemMineCharacter(ModIdConfig.luciferBladeId).setUnlocalizedName("luciferBlade");
-			netherHandle=new ItemMineCharacter(ModIdConfig.netherHandleId ).setUnlocalizedName("netherHandle");
-			reaperBlade=new ItemMineCharacter(ModIdConfig.reaperBladeId ).setUnlocalizedName("reaperBlade");
-			mattockBlade=new ItemMineCharacter(ModIdConfig.mattockBladeId ).setUnlocalizedName("mattockBlade");
+			excaliburHandle=new ItemMineCharacter().setUnlocalizedName("excaliburHandle");
+			excaliburBlade=new ItemMineCharacter().setUnlocalizedName("excaliburBlade");
+			luciferHandle=new ItemMineCharacter().setUnlocalizedName("luciferHandle");
+			luciferBlade=new ItemMineCharacter().setUnlocalizedName("luciferBlade");
+			netherHandle=new ItemMineCharacter().setUnlocalizedName("netherHandle");
+			reaperBlade=new ItemMineCharacter().setUnlocalizedName("reaperBlade");
+			mattockBlade=new ItemMineCharacter().setUnlocalizedName("mattockBlade");
 			
-			mjolnirHandle=new ItemMineCharacter(ModIdConfig.mjolnirHandleId).setUnlocalizedName("mjolnirHandle");
-			mjolnirBlade=new ItemMineCharacter(ModIdConfig.mjolnirBladeId).setUnlocalizedName("mjolnirBlade");
-			netherAxeBlade=new ItemMineCharacter(ModIdConfig.netherAxeBladeId).setUnlocalizedName("netherAxeBlade");
-			netherPickaxeBlade=new ItemMineCharacter(ModIdConfig.netherPickaxeBladeId).setUnlocalizedName("netherPickaxeBlade");	
-			lanceHandle=new ItemMineCharacter(ModIdConfig.lanceHandleId).setUnlocalizedName("lanceHandle");
-			lanceBlade=new ItemMineCharacter(ModIdConfig.lanceBladeId).setUnlocalizedName("lanceBlade");	
-			tomahawkBlade=new ItemMineCharacter(ModIdConfig.tomahawkBladeId).setUnlocalizedName("tomahawkBlade");
-			magicPowder=new ItemMineCharacter(ModIdConfig.magicPowderId).setUnlocalizedName("magicPowder");
+			mjolnirHandle=new ItemMineCharacter().setUnlocalizedName("mjolnirHandle");
+			mjolnirBlade=new ItemMineCharacter().setUnlocalizedName("mjolnirBlade");
+			netherAxeBlade=new ItemMineCharacter().setUnlocalizedName("netherAxeBlade");
+			netherPickaxeBlade=new ItemMineCharacter().setUnlocalizedName("netherPickaxeBlade");	
+			lanceHandle=new ItemMineCharacter().setUnlocalizedName("lanceHandle");
+			lanceBlade=new ItemMineCharacter().setUnlocalizedName("lanceBlade");	
+			tomahawkBlade=new ItemMineCharacter().setUnlocalizedName("tomahawkBlade");
+			magicPowder=new ItemMineCharacter().setUnlocalizedName("magicPowder");
 			
-			bat=new ItemBat(ModIdConfig.batId).setUnlocalizedName("bat");
-			friedEgg=(ItemFood) new CharItemFood(ModIdConfig.friedEggId, 3, 0.1F, false).setUnlocalizedName("friedEgg");
+			bat=new ItemBat().setUnlocalizedName("bat");
+			friedEgg=(ItemFood) new CharItemFood(3, 0.1F, false).setUnlocalizedName("friedEgg");
 			
-			magicString=new ItemMineCharacter(ModIdConfig.magicStringId).setUnlocalizedName("magicString");
-			nethercoal=new ItemMineCharacter(ModIdConfig.nethercoalId).setUnlocalizedName("nethercoal");
-		    demonite=new ItemMineCharacter(ModIdConfig.demoniteId).setUnlocalizedName("demonite");
-		    luciferite=new ItemMineCharacter(ModIdConfig.luciferiteId).setUnlocalizedName("luciferite");
-		    etherealIngot=new ItemMineCharacter(ModIdConfig.etherealIngotId).setUnlocalizedName("etherealIngot");
+			magicString=new ItemMineCharacter().setUnlocalizedName("magicString");
+			nethercoal=new ItemMineCharacter().setUnlocalizedName("nethercoal");
+		    demonite=new ItemMineCharacter().setUnlocalizedName("demonite");
+		    luciferite=new ItemMineCharacter().setUnlocalizedName("luciferite");
+		    etherealIngot=new ItemMineCharacter().setUnlocalizedName("etherealIngot");
 		   
-		    firePowder=new ItemMineCharacter(ModIdConfig.firePowderId).setUnlocalizedName("firePowder");
-		   icePowder=new ItemMineCharacter(ModIdConfig.icePowderId).setUnlocalizedName("icePowder");
-		    lifePowder=new ItemMineCharacter(ModIdConfig.lifePowderId).setUnlocalizedName("lifePowder");
-		    deathPowder=new ItemMineCharacter(ModIdConfig.deathPowderId).setUnlocalizedName("deathPowder");
-		    etherealPowder=new ItemMineCharacter(ModIdConfig.etherealPowderId).setUnlocalizedName("etherealPowder");
-			smokeGrenade=new ItemSmokeGrenade(ModIdConfig.smokeGrenadeId).setUnlocalizedName("smokeGrenade");
-		    shuriken=new ItemShuriken(ModIdConfig.shurikenId).setUnlocalizedName("shuriken");
-		    assassinSteel=new ItemMineCharacter(ModIdConfig.ninjaSteelId).setUnlocalizedName("assassinSteel");
-			dragger=new ItemDragger(ModIdConfig.katanaId, ASSASSIN).setUnlocalizedName("dragger");
-			draggerHandle=new ItemMineCharacter(ModIdConfig.katanaHandleId).setUnlocalizedName("draggerHandle");
-			draggerBlade=new ItemMineCharacter(ModIdConfig.katanaBladeId).setUnlocalizedName("draggerBlade");
-		    quiver=new ItemMineCharacter(ModIdConfig.quiverId).setUnlocalizedName("quiver");
-		    netherAxe=new ItemNetherAxe(ModIdConfig.netherAxeId,NORTH).setUnlocalizedName("netherAxe");
-		    netherPickaxe=new ItemNetherPickaxe(ModIdConfig.netherPickaxeId,NORTH).setUnlocalizedName("netherPickaxe");
+		    firePowder=new ItemMineCharacter().setUnlocalizedName("firePowder");
+		   icePowder=new ItemMineCharacter().setUnlocalizedName("icePowder");
+		    lifePowder=new ItemMineCharacter().setUnlocalizedName("lifePowder");
+		    deathPowder=new ItemMineCharacter().setUnlocalizedName("deathPowder");
+		    etherealPowder=new ItemMineCharacter().setUnlocalizedName("etherealPowder");
+			smokeGrenade=new ItemSmokeGrenade().setUnlocalizedName("smokeGrenade");
+		    shuriken=new ItemShuriken().setUnlocalizedName("shuriken");
+		    assassinSteel=new ItemMineCharacter().setUnlocalizedName("assassinSteel");
+			dragger=new ItemDragger(ASSASSIN).setUnlocalizedName("dragger");
+			draggerHandle=new ItemMineCharacter().setUnlocalizedName("draggerHandle");
+			draggerBlade=new ItemMineCharacter().setUnlocalizedName("draggerBlade");
+		    quiver=new ItemMineCharacter().setUnlocalizedName("quiver");
+		    netherAxe=new ItemNetherAxe(NORTH).setUnlocalizedName("netherAxe");
+		    netherPickaxe=new ItemNetherPickaxe(NORTH).setUnlocalizedName("netherPickaxe");
 	
 		    this.registerItems();
 	}

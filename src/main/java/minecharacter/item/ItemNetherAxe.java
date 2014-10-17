@@ -27,7 +27,7 @@ public class ItemNetherAxe extends ItemTool {
 					Blocks.log, Blocks.log2, Blocks.chest, Blocks.pumpkin,
 					Blocks.lit_pumpkin });
 
-	public ItemNetherAxe(int par1, ToolMaterial par3EnumToolMaterial) {
+	public ItemNetherAxe(ToolMaterial par3EnumToolMaterial) {
 		super(3, par3EnumToolMaterial, blocksEffectiveAgainst);
 		this.setCreativeTab(MineCharacter.tabMineCharacter);
 		this.setMaxDamage(3321);

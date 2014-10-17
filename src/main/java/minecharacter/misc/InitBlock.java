@@ -12,6 +12,7 @@ import minecharacter.block.BlockWheat;
 import minecharacter.block.ItemBlockMineCharacter;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
+import net.minecraft.init.Blocks;
 
 public class InitBlock {
 	public static Block blockOmelette;
@@ -27,18 +28,16 @@ public class InitBlock {
 
 	public void initBlock() {
 
-		blockOmelette = new BlockOmelette(ModIdConfig.blockOmeletteId).setUnlocalizedName("blockOmelette");
-		blockNethercoal = new BlockNetherOrb(ModIdConfig.blockNethercoalId, 0).setUnlocalizedName("blockNethercoal");
-		blockDemonite = new BlockNetherOrb(ModIdConfig.blockDemoniteId, 1).setUnlocalizedName("blockDemonite");
-		blockLuciferite = new BlockNetherOrb(ModIdConfig.blockLuciferiteId, 2).setUnlocalizedName("blockLuciferite");
-		blockWheat = new BlockWheat(ModIdConfig.blockWheatId).setUnlocalizedName("blockWheat");
-		blockOrb = new BlockOrb(ModIdConfig.blockOrbId).setUnlocalizedName("blockOrb");
-		air = new BlockAir(ModIdConfig.airId, Material.air).setUnlocalizedName("air");
-		sponge = new BlockSponge(ModIdConfig.spongeId);
-		Block.blocksList[Block.sponge.blockID] = null;
-		Block.blocksList[Block.sponge.blockID] = InitBlock.sponge;
-		pan = new BlockPan(ModIdConfig.panId).setUnlocalizedName("pan");
-		blockAnvil = new BlockAnvil(ModIdConfig.blockAnvilId, Material.rock).setUnlocalizedName("blockAnvil");
+		blockOmelette = new BlockOmelette().setBlockName("blockOmelette");
+		blockNethercoal = new BlockNetherOrb(0).setBlockName("blockNethercoal");
+		blockDemonite = new BlockNetherOrb(1).setBlockName("blockDemonite");
+		blockLuciferite = new BlockNetherOrb(2).setBlockName("blockLuciferite");
+		blockWheat = new BlockWheat().setBlockName("blockWheat");
+		blockOrb = new BlockOrb().setBlockName("blockOrb");
+		air = new BlockAir(Material.air).setBlockName("air");
+		sponge = new BlockSponge();
+		pan = new BlockPan().setBlockName("pan");
+		blockAnvil = new BlockAnvil(Material.rock).setBlockName("blockAnvil");
 		this.registerBlocks();
 	}
 

@@ -10,7 +10,6 @@ import minecharacter.misc.EventHandler;
 import minecharacter.misc.InitBlock;
 import minecharacter.misc.InitItem;
 import minecharacter.misc.Localization;
-import minecharacter.misc.ModIdConfig;
 import minecharacter.misc.TickHandler;
 import minecharacter.network.PacketHandler;
 import minecharacter.proxy.CommonProxy;
@@ -49,7 +48,6 @@ public class MineCharacter implements IFuelHandler {
 
 	@Mod.EventHandler
 	public void preInitMod(FMLPreInitializationEvent event) {
-		new ModIdConfig(event.getSuggestedConfigurationFile());
 		new InitBlock().initBlock();
 		new InitItem().initItem();
 		GameRegistry.registerTileEntity(TileEntityOrb.class, "tileentityorb");
