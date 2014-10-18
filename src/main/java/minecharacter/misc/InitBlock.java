@@ -46,6 +46,7 @@ public class InitBlock {
 
 
 	}
+	
 
 	private void registerBlocks() {
 		registerBlock(InitBlock.blockOmelette);
