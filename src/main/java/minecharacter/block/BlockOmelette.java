@@ -45,8 +45,9 @@ public class BlockOmelette extends BlockCake {
 	}
 
 	@Override
-	public Item getItemDropped(int par1, Random par2Random, int par3) {
-
+	@SideOnly(Side.CLIENT)
+	public Item getItem(World p_149694_1_, int p_149694_2_, int p_149694_3_,
+			int p_149694_4_) {
 		return InitItem.omelette;
 	}
 
