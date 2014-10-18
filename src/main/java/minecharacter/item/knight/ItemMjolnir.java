@@ -2,6 +2,8 @@ package minecharacter.item.knight;
 
 import java.util.List;
 
+import com.google.common.collect.Multimap;
+
 import minecharacter.MineCharacter;
 import minecharacter.entity.EntityLightingMjolnir;
 import minecharacter.item.ItemHammer;
@@ -11,6 +13,8 @@ import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.entity.SharedMonsterAttributes;
+import net.minecraft.entity.ai.attributes.AttributeModifier;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.EnumAction;
 import net.minecraft.item.Item;
@@ -23,18 +27,13 @@ import cpw.mods.fml.relauncher.SideOnly;
 
 public class ItemMjolnir extends ItemHammer {
 
-	private int weaponDamage;
+	private int damage;
 
 	public ItemMjolnir(ToolMaterial par3EnumToolMaterial) {
 		super(par3EnumToolMaterial);
 		this.setMaxDamage(3122);
-		this.weaponDamage = (int) (3 + par3EnumToolMaterial.getDamageVsEntity());
+		this.damage = (int) (3 + par3EnumToolMaterial.getDamageVsEntity());
 		this.setCreativeTab(MineCharacter.tabMineCharacter);
-	}
-
-	@Override
-	public int getDamage(ItemStack stack) {
-		return this.weaponDamage;
 	}
 
 	@Override
@@ -49,7 +48,7 @@ public class ItemMjolnir extends ItemHammer {
 		par2EntityLiving
 				.attackEntityFrom(DamageSource
 						.causePlayerDamage((EntityPlayer) par3EntityLiving),
-						this.weaponDamage);
+						this.damage);
 		return false;
 	}
 
@@ -80,7 +79,9 @@ public class ItemMjolnir extends ItemHammer {
 		if (par3EntityPlayer.capabilities.isCreativeMode
 				|| MineCharacter.proxy.isEquid(par3EntityPlayer, "knight")) {
 			if (f > 1.0F) {
-				aoe(par1ItemStack, par2World, par3EntityPlayer);
+				if (!par2World.isRemote) {
+					aoe(par1ItemStack, par2World, par3EntityPlayer);
+				}
 				par3EntityPlayer.swingItem();
 			}
 		}
@@ -147,4 +148,12 @@ public class ItemMjolnir extends ItemHammer {
 		return EnumAction.bow;
 	}
 
+	@Override
+	public Multimap getItemAttributeModifiers() {
+		Multimap multimap = super.getItemAttributeModifiers();
+		multimap.put(SharedMonsterAttributes.attackDamage
+				.getAttributeUnlocalizedName(), new AttributeModifier(
+				field_111210_e, "Weapon modifier", (double) this.damage, 0));
+		return multimap;
+	}
 }

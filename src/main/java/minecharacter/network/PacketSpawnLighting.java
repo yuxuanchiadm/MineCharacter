@@ -6,6 +6,8 @@ import java.io.ByteArrayOutputStream;
 import java.io.DataOutputStream;
 
 import cpw.mods.fml.client.FMLClientHandler;
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 import minecharacter.MineCharacter;
 import minecharacter.entity.EntityLightingMjolnir;
 import minecharacter.entity.EntityLightningOrb;
@@ -44,6 +46,7 @@ public class PacketSpawnLighting extends PacketBase {
 	}
 
 	@Override
+	@SideOnly(Side.CLIENT)
 	public void handleClient() {
 		EntityPlayer player = FMLClientHandler.instance().getClient().thePlayer;
 		if (type == -12) {

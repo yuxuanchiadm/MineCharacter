@@ -151,6 +151,9 @@ public class BlockOrb extends BlockContainer {
 	@Override
 	public void onNeighborBlockChange(World par1World, int par2, int par3,
 			int par4, Block block) {
+		if (par1World.isRemote) {
+			return;
+		}
 		if (!par1World.isAirBlock(par2, par3, par4)) {
 			TileEntity tile = par1World.getTileEntity(par2, par3, par4);
 			if (tile != null && tile instanceof TileEntityOrb) {
@@ -158,31 +161,38 @@ public class BlockOrb extends BlockContainer {
 				if (orb.getBlockMetadata() > 1) {
 					for (int i = -2; i < 3; i++)
 						for (int j = -2; j < 3; j++) {
-							
-//par1World.setBlock(par2 + i,par3, par4 + j,Blocks.cake);
-							if (Block.isEqualTo(par1World.getBlock(par2 + i,par3, par4 + j), Blocks.redstone_wire)||
-							    (Block.isEqualTo(par1World.getBlock(par2 + i, par3,par4 + j),Blocks.lit_redstone_lamp)&& Block.isEqualTo(par1World.getBlock(par2 + i, par3 + 1, par4+ j),Blocks.wooden_pressure_plate))
-							    ) {
-									
-									
+							if (Block.isEqualTo(par1World.getBlock(par2 + i,
+									par3, par4 + j), Blocks.redstone_wire)
+									|| (Block.isEqualTo(par1World.getBlock(par2
+											+ i, par3, par4 + j),
+											Blocks.lit_redstone_lamp) && Block
+											.isEqualTo(
+													par1World.getBlock(
+															par2 + i, par3 + 1,
+															par4 + j),
+													Blocks.wooden_pressure_plate))) {
+
 								int i1 = par2 + i;
 								int j1 = par3;
 								int k1 = par4 + j;
 								int flag = 0;
-			
-								List items = par1World.getEntitiesWithinAABB(EntityItem.class, 
-										AxisAlignedBB.getBoundingBox(
-												i1,j1 + 1, 
-												k1,i1 + 1, 
-												j1 + 2,k1 + 1
-												));
+
+								List items = par1World
+										.getEntitiesWithinAABB(
+												EntityItem.class, AxisAlignedBB
+														.getBoundingBox(i1,
+																j1 + 1, k1,
+																i1 + 1, j1 + 2,
+																k1 + 1));
 								if (items.size() < 1) {
 									return;
 								}
-								
 
-								if (((EntityItem) items.get(0)).getEntityItem().getItem().equals(InitItem.magicPowder)
-									||((EntityItem) items.get(0)).getEntityItem().getItem().equals(Items.iron_ingot)) {
+								if (((EntityItem) items.get(0)).getEntityItem()
+										.getItem().equals(InitItem.magicPowder)
+										|| ((EntityItem) items.get(0))
+												.getEntityItem().getItem()
+												.equals(Items.iron_ingot)) {
 									flag = 1;
 								} else if (((EntityItem) items.get(0))
 										.getEntityItem().equals(InitItem.rune)) {
@@ -191,32 +201,91 @@ public class BlockOrb extends BlockContainer {
 									flag = 3;
 								}
 								if (flag == 1) {
-//									par1World.setBlock(i1, j1, k1,Blocks);
-									if (Block.isEqualTo(par1World.getBlock(i1 - 2, j1, k1 - 2),InitBlock.blockOrb)
-											&& Block.isEqualTo(par1World.getBlock(i1 + 2, j1,k1 - 2),InitBlock.blockOrb)
-											&& Block.isEqualTo(par1World.getBlock(i1 + 2, j1,k1 + 2),InitBlock.blockOrb)
-											&& Block.isEqualTo(par1World.getBlock(i1 - 2, j1,k1 + 2),InitBlock.blockOrb)
-											&& Block.isEqualTo(par1World.getBlock(i1 - 2, j1,k1 - 1),Blocks.redstone_wire)
-											&& Block.isEqualTo(par1World.getBlock(i1 - 2, j1,k1),Blocks.redstone_wire)
-											&& Block.isEqualTo(par1World.getBlock(i1 - 2, j1,k1 + 1),Blocks.redstone_wire)
-											&& Block.isEqualTo(par1World.getBlock(i1 - 1, j1,k1),Blocks.redstone_wire)
-											&& Block.isEqualTo(par1World.getBlock(i1, j1,k1 - 1),Blocks.redstone_wire)
-											&& Block.isEqualTo(par1World.getBlock(i1, j1,k1 - 2),Blocks.redstone_wire)
-											&& Block.isEqualTo(par1World.getBlock(i1 - 1, j1,k1 - 2),Blocks.redstone_wire)
-											&& Block.isEqualTo(par1World.getBlock(i1 + 1, j1,k1 - 2),Blocks.redstone_wire)
-											&& Block.isEqualTo(par1World.getBlock(i1 + 1, j1,k1),Blocks.redstone_wire)
-											&& Block.isEqualTo(par1World.getBlock(i1 + 2, j1,k1 + 0),Blocks.redstone_wire)
-											&& Block.isEqualTo(par1World.getBlock(i1 + 2, j1,k1 - 1),Blocks.redstone_wire)
-											&& Block.isEqualTo(par1World.getBlock(i1 + 2, j1,k1 + 1),Blocks.redstone_wire)
-											&& Block.isEqualTo(par1World.getBlock(i1 + 1, j1,k1 + 2),Blocks.redstone_wire)
-											&& Block.isEqualTo(par1World.getBlock(i1 - 1, j1,k1 + 2),Blocks.redstone_wire)
-											&& Block.isEqualTo(par1World.getBlock(i1, j1,k1 + 1),Blocks.redstone_wire)
-											&& Block.isEqualTo(par1World.getBlock(i1, j1,k1 + 2),Blocks.redstone_wire)
-											&& Block.isEqualTo(par1World.getBlock(i1 - 1, j1,k1 - 1),Blocks.air)
-											&& Block.isEqualTo(par1World.getBlock(i1 + 1, j1,k1 - 1),Blocks.air)
-											&& Block.isEqualTo(par1World.getBlock(i1 + 1, j1,k1 + 1),Blocks.air)
-											&& Block.isEqualTo(par1World.getBlock(i1 - 1, j1,k1 + 1),Blocks.air)
-										) {
+									// par1World.setBlock(i1, j1, k1,Blocks);
+									if (Block.isEqualTo(par1World.getBlock(
+											i1 - 2, j1, k1 - 2),
+											InitBlock.blockOrb)
+											&& Block.isEqualTo(par1World
+													.getBlock(i1 + 2, j1,
+															k1 - 2),
+													InitBlock.blockOrb)
+											&& Block.isEqualTo(par1World
+													.getBlock(i1 + 2, j1,
+															k1 + 2),
+													InitBlock.blockOrb)
+											&& Block.isEqualTo(par1World
+													.getBlock(i1 - 2, j1,
+															k1 + 2),
+													InitBlock.blockOrb)
+											&& Block.isEqualTo(par1World
+													.getBlock(i1 - 2, j1,
+															k1 - 1),
+													Blocks.redstone_wire)
+											&& Block.isEqualTo(par1World
+													.getBlock(i1 - 2, j1, k1),
+													Blocks.redstone_wire)
+											&& Block.isEqualTo(par1World
+													.getBlock(i1 - 2, j1,
+															k1 + 1),
+													Blocks.redstone_wire)
+											&& Block.isEqualTo(par1World
+													.getBlock(i1 - 1, j1, k1),
+													Blocks.redstone_wire)
+											&& Block.isEqualTo(par1World
+													.getBlock(i1, j1, k1 - 1),
+													Blocks.redstone_wire)
+											&& Block.isEqualTo(par1World
+													.getBlock(i1, j1, k1 - 2),
+													Blocks.redstone_wire)
+											&& Block.isEqualTo(par1World
+													.getBlock(i1 - 1, j1,
+															k1 - 2),
+													Blocks.redstone_wire)
+											&& Block.isEqualTo(par1World
+													.getBlock(i1 + 1, j1,
+															k1 - 2),
+													Blocks.redstone_wire)
+											&& Block.isEqualTo(par1World
+													.getBlock(i1 + 1, j1, k1),
+													Blocks.redstone_wire)
+											&& Block.isEqualTo(par1World
+													.getBlock(i1 + 2, j1,
+															k1 + 0),
+													Blocks.redstone_wire)
+											&& Block.isEqualTo(par1World
+													.getBlock(i1 + 2, j1,
+															k1 - 1),
+													Blocks.redstone_wire)
+											&& Block.isEqualTo(par1World
+													.getBlock(i1 + 2, j1,
+															k1 + 1),
+													Blocks.redstone_wire)
+											&& Block.isEqualTo(par1World
+													.getBlock(i1 + 1, j1,
+															k1 + 2),
+													Blocks.redstone_wire)
+											&& Block.isEqualTo(par1World
+													.getBlock(i1 - 1, j1,
+															k1 + 2),
+													Blocks.redstone_wire)
+											&& Block.isEqualTo(par1World
+													.getBlock(i1, j1, k1 + 1),
+													Blocks.redstone_wire)
+											&& Block.isEqualTo(par1World
+													.getBlock(i1, j1, k1 + 2),
+													Blocks.redstone_wire)
+											&& Block.isEqualTo(par1World
+													.getBlock(i1 - 1, j1,
+															k1 - 1), Blocks.air)
+											&& Block.isEqualTo(par1World
+													.getBlock(i1 + 1, j1,
+															k1 - 1), Blocks.air)
+											&& Block.isEqualTo(par1World
+													.getBlock(i1 + 1, j1,
+															k1 + 1), Blocks.air)
+											&& Block.isEqualTo(par1World
+													.getBlock(i1 - 1, j1,
+															k1 + 1), Blocks.air)) {
 										TileEntityOrb t1 = (TileEntityOrb) par1World
 												.getTileEntity(i1 - 2, j1,
 														k1 - 2);
@@ -285,32 +354,90 @@ public class BlockOrb extends BlockContainer {
 									}
 								}
 								if (flag == 2) {
-									if (
-											Block.isEqualTo(par1World.getBlock(i1 - 2, j1, k1 - 2),InitBlock.blockOrb)
-											&& Block.isEqualTo(par1World.getBlock(i1 + 2, j1,k1 - 2),InitBlock.blockOrb)
-											&& Block.isEqualTo(par1World.getBlock(i1 + 2, j1,k1 + 2),InitBlock.blockOrb)
-											&& Block.isEqualTo(par1World.getBlock(i1 - 2, j1,k1 + 2),InitBlock.blockOrb)
-											&&Block.isEqualTo(par1World.getBlock(i1 - 2, j1,k1 - 1),Blocks.redstone_wire)
-											&& Block.isEqualTo(par1World.getBlock(i1 - 2, j1,k1),Blocks.redstone_wire)
-											&& Block.isEqualTo(par1World.getBlock(i1 - 2, j1,k1 + 1),Blocks.redstone_wire)
-											&& Block.isEqualTo(par1World.getBlock(i1 - 1, j1,k1),Blocks.redstone_wire)
-											&&Block.isEqualTo(par1World.getBlock(i1, j1, k1 - 1),Blocks.redstone_wire)
-											&& Block.isEqualTo(par1World.getBlock(i1, j1,k1 - 2), Blocks.redstone_wire)
-											&& Block.isEqualTo(par1World.getBlock(i1 - 1, j1,k1 - 2) , Blocks.redstone_wire)
-											&& Block.isEqualTo(par1World.getBlock(i1 + 1, j1,k1 - 2) , Blocks.redstone_wire)
-											&&Block.isEqualTo(par1World.getBlock(i1 + 1, j1, k1),Blocks.redstone_wire)
-											&& Block.isEqualTo(par1World.getBlock(i1 + 2, j1,k1 + 0),Blocks.redstone_wire)
-											&& Block.isEqualTo(par1World.getBlock(i1 + 2, j1,k1 - 1),Blocks.redstone_wire)
-											&& Block.isEqualTo(par1World.getBlock(i1 + 2, j1,k1 + 1),Blocks.redstone_wire)
-											&&Block.isEqualTo(par1World.getBlock(i1 + 1, j1,k1 + 2),Blocks.redstone_wire)
-											&& Block.isEqualTo(par1World.getBlock(i1 - 1, j1,k1 + 2),Blocks.redstone_wire)
-											&& Block.isEqualTo(par1World.getBlock(i1, j1,k1 + 1),Blocks.redstone_wire)
-											&& Block.isEqualTo(par1World.getBlock(i1, j1,k1 + 2),Blocks.redstone_wire)
-											&&Block.isEqualTo(par1World.getBlock(i1 - 1, j1,k1 - 1),Blocks.air)
-											&& Block.isEqualTo(par1World.getBlock(i1 + 1, j1,k1 - 1),Blocks.air)
-											&& Block.isEqualTo(par1World.getBlock(i1 + 1, j1,k1 + 1),Blocks.air)
-											&& Block.isEqualTo(par1World.getBlock(i1 - 1, j1,k1 + 1),Blocks.air)
-											) {
+									if (Block.isEqualTo(par1World.getBlock(
+											i1 - 2, j1, k1 - 2),
+											InitBlock.blockOrb)
+											&& Block.isEqualTo(par1World
+													.getBlock(i1 + 2, j1,
+															k1 - 2),
+													InitBlock.blockOrb)
+											&& Block.isEqualTo(par1World
+													.getBlock(i1 + 2, j1,
+															k1 + 2),
+													InitBlock.blockOrb)
+											&& Block.isEqualTo(par1World
+													.getBlock(i1 - 2, j1,
+															k1 + 2),
+													InitBlock.blockOrb)
+											&& Block.isEqualTo(par1World
+													.getBlock(i1 - 2, j1,
+															k1 - 1),
+													Blocks.redstone_wire)
+											&& Block.isEqualTo(par1World
+													.getBlock(i1 - 2, j1, k1),
+													Blocks.redstone_wire)
+											&& Block.isEqualTo(par1World
+													.getBlock(i1 - 2, j1,
+															k1 + 1),
+													Blocks.redstone_wire)
+											&& Block.isEqualTo(par1World
+													.getBlock(i1 - 1, j1, k1),
+													Blocks.redstone_wire)
+											&& Block.isEqualTo(par1World
+													.getBlock(i1, j1, k1 - 1),
+													Blocks.redstone_wire)
+											&& Block.isEqualTo(par1World
+													.getBlock(i1, j1, k1 - 2),
+													Blocks.redstone_wire)
+											&& Block.isEqualTo(par1World
+													.getBlock(i1 - 1, j1,
+															k1 - 2),
+													Blocks.redstone_wire)
+											&& Block.isEqualTo(par1World
+													.getBlock(i1 + 1, j1,
+															k1 - 2),
+													Blocks.redstone_wire)
+											&& Block.isEqualTo(par1World
+													.getBlock(i1 + 1, j1, k1),
+													Blocks.redstone_wire)
+											&& Block.isEqualTo(par1World
+													.getBlock(i1 + 2, j1,
+															k1 + 0),
+													Blocks.redstone_wire)
+											&& Block.isEqualTo(par1World
+													.getBlock(i1 + 2, j1,
+															k1 - 1),
+													Blocks.redstone_wire)
+											&& Block.isEqualTo(par1World
+													.getBlock(i1 + 2, j1,
+															k1 + 1),
+													Blocks.redstone_wire)
+											&& Block.isEqualTo(par1World
+													.getBlock(i1 + 1, j1,
+															k1 + 2),
+													Blocks.redstone_wire)
+											&& Block.isEqualTo(par1World
+													.getBlock(i1 - 1, j1,
+															k1 + 2),
+													Blocks.redstone_wire)
+											&& Block.isEqualTo(par1World
+													.getBlock(i1, j1, k1 + 1),
+													Blocks.redstone_wire)
+											&& Block.isEqualTo(par1World
+													.getBlock(i1, j1, k1 + 2),
+													Blocks.redstone_wire)
+											&& Block.isEqualTo(par1World
+													.getBlock(i1 - 1, j1,
+															k1 - 1), Blocks.air)
+											&& Block.isEqualTo(par1World
+													.getBlock(i1 + 1, j1,
+															k1 - 1), Blocks.air)
+											&& Block.isEqualTo(par1World
+													.getBlock(i1 + 1, j1,
+															k1 + 1), Blocks.air)
+											&& Block.isEqualTo(par1World
+													.getBlock(i1 - 1, j1,
+															k1 + 1), Blocks.air)) {
 										TileEntityOrb t1 = (TileEntityOrb) par1World
 												.getTileEntity(i1 - 2, j1,
 														k1 - 2);

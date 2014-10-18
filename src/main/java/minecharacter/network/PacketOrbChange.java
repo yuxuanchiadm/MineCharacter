@@ -10,8 +10,9 @@ import minecharacter.block.tileentity.TileEntityOrb;
 import net.minecraft.client.multiplayer.WorldClient;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.tileentity.TileEntity;
-
 import cpw.mods.fml.client.FMLClientHandler;
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 
 public class PacketOrbChange extends PacketBase {
 	public int x;
@@ -46,6 +47,7 @@ public class PacketOrbChange extends PacketBase {
 	}
 
 	@Override
+	@SideOnly(Side.CLIENT)
 	public void handleClient() {
 		WorldClient worldClient = FMLClientHandler.instance().getClient().theWorld;
 		TileEntity tile = worldClient.getTileEntity(x, y, z);

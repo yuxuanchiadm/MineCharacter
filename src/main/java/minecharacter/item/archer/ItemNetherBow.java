@@ -92,9 +92,9 @@ public class ItemNetherBow extends ItemArcherBow {
 			par2World.playSoundAtEntity(par3EntityPlayer, "random.bow", 1.0F,
 					1.0F / (itemRand.nextFloat() * 0.4F + 1.2F) + f * 0.5F);
 
-			entityarrow1.canBePickedUp = 2;
-			entityarrow2.canBePickedUp = 2;
-			entityarrow3.canBePickedUp = 2;
+			entityarrow1.canBePickedUp = 1;
+			entityarrow2.canBePickedUp = 1;
+			entityarrow3.canBePickedUp = 1;
 
 			par3EntityPlayer.inventory.consumeInventoryItem(Items.arrow);
 

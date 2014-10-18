@@ -73,7 +73,7 @@ public class ItemEtherBow extends ItemArcherBow {
 			par2World.playSoundAtEntity(par3EntityPlayer, "random.bow", 1.0F,
 					1.0F / (itemRand.nextFloat() * 0.4F + 1.2F) + f * 0.5F);
 
-			entityarrow.canBePickedUp = 2;
+			entityarrow.canBePickedUp = 1;
 
 			par3EntityPlayer.inventory.consumeInventoryItem(Items.arrow);
 
