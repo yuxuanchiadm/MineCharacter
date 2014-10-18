@@ -77,9 +77,7 @@ public class EntityLightningOrb extends EntityLightningBolt {
 				for (int l = 0; l < list.size(); ++l) {
 					Entity entity = (Entity) list.get(l);
 					if (entity instanceof EntityItem) {
-						System.out.println(FMLCommonHandler.instance()
-								.getEffectiveSide().name());
-						if (((EntityItem) entity).getEntityItem().equals(
+						if (((EntityItem) entity).getEntityItem().getItem().equals(
 								InitItem.magicPowder)) {
 							this.worldObj.spawnEntityInWorld(new EntityItem(
 									worldObj, this.posX, this.posY, this.posZ,
@@ -89,7 +87,7 @@ public class EntityLightningOrb extends EntityLightningBolt {
 											0)));
 							entity.setDead();
 							this.setDead();
-						} else if (((EntityItem) entity).getEntityItem()
+						} else if (((EntityItem) entity).getEntityItem().getItem()
 								.equals(Items.iron_ingot)) {
 
 							this.worldObj.spawnEntityInWorld(new EntityItem(
@@ -103,7 +101,7 @@ public class EntityLightningOrb extends EntityLightningBolt {
 
 						}
 
-						else if (((EntityItem) entity).getEntityItem().equals(
+						else if (((EntityItem) entity).getEntityItem().getItem().equals(
 								InitItem.rune)) {
 							if (this.type == 1) {
 								this.worldObj
