@@ -8,8 +8,11 @@ import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.attributes.AttributeModifier;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.ItemSword;
+import net.minecraft.util.DamageSource;
+import net.minecraft.world.World;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
@@ -38,6 +41,12 @@ public class ItemLance extends ItemSword {
 		if ((par2EntityLiving.ridingEntity != null)) {
 			par2EntityLiving.mountEntity(null);
 		}
+		if (par3EntityLiving.ridingEntity != null) {
+			par2EntityLiving.attackEntityFrom(DamageSource
+					.causeIndirectMagicDamage(par3EntityLiving,
+							par2EntityLiving), 6);
+		}
+
 		return true;
 	}
 
@@ -45,14 +54,13 @@ public class ItemLance extends ItemSword {
 	public String getItemStackDisplayName(ItemStack itemStack) {
 		return Localization.localize(getUnlocalizedName(itemStack));
 	}
-	
+
 	@Override
 	public Multimap getItemAttributeModifiers() {
 		Multimap multimap = super.getItemAttributeModifiers();
 		multimap.put(SharedMonsterAttributes.attackDamage
 				.getAttributeUnlocalizedName(), new AttributeModifier(
-				field_111210_e, "Weapon modifier",
-				(double) this.damage, 0));
+				field_111210_e, "Weapon modifier", (double) this.damage, 0));
 		return multimap;
 	}
 }
