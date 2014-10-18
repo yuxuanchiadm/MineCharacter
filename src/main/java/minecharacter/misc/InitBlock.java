@@ -48,6 +48,7 @@ public class InitBlock {
 	}
 
 	private void registerBlocks() {
+		registerBlock(InitBlock.blockOmelette);
 		registerBlock(InitBlock.blockNethercoal);
 		registerBlock(InitBlock.blockDemonite);
 		registerBlock(InitBlock.blockLuciferite);
