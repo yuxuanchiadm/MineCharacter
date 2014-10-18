@@ -32,44 +32,44 @@ public class CharItemArmor extends ItemArmor {
 	@Override
 	public String getArmorTexture(ItemStack stack, Entity entity, int slot,
 			String type) {
-		if ((stack.equals(InitItem.knightHelmet))
-				|| (stack.equals(InitItem.knightChest))
-				|| (stack.equals(InitItem.knightBoots))) {
+		if ((stack.getItem().equals(InitItem.knightHelmet))
+				|| (stack.getItem().equals(InitItem.knightChest))
+				|| (stack.getItem().equals(InitItem.knightBoots))) {
 			return "minecharacter:textures/models/armor/knight_1.png";
 		}
-		if (stack.equals(InitItem.knightLegs)) {
+		if (stack.getItem().equals(InitItem.knightLegs)) {
 			return "minecharacter:textures/models/armor/knight_2.png";
 		}
-		if ((stack.equals(InitItem.grimHelmet))
-				|| (stack.equals(InitItem.grimChest))
-				|| (stack.equals(InitItem.grimBoots))) {
+		if ((stack.getItem().equals(InitItem.grimHelmet))
+				|| (stack.getItem().equals(InitItem.grimChest))
+				|| (stack.getItem().equals(InitItem.grimBoots))) {
 			return "minecharacter:textures/models/armor/grim_1.png";
 		}
-		if (stack.equals(InitItem.grimLegs)) {
+		if (stack.getItem().equals(InitItem.grimLegs)) {
 			return "minecharacter:textures/models/armor/grim_2.png";
 		}
-		if ((stack.equals(InitItem.mageHelmet))
-				|| (stack.equals(InitItem.mageChest))
-				|| (stack.equals(InitItem.mageBoots))) {
+		if ((stack.getItem().equals(InitItem.mageHelmet))
+				|| (stack.getItem().equals(InitItem.mageChest))
+				|| (stack.getItem().equals(InitItem.mageBoots))) {
 			return "minecharacter:textures/models/armor/mage_1.png";
 		}
-		if (stack.equals(InitItem.mageLegs)) {
+		if (stack.getItem().equals(InitItem.mageLegs)) {
 			return "minecharacter:textures/models/armor/mage_2.png";
 		}
-		if ((stack.equals(InitItem.archerHelmet))
-				|| (stack.equals(InitItem.archerChest))
-				|| (stack.equals(InitItem.archerBoots))) {
+		if ((stack.getItem().equals(InitItem.archerHelmet))
+				|| (stack.getItem().equals(InitItem.archerChest))
+				|| (stack.getItem().equals(InitItem.archerBoots))) {
 			return "minecharacter:textures/models/armor/archer_1.png";
 		}
-		if (stack.equals(InitItem.archerLegs)) {
+		if (stack.getItem().equals(InitItem.archerLegs)) {
 			return "minecharacter:textures/models/armor/archer_2.png";
 		}
-		if ((stack.equals(InitItem.assassinHelmet))
-				|| (stack.equals(InitItem.assassinChest))
-				|| (stack.equals(InitItem.assassinBoots))) {
+		if ((stack.getItem().equals(InitItem.assassinHelmet))
+				|| (stack.getItem().equals(InitItem.assassinChest))
+				|| (stack.getItem().equals(InitItem.assassinBoots))) {
 			return "minecharacter:textures/models/armor/assassin_1.png";
 		}
-		if (stack.equals(InitItem.assassinLegs)) {
+		if (stack.getItem().equals(InitItem.assassinLegs)) {
 			return "minecharacter:textures/models/armor/assassin_2.png";
 		}
 		return "";
