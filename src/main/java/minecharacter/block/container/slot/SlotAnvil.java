@@ -31,10 +31,6 @@ public class SlotAnvil extends Slot {
 	      if (itemstack1 != null)
 	      {
 	        this.anvilMatrix.decrStackSize(i, 1);
-//	        if (itemstack1.getItem().isDamageable())
-//	        {
-//	          this.anvilMatrix.setInventorySlotContents(i, new ItemStack(itemstack1.getItem().itemID,1,1));
-//	        }
 	      }
 	    }
 	  }

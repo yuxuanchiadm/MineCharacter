@@ -15,12 +15,12 @@ public class SlotAnvilHammer extends Slot {
 
 	@Override
 	public boolean isItemValid(ItemStack par1ItemStack) {
-		if ((par1ItemStack.equals(InitItem.woodHammer))
-				|| (par1ItemStack.equals(InitItem.stoneHammer))
-				|| (par1ItemStack.equals(InitItem.ironHammer))
-				|| (par1ItemStack.equals(InitItem.goldHammer))
-				|| (par1ItemStack.equals(InitItem.diamondHammer))
-				|| (par1ItemStack.equals(InitItem.mjolnir))) {
+		if ((par1ItemStack.getItem().equals(InitItem.woodHammer))
+				|| (par1ItemStack.getItem().equals(InitItem.stoneHammer))
+				|| (par1ItemStack.getItem().equals(InitItem.ironHammer))
+				|| (par1ItemStack.getItem().equals(InitItem.goldHammer))
+				|| (par1ItemStack.getItem().equals(InitItem.diamondHammer))
+				|| (par1ItemStack.getItem().equals(InitItem.mjolnir))) {
 			return true;
 		}
 
