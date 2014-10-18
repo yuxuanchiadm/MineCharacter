@@ -34,11 +34,12 @@ public class BlockNetherOrb extends Block {
 		this.setCreativeTab(MineCharacter.tabMineCharacter);
 	}
 
+	@Override
 	public Item getItemDropped(int par1, Random par2Random, int par3) {
-		
+
 		return this.equals(InitBlock.blockNethercoal) ? InitItem.nethercoal
 				: Items.netherbrick;
-		// XXX 这里需要掉落一个地狱岩
+
 	}
 
 	@Override
@@ -46,37 +47,28 @@ public class BlockNetherOrb extends Block {
 
 		if (this.equals(InitBlock.blockNethercoal))
 			return super.canHarvestBlock(player, meta);
-		else {
-			if (player.inventory.getCurrentItem().getItem() instanceof ItemTool) {
-				return ToolMaterial
-						.valueOf(
-								((ItemTool) player.inventory.getCurrentItem()
-										.getItem()).getToolMaterialName())
-						.getHarvestLevel() > 0;
-			}
-		}
-		return super.canHarvestBlock(player, meta);
+		return true;
 	}
 
 	@Override
 	public void harvestBlock(World par1World, EntityPlayer par2EntityPlayer,
 			int par3, int par4, int par5, int par6) {
 		if (par2EntityPlayer.inventory.getCurrentItem() != null
-				&& par2EntityPlayer.inventory.getCurrentItem().equals(
-						Items.golden_pickaxe)) {
+				&& par2EntityPlayer.inventory.getCurrentItem().getItem()
+						.equals(Items.golden_pickaxe)) {
 			switch (this.meta) {
 			case 1:
 				if (!par1World.isRemote)
 					par1World.spawnEntityInWorld(new EntityItem(par1World,
-							par3, par4, par5, new ItemStack(
-									InitBlock.blockDemonite, 1, 0)));
+							par3, par4, par5, new ItemStack(InitItem.demonite,
+									1, 0)));
 				par1World.setBlockToAir(par3, par4, par5);
 				return;
 			case 2:
 				if (!par1World.isRemote)
 					par1World.spawnEntityInWorld(new EntityItem(par1World,
 							par3, par4, par5, new ItemStack(
-									InitBlock.blockLuciferite, 1, 0)));
+									InitItem.luciferite, 1, 0)));
 				par1World.setBlockToAir(par3, par4, par5);
 				return;
 			default:
