@@ -195,7 +195,7 @@ public class BlockOrb extends BlockContainer {
 												.equals(Items.iron_ingot)) {
 									flag = 1;
 								} else if (((EntityItem) items.get(0))
-										.getEntityItem().equals(InitItem.rune)) {
+										.getEntityItem().getItem().equals(InitItem.rune)) {
 									flag = 2;
 								} else {
 									flag = 3;
