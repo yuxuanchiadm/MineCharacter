@@ -49,7 +49,7 @@ public class PacketSpawnLighting extends PacketBase {
 	@SideOnly(Side.CLIENT)
 	public void handleClient() {
 		EntityPlayer player = FMLClientHandler.instance().getClient().thePlayer;
-		if (type == -12) {
+		if (type >0) {
 			EntityLightingMjolnir lightning = new EntityLightingMjolnir(
 					player.worldObj, player, x + 0.5F, y + 1.5F, z + 0.5F);
 			player.worldObj.spawnEntityInWorld(lightning);

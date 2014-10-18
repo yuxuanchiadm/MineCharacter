@@ -107,13 +107,14 @@ public class ItemMjolnir extends ItemHammer {
 			if (d5 <= 8.0D) {
 				par1ItemStack.damageItem(6, par3EntityPlayer);
 				hitEntity(par1ItemStack, entity, par3EntityPlayer);
-				EntityLightingMjolnir lighting = new EntityLightingMjolnir(
+				PacketSpawnLighting.spawnlight(entity.posX, entity.posY,
+						entity.posZ, 0);	
+				EntityLightingMjolnir lightning = new EntityLightingMjolnir(
 						par2World, par3EntityPlayer, entity.posX, entity.posY,
 						entity.posZ);
 
-				par2World.weatherEffects.add(lighting);
-				PacketSpawnLighting.spawnlight(lighting.posX, lighting.posY,
-						lighting.posZ, -12);
+				par2World.spawnEntityInWorld(lightning);
+
 				par2World.playSoundEffect(par3EntityPlayer.posX,
 						par3EntityPlayer.posY, par3EntityPlayer.posZ,
 						"random.explode", 4.0F,
