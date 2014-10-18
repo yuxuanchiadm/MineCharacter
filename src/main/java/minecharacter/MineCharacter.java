@@ -13,15 +13,12 @@ import minecharacter.misc.EventHandler;
 import minecharacter.misc.InitBlock;
 import minecharacter.misc.InitItem;
 import minecharacter.misc.Localization;
-import minecharacter.misc.TickHandler;
 import minecharacter.network.PacketHandler;
 import minecharacter.proxy.CommonProxy;
 import minecharacter.world.WorldGenerator;
-import net.minecraft.block.Block;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.common.MinecraftForge;
 import cpw.mods.fml.common.IFuelHandler;
@@ -65,7 +62,6 @@ public class MineCharacter implements IFuelHandler {
 				new PacketHandler());
 
 		MinecraftForge.EVENT_BUS.register(new EventHandler());
-		MinecraftForge.EVENT_BUS.register(new TickHandler());
 
 		GameRegistry.registerWorldGenerator(new WorldGenerator(), 0);
 		NetworkRegistry.INSTANCE.registerGuiHandler(this, proxy);

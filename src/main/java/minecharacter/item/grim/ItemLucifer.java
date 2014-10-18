@@ -7,6 +7,7 @@ import minecharacter.misc.InitItem;
 import minecharacter.misc.Localization;
 import minecharacter.network.PacketSetPos;
 import net.minecraft.client.renderer.texture.IIconRegister;
+import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.ItemSword;
@@ -27,6 +28,15 @@ public class ItemLucifer extends ItemSword {
 		super(par2EnumToolMaterial);
 		this.setMaxDamage(2341);
 		this.setCreativeTab(MineCharacter.tabMineCharacter);
+	}
+
+	@Override
+	public boolean hitEntity(ItemStack par1ItemStack,
+			EntityLivingBase par2EntityLivingBase,
+			EntityLivingBase par3EntityLivingBase) {
+		par2EntityLivingBase.setFire(20);
+		return super.hitEntity(par1ItemStack, par2EntityLivingBase,
+				par3EntityLivingBase);
 	}
 
 	@Override
