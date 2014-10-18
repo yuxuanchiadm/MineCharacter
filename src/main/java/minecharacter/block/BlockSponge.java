@@ -14,10 +14,9 @@ public class BlockSponge extends Block {
 
 	public BlockSponge() {
 		super(Material.sponge);
-		setHardness(0.6F);
-		setStepSound(soundTypeGrass);
-		// setUnlocalizedName("sponge");
-		// setTextureName("sponge");
+		this.setHardness(0.6F);
+		this.setStepSound(soundTypeGrass);
+		this.setBlockTextureName("sponge");
 		this.setCreativeTab(CreativeTabs.tabBlock);
 		this.setTickRandomly(true);
 	}

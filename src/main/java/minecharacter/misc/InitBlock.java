@@ -35,7 +35,7 @@ public class InitBlock {
 		blockWheat = new BlockWheat().setBlockName("blockWheat");
 		blockOrb = new BlockOrb().setBlockName("blockOrb");
 		air = new BlockAir(Material.air).setBlockName("air");
-		sponge = new BlockSponge();
+		sponge = new BlockSponge().setBlockName("sponge");
 		pan = new BlockPan().setBlockName("pan");
 		blockAnvil = new BlockAnvil(Material.rock).setBlockName("blockAnvil");
 		this.registerBlocks();
@@ -53,6 +53,8 @@ public class InitBlock {
 		registerBlock(InitBlock.blockLuciferite);
 		registerBlock(InitBlock.blockWheat);
 		registerBlock(InitBlock.blockOrb);
+		registerBlock(InitBlock.air);
+		registerBlock(InitBlock.sponge);
 		registerBlock(InitBlock.pan);
 		registerBlock(InitBlock.blockAnvil);
 
