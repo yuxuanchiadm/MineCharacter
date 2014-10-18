@@ -98,7 +98,6 @@ public class BlockPan extends BlockContainer {
 		if (stack == null) {
 			return false;
 		}
-		// XXX 用item实例直接比较 不一定行
 		Item itemMayCook = stack.getItem();
 		if (itemMayCook == Items.cooked_chicken
 				|| itemMayCook == Items.cooked_porkchop
@@ -122,7 +121,6 @@ public class BlockPan extends BlockContainer {
 				+ this.getUnlocalizedName().replace("tile.", ""));
 	}
 
-	// XXX 具体效果等待运行游戏查看
 	private void func_149930_e(World world, int posX, int poxY, int posZ) {
 		if (world.isRemote) {
 			return;
