@@ -47,6 +47,7 @@ public class EntityTomahawk extends Entity implements IThrowableEntity,
 	private double damage = 2.0D;
 	private EntityPlayer thrower;
 	private int itemDamage;
+	private boolean initTracker;
 	
 	public EntityTomahawk(World par1World) {
 		super(par1World);
@@ -105,6 +106,13 @@ public class EntityTomahawk extends Entity implements IThrowableEntity,
 	@Override
 	public void onUpdate() {
 		super.onUpdate();
+		if(!worldObj.isRemote) {
+			if(!initTracker) {
+				EntityTracker entitytracker = ((WorldServer)worldObj).getEntityTracker();
+				entitytracker.updateTrackedEntities();
+				initTracker = true;
+			}
+		}
 		if (this.prevRotationPitch == 0.0F && this.prevRotationYaw == 0.0F) {
 			float f = MathHelper.sqrt_double(this.motionX * this.motionX
 					+ this.motionZ * this.motionZ);
@@ -268,6 +276,10 @@ public class EntityTomahawk extends Entity implements IThrowableEntity,
 
 						this.playSound("random.bowhit", 1.0F,
 								1.2F / (this.rand.nextFloat() * 0.2F + 0.9F));
+						
+						this.motionX = 0;
+						this.motionY = 0;
+						this.motionZ = 0;
 					} else {
 						this.motionX *= -0.10000000149011612D;
 						this.motionY *= -0.10000000149011612D;

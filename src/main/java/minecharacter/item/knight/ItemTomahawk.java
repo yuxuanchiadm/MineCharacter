@@ -50,9 +50,6 @@ public class ItemTomahawk extends ItemTool {
 	@Override
 	public void onPlayerStoppedUsing(ItemStack par1ItemStack, World par2World,
 			EntityPlayer par3EntityPlayer, int par4) {
-		if (par3EntityPlayer.worldObj.isRemote) {
-			return;
-		}
 		int j = this.getMaxItemUseDuration(par1ItemStack) - par4;
 		float f = j / 20.0F;
 		if (f > 1.0F) {
@@ -66,7 +63,9 @@ public class ItemTomahawk extends ItemTool {
 				par3EntityPlayer.inventory
 						.consumeInventoryItem(InitItem.tomahawk);
 
-				par2World.spawnEntityInWorld(entityTomahawk);
+				if (!par2World.isRemote) {
+					par2World.spawnEntityInWorld(entityTomahawk);
+				}
 			}
 		}
 
