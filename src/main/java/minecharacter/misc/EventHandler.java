@@ -69,7 +69,8 @@ public class EventHandler {
 			EntityPlayer player = (EntityPlayer) event.target;
 			if (MineCharacter.proxy.isEquid(player, "assassin")
 					&& player.isPotionActive(Potion.invisibility)) {
-				((EntityLiving) event.entityLiving).setAttackTarget(null);
+				if (!(event.entityLiving instanceof EntityPlayer))
+					((EntityLiving) event.entityLiving).setAttackTarget(null);
 
 			}
 		}
