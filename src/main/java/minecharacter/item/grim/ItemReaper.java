@@ -8,7 +8,9 @@ import minecharacter.misc.InitItem;
 import minecharacter.misc.Localization;
 import net.minecraft.block.Block;
 import net.minecraft.client.renderer.texture.IIconRegister;
+import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLiving;
+import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.monster.EntityEnderman;
 import net.minecraft.entity.player.EntityPlayer;
@@ -66,25 +68,23 @@ public class ItemReaper extends ItemTool {
 		par1ItemStack.damageItem(4, par3EntityPlayer);
 		par2World.playSoundAtEntity(par3EntityPlayer, "mob.ghast.scream", 1.0F,
 				1.0F / (MineCharacter.ran.nextFloat() * 0.4F + 1.2F));
-		List<?> list = par2World.getEntitiesWithinAABBExcludingEntity(
-				par3EntityPlayer, AxisAlignedBB.getBoundingBox(
-						par3EntityPlayer.posX - 5.0D,
-						par3EntityPlayer.posY - 5.0D,
-						par3EntityPlayer.posZ - 5.0D,
-						par3EntityPlayer.posX + 5.0D,
-						par3EntityPlayer.posY + 5.0D,
-						par3EntityPlayer.posZ + 5.0D));
+		List<Entity> list = MineCharacter.proxy.findTarget(par2World,
+				AxisAlignedBB.getBoundingBox(par3EntityPlayer.posX - 5,
+						par3EntityPlayer.posY - 5, par3EntityPlayer.posZ - 5,
+						par3EntityPlayer.posX + 5, par3EntityPlayer.posY + 5,
+						par3EntityPlayer.posZ + 5), par3EntityPlayer);
 		for (int k2 = 0; k2 < list.size(); k2++) {
-			if (list.get(k2) instanceof EntityLiving
+			if (list.get(k2) instanceof EntityLivingBase
 					&& !(list.get(k2) instanceof EntityEnderman)) {
-				EntityLiving entity = (EntityLiving) list.get(k2);
+				EntityLivingBase entity = (EntityLivingBase) list.get(k2);
 				double d5 = entity.getDistance(par3EntityPlayer.posX,
 						par3EntityPlayer.posY, par3EntityPlayer.posZ);
 				if (d5 <= 5.0D) {
 
 					entity.attackEntityFrom(
 							DamageSource.causeIndirectMagicDamage(
-									par3EntityPlayer, entity), entity.getHealth());
+									par3EntityPlayer, entity), entity
+									.getHealth());
 					if (!par2World.isRemote) {
 						par2World.spawnEntityInWorld(new EntityItem(par2World,
 								entity.posX, entity.posY, entity.posZ,
