@@ -41,11 +41,7 @@ public class ItemLance extends ItemSword {
 		if ((par2EntityLiving.ridingEntity != null)) {
 			par2EntityLiving.mountEntity(null);
 		}
-		if (par3EntityLiving.ridingEntity != null) {
-			par2EntityLiving.attackEntityFrom(DamageSource
-					.causeIndirectMagicDamage(par3EntityLiving,
-							par2EntityLiving), 6);
-		}
+
 
 		return true;
 	}

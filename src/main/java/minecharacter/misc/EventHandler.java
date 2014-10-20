@@ -41,7 +41,8 @@ public class EventHandler {
 			} else if (action == PlayerInteractEvent.Action.RIGHT_CLICK_BLOCK) {
 				if (player.inventory.getCurrentItem() != null
 						&& player.inventory.getCurrentItem().getItem()
-								.equals(Item.getItemFromBlock(Blocks.torch)) && rand.nextInt(100) == 1)
+								.equals(Item.getItemFromBlock(Blocks.torch))
+						&& rand.nextInt(100) == 1)
 					player.worldObj.newExplosion(null, event.x, event.y,
 							event.z, 4.0F, true, true);
 
@@ -57,7 +58,7 @@ public class EventHandler {
 			if (player.ridingEntity != null
 					&& player.ridingEntity instanceof EntityHorse) {
 				event.target.attackEntityFrom(
-						DamageSource.causePlayerDamage(player), 2);
+						DamageSource.causePlayerDamage(player), 20);
 			}
 		}
 	}
@@ -83,9 +84,8 @@ public class EventHandler {
 						.canHarvestBlock(event.block,
 								event.harvester.inventory.getCurrentItem()))
 				&& ((event.harvester.inventory.getCurrentItem().getItem()
-						.equals(InitItem.netherPickaxe))
-				|| (event.harvester.inventory.getCurrentItem().getItem()
-						.equals(InitItem.netherAxe)))) {
+						.equals(InitItem.netherPickaxe)) || (event.harvester.inventory
+						.getCurrentItem().getItem().equals(InitItem.netherAxe)))) {
 			ArrayList removeThese = new ArrayList(1);
 			ArrayList addThese = new ArrayList(1);
 
