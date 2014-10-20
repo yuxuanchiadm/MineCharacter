@@ -58,51 +58,35 @@ public class ItemNetherBow extends ItemArcherBow {
 			if (f > 1.0F) {
 				f = 1.0F;
 			}
+			EntityArrow[] entityarrows = {
+					new EntityArrow(par2World, par3EntityPlayer, f * 2.0F),
+					new EntityArrow(par2World, par3EntityPlayer, f * 2.0F),
+					new EntityArrow(par2World, par3EntityPlayer, f * 2.0F) };
 
-			EntityArrow entityarrow1 = new EntityArrow(par2World,
-					par3EntityPlayer, f * 2.0F);
-			EntityArrow entityarrow2 = new EntityArrow(par2World,
-					par3EntityPlayer, f * 2.0F);
-			entityarrow2.setPosition(entityarrow2.posX, entityarrow2.posY + 1,
-					entityarrow2.posZ);
+			entityarrows[1].setPosition(entityarrows[1].posX,
+					entityarrows[1].posY + 1, entityarrows[1].posZ);
 
-			EntityArrow entityarrow3 = new EntityArrow(par2World,
-					par3EntityPlayer, f * 2.0F);
-			entityarrow3.setPosition(entityarrow3.posX, entityarrow3.posY + 2,
-					entityarrow3.posZ);
+			entityarrows[2].setPosition(entityarrows[2].posX,
+					entityarrows[2].posY + 2, entityarrows[2].posZ);
 
-			if (f == 1.0F) {
-				entityarrow1.setIsCritical(true);
-				entityarrow2.setIsCritical(true);
-				entityarrow3.setIsCritical(true);
+			for (EntityArrow arrow : entityarrows) {
+				if (f == 1.0F) {
+					arrow.setIsCritical(true);
+				}
+
+				arrow.setFire(100);
+				arrow.setDamage(this.damage * f);
+
+				par2World.playSoundAtEntity(par3EntityPlayer, "random.bow",
+						1.0F, 1.0F / (itemRand.nextFloat() * 0.4F + 1.2F) + f
+								* 0.5F);
+				arrow.canBePickedUp = 1;
+				par3EntityPlayer.inventory.consumeInventoryItem(Items.arrow);
+				if (!par2World.isRemote) {
+					par2World.spawnEntityInWorld(arrow);
+				}
 			}
-			entityarrow1.setFire(100);
-			entityarrow2.setFire(100);
-			entityarrow3.setFire(100);
 
-			entityarrow1.setDamage(this.damage * f);
-			entityarrow2.setDamage(this.damage * f);
-			entityarrow3.setDamage(this.damage * f);
-
-			par1ItemStack.damageItem(2, par3EntityPlayer);
-			par2World.playSoundAtEntity(par3EntityPlayer, "random.bow", 1.0F,
-					1.0F / (itemRand.nextFloat() * 0.4F + 1.2F) + f * 0.5F);
-			par2World.playSoundAtEntity(par3EntityPlayer, "random.bow", 1.0F,
-					1.0F / (itemRand.nextFloat() * 0.4F + 1.2F) + f * 0.5F);
-			par2World.playSoundAtEntity(par3EntityPlayer, "random.bow", 1.0F,
-					1.0F / (itemRand.nextFloat() * 0.4F + 1.2F) + f * 0.5F);
-
-			entityarrow1.canBePickedUp = 1;
-			entityarrow2.canBePickedUp = 1;
-			entityarrow3.canBePickedUp = 1;
-
-			par3EntityPlayer.inventory.consumeInventoryItem(Items.arrow);
-
-			if (!par2World.isRemote) {
-				par2World.spawnEntityInWorld(entityarrow1);
-				par2World.spawnEntityInWorld(entityarrow2);
-				par2World.spawnEntityInWorld(entityarrow3);
-			}
 		}
 	}
 
