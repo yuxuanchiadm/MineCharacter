@@ -44,10 +44,16 @@ public class ItemDragger extends ItemSword {
 			EntityLivingBase par3EntityLivingBase) {
 
 		if (MineCharacter.proxy.isEquid((EntityPlayer) par3EntityLivingBase,
-				"assassin") && Item.itemRand.nextInt(20) == 2) {
+				"assassin")) {
+			if (Item.itemRand.nextInt(15) == 1)
+				par2EntityLivingBase
+						.attackEntityFrom(
+								DamageSource
+										.causePlayerDamage((EntityPlayer) par3EntityLivingBase),
+								100F);
 			par2EntityLivingBase.attackEntityFrom(DamageSource
 					.causePlayerDamage((EntityPlayer) par3EntityLivingBase),
-					100F);
+					par2EntityLivingBase.getTotalArmorValue());
 		}
 
 		return super.hitEntity(par1ItemStack, par2EntityLivingBase,
@@ -59,8 +65,7 @@ public class ItemDragger extends ItemSword {
 		Multimap multimap = super.getItemAttributeModifiers();
 		multimap.put(SharedMonsterAttributes.attackDamage
 				.getAttributeUnlocalizedName(), new AttributeModifier(
-				field_111210_e, "Weapon modifier",
-				(double) this.damage, 0));
+				field_111210_e, "Weapon modifier", (double) this.damage, 0));
 		return multimap;
 	}
 }
