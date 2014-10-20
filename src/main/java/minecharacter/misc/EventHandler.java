@@ -34,14 +34,14 @@ public class EventHandler {
 			if (action == PlayerInteractEvent.Action.LEFT_CLICK_BLOCK) {
 				if (player.inventory.getCurrentItem() != null
 						&& player.inventory.getCurrentItem().getItem() instanceof ItemTool
-						&& rand.nextInt(500) == 1) {
+						&& rand.nextInt(100) == 1) {
 					player.worldObj.newExplosion(null, event.x, event.y,
 							event.z, 4.0F, true, true);
 				}
 			} else if (action == PlayerInteractEvent.Action.RIGHT_CLICK_BLOCK) {
 				if (player.inventory.getCurrentItem() != null
 						&& player.inventory.getCurrentItem().getItem()
-								.equals(Item.getItemFromBlock(Blocks.torch)) && rand.nextInt(500) == 1)
+								.equals(Item.getItemFromBlock(Blocks.torch)) && rand.nextInt(100) == 1)
 					player.worldObj.newExplosion(null, event.x, event.y,
 							event.z, 4.0F, true, true);
 
