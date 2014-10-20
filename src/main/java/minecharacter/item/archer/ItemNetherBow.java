@@ -33,6 +33,7 @@ public class ItemNetherBow extends ItemArcherBow {
 	@Override
 	public void onPlayerStoppedUsing(ItemStack par1ItemStack, World par2World,
 			EntityPlayer par3EntityPlayer, int par4) {
+		par1ItemStack.damageItem(6, par3EntityPlayer);
 		if (FMLCommonHandler.instance().getEffectiveSide() == Side.CLIENT)
 			this.iconsetdefalut();
 		int j = this.getMaxItemUseDuration(par1ItemStack) - par4;

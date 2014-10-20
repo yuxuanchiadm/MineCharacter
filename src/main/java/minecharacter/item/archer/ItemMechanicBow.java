@@ -31,6 +31,7 @@ public class ItemMechanicBow extends ItemArcherBow {
 	@Override
 	public void onPlayerStoppedUsing(ItemStack par1ItemStack, World par2World,
 			EntityPlayer par3EntityPlayer, int par4) {
+		par1ItemStack.damageItem(3, par3EntityPlayer);
 		if (FMLCommonHandler.instance().getEffectiveSide() == Side.CLIENT)
 			iconsetdefalut();
 		int j = this.getMaxItemUseDuration(par1ItemStack) - par4;

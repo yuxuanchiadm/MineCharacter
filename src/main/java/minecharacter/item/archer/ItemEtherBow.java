@@ -32,6 +32,7 @@ public class ItemEtherBow extends ItemArcherBow {
 	@Override
 	public void onPlayerStoppedUsing(ItemStack par1ItemStack, World par2World,
 			EntityPlayer par3EntityPlayer, int par4) {
+		par1ItemStack.damageItem(3, par3EntityPlayer);
 		if (FMLCommonHandler.instance().getEffectiveSide() == Side.CLIENT)
 			this.iconsetdefalut();
 		int j = this.getMaxItemUseDuration(par1ItemStack) - par4;
@@ -61,7 +62,7 @@ public class ItemEtherBow extends ItemArcherBow {
 			}
 
 			EntityArrow entityarrow = new EntityArrow(par2World,
-					par3EntityPlayer, f * 2.0F);
+					par3EntityPlayer, f * 10.0F);
 
 			if (f == 1.0F) {
 				entityarrow.setIsCritical(true);
