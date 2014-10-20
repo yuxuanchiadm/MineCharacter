@@ -105,7 +105,7 @@ public class ItemHammer extends ItemTool {
 						par3EntityPlayer.posX + d6, par3EntityPlayer.posY + d7,
 						par3EntityPlayer.posZ + d6), par3EntityPlayer);
 		for (int k2 = 0; k2 < list.size(); k2++) {
-			EntityLiving entity = (EntityLiving) list.get(k2);
+			EntityLivingBase entity = (EntityLivingBase) list.get(k2);
 			double d5 = entity.getDistanceToEntity(par3EntityPlayer);
 			if (d5 <= 8.0D) {
 				par1ItemStack.damageItem(2, par3EntityPlayer);

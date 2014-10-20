@@ -15,6 +15,7 @@ import minecharacter.misc.InitItem;
 import minecharacter.network.PacketBase;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLiving;
+import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.world.World;
@@ -26,11 +27,11 @@ public class CommonProxy implements IGuiHandler {
 			EntityPlayer player) {
 		List<Entity> entity = new ArrayList();
 		List<Entity> willRemove = new ArrayList();
-		entity = world.getEntitiesWithinAABBExcludingEntity(player, aabb);
+		entity = world.getEntitiesWithinAABBExcludingEntity(null, aabb);
 		Iterator<Entity> iterator = entity.iterator();
 		while (iterator.hasNext()) {
 			Entity temp = iterator.next();
-			if (!(temp instanceof EntityLiving))
+			if ((!(temp instanceof EntityLivingBase))||(temp.equals(player)))
 				willRemove.add(temp);
 		}
 		entity.removeAll(willRemove);
