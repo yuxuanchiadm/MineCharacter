@@ -85,7 +85,8 @@ public class ItemReaper extends ItemTool {
 							DamageSource.causeIndirectMagicDamage(
 									par3EntityPlayer, entity), entity
 									.getHealth());
-					if (!par2World.isRemote) {
+					if (!par2World.isRemote && (!entity.isEntityAlive())) {
+
 						par2World.spawnEntityInWorld(new EntityItem(par2World,
 								entity.posX, entity.posY, entity.posZ,
 								new ItemStack(InitItem.soul, 1)));
