@@ -104,7 +104,7 @@ public class BlockPan extends BlockContainer {
 				|| itemMayCook == InitItem.friedEgg
 				|| itemMayCook == Items.cooked_beef
 				|| itemMayCook == Items.baked_potato
-				|| itemMayCook == Items.fishing_rod)
+				|| itemMayCook == Items.cooked_fished)
 			return true;
 		return false;
 	}
