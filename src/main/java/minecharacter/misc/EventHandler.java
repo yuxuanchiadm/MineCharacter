@@ -11,6 +11,7 @@ import net.minecraft.entity.item.EntityXPOrb;
 import net.minecraft.entity.passive.EntityHorse;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.ItemTool;
 import net.minecraft.item.crafting.FurnaceRecipes;
@@ -39,8 +40,8 @@ public class EventHandler {
 				}
 			} else if (action == PlayerInteractEvent.Action.RIGHT_CLICK_BLOCK) {
 				if (player.inventory.getCurrentItem() != null
-						&& player.inventory.getCurrentItem().getItem().equals(Blocks.torch)
-						&& rand.nextInt(500) == 1)
+						&& player.inventory.getCurrentItem().getItem()
+								.equals(Item.getItemFromBlock(Blocks.torch)) && rand.nextInt(500) == 1)
 					player.worldObj.newExplosion(null, event.x, event.y,
 							event.z, 4.0F, true, true);
 
@@ -78,8 +79,13 @@ public class EventHandler {
 	public void harvestDrops(BlockEvent.HarvestDropsEvent event) {
 		if ((event.harvester != null)
 				&& (event.harvester.inventory.getCurrentItem() != null)
-				&& (event.harvester.inventory.getCurrentItem().getItem().canHarvestBlock(event.block, event.harvester.inventory.getCurrentItem()))
-				&& (event.harvester.inventory.getCurrentItem().equals(InitItem.netherPickaxe))) {
+				&& (event.harvester.inventory.getCurrentItem().getItem()
+						.canHarvestBlock(event.block,
+								event.harvester.inventory.getCurrentItem()))
+				&& ((event.harvester.inventory.getCurrentItem().getItem()
+						.equals(InitItem.netherPickaxe))
+				|| (event.harvester.inventory.getCurrentItem().getItem()
+						.equals(InitItem.netherAxe)))) {
 			ArrayList removeThese = new ArrayList(1);
 			ArrayList addThese = new ArrayList(1);
 

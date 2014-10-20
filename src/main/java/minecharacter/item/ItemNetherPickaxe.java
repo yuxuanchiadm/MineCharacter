@@ -8,6 +8,7 @@ import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.entity.item.EntityItem;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemPickaxe;
@@ -72,43 +73,7 @@ public class ItemNetherPickaxe extends ItemPickaxe {
 				par3EntityLiving);
 	}
 
-	@Override
-	public boolean onBlockDestroyed(ItemStack par1ItemStack, World par2World,
-			Block block, int x, int y, int z, EntityLivingBase par7EntityLiving) {
-		if ((super.onBlockDestroyed(par1ItemStack, par2World, block, x, y, z,
-				par7EntityLiving)) && (canHarvestBlock(block, par1ItemStack))) {
-			if (par2World.isRemote) {
-				int meta = par2World.getBlockMetadata(x, y, z);
-				par2World.setBlockToAir(x, y, z);
-				ArrayList<ItemStack> items = block.getDrops(par2World, x, y, z,
-						meta, 0);
-
-				for (ItemStack input : items) {
-					ItemStack result = FurnaceRecipes.smelting()
-							.getSmeltingResult(input);
-					if (result != null) {
-
-						for (int var1 = 0; var1 < 5; var1++) {
-							double rx = Item.itemRand.nextGaussian() * 0.02D;
-							double ry = Item.itemRand.nextGaussian() * 0.02D;
-							double rz = Item.itemRand.nextGaussian() * 0.02D;
-							double magnitude = 20.0D;
-							par2World.spawnParticle("flame", x + 0.5D + rx
-									* magnitude, y + 0.5D + ry * magnitude, z
-									+ 0.5D + rz * magnitude, -rx, -ry, -rz);
-						}
-
-					}
-
-				}
-
-			}
-
-			return true;
-		}
-
-		return false;
-	}
+	
 
 	@Override
 	@SideOnly(Side.CLIENT)

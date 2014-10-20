@@ -43,28 +43,10 @@ public class ItemNetherAxe extends ItemTool {
 	}
 
 	@Override
-	public boolean onBlockStartBreak(ItemStack itemstack, int X, int Y, int Z,
-			EntityPlayer player) {
-		World world = player.worldObj;
-
-		ItemStack item = FurnaceRecipes.smelting().getSmeltingResult(
-				new ItemStack(world.getBlock(X, Y, Z)));
-		if (item != null
-				&& world.getBlock(X, Y, Z).getMaterial().equals(Material.wood)) {
-			itemstack.damageItem(2, player);
-			world.spawnEntityInWorld(new EntityItem(world, X, Y, Z, item));
-
-			world.setBlockToAir(X, Y, Z);
-			return true;
-		}
-		return false;
-
-	}
-
-	@Override
 	public String getItemStackDisplayName(ItemStack itemStack) {
 		return Localization.localize(getUnlocalizedName(itemStack));
 	}
+
 	@Override
 	@SideOnly(Side.CLIENT)
 	public void registerIcons(IIconRegister par1IconRegister) {
@@ -72,4 +54,10 @@ public class ItemNetherAxe extends ItemTool {
 				+ this.getUnlocalizedName().replace("item.", ""));
 	}
 
+	@Override
+	public boolean canHarvestBlock(Block block, ItemStack itemStack) {
+		return block.getMaterial() == Material.wood
+				|| block.getMaterial() == Material.plants
+				|| block.getMaterial() == Material.vine;
+	}
 }

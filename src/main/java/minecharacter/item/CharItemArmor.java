@@ -89,16 +89,15 @@ public class CharItemArmor extends ItemArmor {
 			ItemStack itemStack) {
 		tick++;
 
-		System.out.println(tick);
 		if (tick > 200) {
 			if (itemStack.getItem().equals(InitItem.archerHelmet)
 					&& MineCharacter.proxy.isEquid(player, "archer")
 					&& notEnoughArrow(player)) {
-			
+
 				if (FMLCommonHandler.instance().getEffectiveSide() == Side.SERVER)
 					player.inventory.addItemStackToInventory(new ItemStack(
 							Items.arrow, 1));
-				
+
 			}
 
 			tick = 0;

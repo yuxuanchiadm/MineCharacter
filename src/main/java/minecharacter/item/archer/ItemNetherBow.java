@@ -108,13 +108,14 @@ public class ItemNetherBow extends ItemArcherBow {
 
 	private int getItemSizeinInventory(EntityPlayer player, Item item) {
 		ItemStack[] mainInventory = player.inventory.mainInventory;
+		int count = 0;
 		for (int i = 0; i < mainInventory.length; ++i) {
 			if (mainInventory[i] != null && mainInventory[i].getItem() == item) {
-				return i;
+				count += mainInventory[i].stackSize;
 			}
 		}
 
-		return 0;
+		return count;
 
 	}
 
