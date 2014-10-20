@@ -12,6 +12,7 @@ import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Items;
 import net.minecraft.item.Item;
+import net.minecraft.item.ItemFood;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.FurnaceRecipes;
 import net.minecraft.tileentity.TileEntity;
@@ -104,7 +105,8 @@ public class BlockPan extends BlockContainer {
 				|| itemMayCook == InitItem.friedEgg
 				|| itemMayCook == Items.cooked_beef
 				|| itemMayCook == Items.baked_potato
-				|| itemMayCook == Items.cooked_fished)
+				|| itemMayCook == Items.cooked_fished
+				|| itemMayCook instanceof ItemFood)
 			return true;
 		return false;
 	}
