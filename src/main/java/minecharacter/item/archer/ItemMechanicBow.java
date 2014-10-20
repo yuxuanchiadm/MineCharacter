@@ -69,6 +69,7 @@ public class ItemMechanicBow extends ItemArcherBow {
 			entityarrow.setDamage(this.damage * f);
 
 			par1ItemStack.damageItem(1, par3EntityPlayer);
+			if (FMLCommonHandler.instance().getEffectiveSide() == Side.CLIENT)
 			par2World.playSoundAtEntity(par3EntityPlayer, "random.bow", 1.0F,
 					1.0F / (itemRand.nextFloat() * 0.4F + 1.2F) + f * 0.5F);
 

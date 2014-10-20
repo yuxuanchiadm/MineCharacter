@@ -70,16 +70,17 @@ public class ItemEtherBow extends ItemArcherBow {
 			entityarrow.setDamage(this.damage * f);
 
 			par1ItemStack.damageItem(2, par3EntityPlayer);
-			par2World.playSoundAtEntity(par3EntityPlayer, "random.bow", 1.0F,
-					1.0F / (itemRand.nextFloat() * 0.4F + 1.2F) + f * 0.5F);
+				par2World.playSoundAtEntity(par3EntityPlayer, "random.bow",
+						1.0F, 1.0F / (itemRand.nextFloat() * 0.4F + 1.2F) + f
+								* 0.5F);
 
 			entityarrow.canBePickedUp = 1;
 
 			par3EntityPlayer.inventory.consumeInventoryItem(Items.arrow);
 
-			if (!par2World.isRemote) {
+			if (FMLCommonHandler.instance().getEffectiveSide() == Side.SERVER)
 				par2World.spawnEntityInWorld(entityarrow);
-			}
+
 		}
 	}
 

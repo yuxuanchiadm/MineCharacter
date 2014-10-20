@@ -3,6 +3,7 @@ package minecharacter.item;
 import minecharacter.MineCharacter;
 import minecharacter.misc.InitItem;
 import minecharacter.misc.Localization;
+import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
@@ -11,6 +12,8 @@ import net.minecraft.item.ItemArmor;
 import net.minecraft.item.ItemStack;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.world.World;
+import net.minecraftforge.common.MinecraftForge;
+import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.common.gameevent.TickEvent;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
@@ -84,13 +87,20 @@ public class CharItemArmor extends ItemArmor {
 	@Override
 	public void onArmorTick(World world, EntityPlayer player,
 			ItemStack itemStack) {
-
 		tick++;
 
-		if (tick == 200 && MineCharacter.proxy.isEquid(player, "archer")
-				&& notEnoughArrow(player)) {
-			player.inventory.addItemStackToInventory(new ItemStack(Items.arrow,
-					1));
+		System.out.println(tick);
+		if (tick > 200) {
+			if (itemStack.getItem().equals(InitItem.archerHelmet)
+					&& MineCharacter.proxy.isEquid(player, "archer")
+					&& notEnoughArrow(player)) {
+			
+				if (FMLCommonHandler.instance().getEffectiveSide() == Side.SERVER)
+					player.inventory.addItemStackToInventory(new ItemStack(
+							Items.arrow, 1));
+				
+			}
+
 			tick = 0;
 		}
 

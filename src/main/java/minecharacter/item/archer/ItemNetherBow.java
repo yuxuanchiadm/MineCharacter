@@ -3,8 +3,10 @@ package minecharacter.item.archer;
 import minecharacter.MineCharacter;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.entity.projectile.EntityArrow;
 import net.minecraft.init.Items;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.IIcon;
 import net.minecraft.world.World;
@@ -46,8 +48,9 @@ public class ItemNetherBow extends ItemArcherBow {
 		boolean flag = par3EntityPlayer.capabilities.isCreativeMode;
 
 		if (flag
-				|| (MineCharacter.proxy.isEquid(par3EntityPlayer, "archer") && par3EntityPlayer.inventory
-						.hasItem(Items.arrow))) {
+				|| (MineCharacter.proxy.isEquid(par3EntityPlayer, "archer")
+						&& par3EntityPlayer.inventory.hasItem(Items.arrow) && (getItemSizeinInventory(
+						par3EntityPlayer, Items.arrow) >= 3))) {
 			float f = (float) j / 40.0F;
 			f = (f * f + f * 2.0F) / 3.0F;
 
@@ -76,10 +79,10 @@ public class ItemNetherBow extends ItemArcherBow {
 
 				arrow.setFire(100);
 				arrow.setDamage(this.damage * f);
-
-				par2World.playSoundAtEntity(par3EntityPlayer, "random.bow",
-						1.0F, 1.0F / (itemRand.nextFloat() * 0.4F + 1.2F) + f
-								* 0.5F);
+				if (FMLCommonHandler.instance().getEffectiveSide() == Side.CLIENT)
+					par2World.playSoundAtEntity(par3EntityPlayer, "random.bow",
+							1.0F, 1.0F / (itemRand.nextFloat() * 0.4F + 1.2F)
+									+ f * 0.5F);
 				arrow.canBePickedUp = 1;
 				par3EntityPlayer.inventory.consumeInventoryItem(Items.arrow);
 				if (!par2World.isRemote) {
@@ -101,6 +104,18 @@ public class ItemNetherBow extends ItemArcherBow {
 			this.iconArray[i] = par1IconRegister.registerIcon("minecharacter:"
 					+ netherBowPullIconNameArray[i]);
 		}
+	}
+
+	private int getItemSizeinInventory(EntityPlayer player, Item item) {
+		ItemStack[] mainInventory = player.inventory.mainInventory;
+		for (int i = 0; i < mainInventory.length; ++i) {
+			if (mainInventory[i] != null && mainInventory[i].getItem() == item) {
+				return i;
+			}
+		}
+
+		return 0;
+
 	}
 
 }
