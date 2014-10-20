@@ -90,7 +90,7 @@ public class ContainerAnvil extends Container {
 				}
 			} else {
 				this.anvResult.setInventorySlotContents(0, AnvingManager
-						.getInstance().findMatchingRecipe(this.anvilMatrix));
+						.getInstance().findMatchingRecipe(this.anvilMatrix, worldObj));
 
 			}
 

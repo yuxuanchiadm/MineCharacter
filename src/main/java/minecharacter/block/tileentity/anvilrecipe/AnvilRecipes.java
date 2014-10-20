@@ -2,12 +2,13 @@ package minecharacter.block.tileentity.anvilrecipe;
 
 import minecharacter.block.container.InventoryAnvil;
 import net.minecraft.item.ItemStack;
+import net.minecraft.world.World;
 
 public class AnvilRecipes implements IAnvilRecipe {
 
 	public int recipeWidth;
 	public int recipeHeight;
-	public ItemStack[] recipeItems;
+	public final ItemStack[] recipeItems;
 
 	private ItemStack recipeOutput;
 
@@ -26,17 +27,17 @@ public class AnvilRecipes implements IAnvilRecipe {
 	}
 
 	@Override
-	public boolean matches(InventoryAnvil inventoryanvil) {
-		for (int i = 0; i <= 5 - this.recipeWidth; i++) {
-			for (int j = 0; j <= 3 - this.recipeHeight; j++) {
-				if (checkMatch(inventoryanvil, i, j, true)) {
+	public boolean matches(InventoryAnvil inventoryanvil, World par2World) {
+		for (int i = 0; i <= 5 - this.recipeWidth; ++i) {
+			for (int j = 0; j <= 3 - this.recipeHeight; ++j) {
+				if (this.checkMatch(inventoryanvil, i, j, true)) {
 					return true;
 				}
-				if (checkMatch(inventoryanvil, i, j, false)) {
+
+				if (this.checkMatch(inventoryanvil, i, j, false)) {
 					return true;
 				}
 			}
-
 		}
 
 		return false;
@@ -44,33 +45,43 @@ public class AnvilRecipes implements IAnvilRecipe {
 
 	private boolean checkMatch(InventoryAnvil inventoryanvil, int i, int j,
 			boolean flag) {
-		for (int k = 0; k < 5; k++) {
-			for (int l = 0; l < 3; l++) {
+		for (int k = 0; k < 5; ++k) {
+			for (int l = 0; l < 3; ++l) {
 				int i1 = k - i;
 				int j1 = l - j;
 				ItemStack itemstack = null;
-				if ((i1 >= 0) && (j1 >= 0) && (i1 < this.recipeWidth)
-						&& (j1 < this.recipeHeight)) {
+
+				if (i1 >= 0 && j1 >= 0 
+						&& i1 < this.recipeWidth && j1 < this.recipeHeight) {
 					if (flag) {
-						itemstack = this.recipeItems[(this.recipeWidth - i1 - 1 + j1
-								* this.recipeWidth)];
+						itemstack = this.recipeItems[this.recipeWidth - i1 - 1+ j1 * this.recipeWidth];
 					} else {
-						itemstack = this.recipeItems[(i1 + j1
-								* this.recipeWidth)];
+						itemstack = this.recipeItems[i1 + j1 * this.recipeWidth];
 					}
 				}
-				ItemStack itemstack1 = inventoryanvil.getStackInRowAndColumn(k,
-						l);
-				if ((itemstack1 != null) || (itemstack != null)) {
-					if (((itemstack1 == null) && (itemstack != null))
-							|| ((itemstack1 != null) && (itemstack == null))) {
+				
+				
+
+				ItemStack itemstack1 = inventoryanvil.getStackInRowAndColumn(k,l);
+				
+				
+				
+				
+				
+
+				if (itemstack1 != null || itemstack != null) {
+					if (itemstack1 == null && itemstack != null
+							|| itemstack1 != null && itemstack == null) {
 						return false;
 					}
-					if (itemstack != null
-							&& (itemstack.equals(itemstack1) || itemstack
-									.getItemDamage() != 32767
-									&& itemstack.getItemDamage() != itemstack1
-											.getItemDamage())) {
+
+					if (itemstack.getItem() != itemstack1.getItem()) {
+						return false;
+					}
+
+					if (itemstack.getItemDamage() != 32767
+							&& itemstack.getItemDamage() != itemstack1
+									.getItemDamage()) {
 						return false;
 					}
 				}

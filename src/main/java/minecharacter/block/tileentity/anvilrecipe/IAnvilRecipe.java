@@ -2,14 +2,15 @@ package minecharacter.block.tileentity.anvilrecipe;
 
 import minecharacter.block.container.InventoryAnvil;
 import net.minecraft.item.ItemStack;
+import net.minecraft.world.World;
 
-public abstract interface IAnvilRecipe {
-	  public abstract boolean matches(InventoryAnvil paramInventoryAnvil);
+public interface IAnvilRecipe {
+	boolean matches(InventoryAnvil paramInventoryAnvil, World par2World);
 
-	  public abstract ItemStack getCraftingResult(InventoryAnvil paramInventoryAnvil);
+	ItemStack getCraftingResult(InventoryAnvil paramInventoryAnvil);
 
-	  public abstract int getRecipeSize();
+	int getRecipeSize();
 
-	  public abstract ItemStack getRecipeOutput();
+	ItemStack getRecipeOutput();
 
 }
