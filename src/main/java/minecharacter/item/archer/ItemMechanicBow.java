@@ -22,7 +22,7 @@ public class ItemMechanicBow extends ItemArcherBow {
 	public ItemMechanicBow() {
 		super();
 		this.setMaxDamage(251);
-		damage = 3;
+		damage = 4;
 		this.iconTime[0] = 0;
 		this.iconTime[1] = 3;
 		this.iconTime[2] = 6;

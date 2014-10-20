@@ -23,7 +23,7 @@ public class ItemEtherBow extends ItemArcherBow {
 	public ItemEtherBow() {
 		super();
 		this.setMaxDamage(3122);
-		damage = 10;
+		damage = 6;
 		this.iconTime[0] = 0;
 		this.iconTime[1] = 3;
 		this.iconTime[2] = 6;
@@ -35,6 +35,7 @@ public class ItemEtherBow extends ItemArcherBow {
 		par1ItemStack.damageItem(3, par3EntityPlayer);
 		if (FMLCommonHandler.instance().getEffectiveSide() == Side.CLIENT)
 			this.iconsetdefalut();
+		
 		int j = this.getMaxItemUseDuration(par1ItemStack) - par4;
 
 		ArrowLooseEvent event = new ArrowLooseEvent(par3EntityPlayer,
@@ -62,15 +63,15 @@ public class ItemEtherBow extends ItemArcherBow {
 			}
 
 			EntityArrow entityarrow = new EntityArrow(par2World,
-					par3EntityPlayer, f * 10.0F);
+					par3EntityPlayer, f * 5.0F);
 
 			if (f == 1.0F) {
 				entityarrow.setIsCritical(true);
 			}
 
-			entityarrow.setDamage(this.damage * f);
+			entityarrow.setDamage(5*f);
 
-			par1ItemStack.damageItem(2, par3EntityPlayer);
+			par1ItemStack.damageItem(8, par3EntityPlayer);
 				par2World.playSoundAtEntity(par3EntityPlayer, "random.bow",
 						1.0F, 1.0F / (itemRand.nextFloat() * 0.4F + 1.2F) + f
 								* 0.5F);

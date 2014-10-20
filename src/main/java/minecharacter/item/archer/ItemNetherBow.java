@@ -24,7 +24,7 @@ public class ItemNetherBow extends ItemArcherBow {
 	public ItemNetherBow() {
 		super();
 		this.setMaxDamage(2341);
-		damage = 6;
+		damage = 3;
 		this.iconTime[0] = 0;
 		this.iconTime[1] = 19;
 		this.iconTime[2] = 40;
