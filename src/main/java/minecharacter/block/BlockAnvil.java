@@ -23,6 +23,7 @@ public class BlockAnvil extends Block {
 	public BlockAnvil(Material material) {
 		super(material);
 		this.setCreativeTab(MineCharacter.tabMineCharacter);
+		this.setHardness(0.7F);
 	}
 
 	@Override

@@ -22,6 +22,7 @@ public class BlockOmelette extends BlockCake {
 
 	public BlockOmelette() {
 		super();
+		this.setHardness(0.7F);
 	}
 
 	@Override

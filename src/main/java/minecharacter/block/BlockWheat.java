@@ -30,6 +30,8 @@ public class BlockWheat extends Block {
 
 	public BlockWheat() {
 		super(Material.grass);
+		this.setHardness(0.3F);
+		this.setStepSound(soundTypeGrass);
 		this.setTickRandomly(true);
 		this.setCreativeTab(MineCharacter.tabMineCharacter);
 	}

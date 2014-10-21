@@ -33,6 +33,7 @@ public class BlockOrb extends BlockContainer {
 		this.setCreativeTab(MineCharacter.tabMineCharacter);
 		this.setLightLevel(0.72F);
 		this.setLightOpacity(1);
+		this.setBlockUnbreakable();
 	}
 
 	@Override
@@ -195,7 +196,8 @@ public class BlockOrb extends BlockContainer {
 												.equals(Items.iron_ingot)) {
 									flag = 1;
 								} else if (((EntityItem) items.get(0))
-										.getEntityItem().getItem().equals(InitItem.rune)) {
+										.getEntityItem().getItem()
+										.equals(InitItem.rune)) {
 									flag = 2;
 								} else {
 									flag = 3;
