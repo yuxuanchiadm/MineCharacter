@@ -153,10 +153,6 @@ public class MineCharacter implements IFuelHandler {
 				new Object[] { " X ", "X X", " X ", Character.valueOf('X'),
 						Blocks.glass });
 
-		GameRegistry.addShapedRecipe(new ItemStack(InitItem.bat, 1),
-				new Object[] { "  X", " X ", "/  ", Character.valueOf('/'),
-						Items.stick, Character.valueOf('X'), Blocks.planks });
-
 		GameRegistry.addShapedRecipe(new ItemStack(InitBlock.blockAnvil, 1),
 				new Object[] { "XXX", " X ", "XXX", Character.valueOf('X'),
 						Items.iron_ingot });
