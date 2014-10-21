@@ -3,21 +3,27 @@ package minecharacter.misc;
 import java.util.ArrayList;
 import java.util.Random;
 
+import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import minecharacter.MineCharacter;
 import net.minecraft.block.Block;
+import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLiving;
+import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.item.EntityXPOrb;
 import net.minecraft.entity.passive.EntityHorse;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.item.ItemSword;
 import net.minecraft.item.ItemTool;
 import net.minecraft.item.crafting.FurnaceRecipes;
 import net.minecraft.potion.Potion;
 import net.minecraft.util.DamageSource;
+import net.minecraft.util.EntityDamageSource;
 import net.minecraft.world.World;
+import net.minecraftforge.event.entity.living.LivingAttackEvent;
 import net.minecraftforge.event.entity.living.LivingSetAttackTargetEvent;
 import net.minecraftforge.event.entity.player.AttackEntityEvent;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent;
@@ -52,15 +58,34 @@ public class EventHandler {
 	}
 
 	@SubscribeEvent
-	public void knightHit(AttackEntityEvent event) {
+	public void charcaterHit(AttackEntityEvent event) {
 		EntityPlayer player = event.entityPlayer;
+
 		if (MineCharacter.proxy.isEquid(player, "knight")) {
 			if (player.ridingEntity != null
 					&& player.ridingEntity instanceof EntityHorse) {
 				event.target.attackEntityFrom(
 						DamageSource.causePlayerDamage(player), 20);
 			}
+
+		} else if (MineCharacter.proxy.isEquid(player, "assassin")) {
+			if (rand.nextInt(15) == 1)
+				event.target.attackEntityFrom(
+						DamageSource.causePlayerDamage(player), 100);
+
 		}
+	}
+
+	@SubscribeEvent
+	public void assassinHit(LivingAttackEvent event) {
+		if (event.source.getDamageType().equals("player")) {
+			EntityPlayer player = (EntityPlayer) ((EntityDamageSource) event.source)
+					.getEntity();
+			if (MineCharacter.proxy.isEquid(player, "assassin")) {
+				event.source.setDamageBypassesArmor();
+			}
+		}
+
 	}
 
 	@SubscribeEvent
