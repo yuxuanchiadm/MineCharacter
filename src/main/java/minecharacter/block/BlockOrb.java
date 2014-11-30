@@ -189,11 +189,13 @@ public class BlockOrb extends BlockContainer {
 									return;
 								}
 
-								if (((EntityItem) items.get(0)).getEntityItem()
-										.getItem().equals(InitItem.magicPowder)
-										|| ((EntityItem) items.get(0))
-												.getEntityItem().getItem()
-												.equals(Items.iron_ingot)) {
+								if ((((EntityItem) items.get(0))
+										.getEntityItem().getItem()
+										.equals(InitItem.magicPowder)
+								|| ((EntityItem) items.get(0)).getEntityItem()
+										.getItem().equals(Items.iron_ingot))
+										&& ((EntityItem) items.get(0))
+												.getEntityItem().stackSize == 1) {
 									flag = 1;
 								} else if (((EntityItem) items.get(0))
 										.getEntityItem().getItem()
